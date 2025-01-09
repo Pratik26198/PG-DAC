@@ -734,18 +734,30 @@ Passing arguments by reference allows modification of the original values.
 
 ### **Syntax**
 ```cpp
-void swap(int &a, int &b) {
-    int temp = a;
-    a = b;
-    b = temp;
-}
-```
+#include <iostream>
+using namespace std;
 
-#### Example:
-```cpp
-int x = 10, y = 20;
-swap(x, y);
-cout << "x: " << x << ", y: " << y; // Output: x: 20, y: 10
+// Function to swap two integers using pass-by-reference
+void swap(int &a, int &b) {
+    int temp = a; // Temporary variable to hold the value of 'a'
+    a = b;        // Assign 'b' to 'a'
+    b = temp;     // Assign the temporary value to 'b'
+}
+
+int main() {
+    int x = 10, y = 20; // Declare and initialize variables
+
+    cout << "Before swapping:" << endl;
+    cout << "x: " << x << ", y: " << y << endl;
+
+    swap(x, y); // Call the swap function
+
+    cout << "After swapping:" << endl;
+    cout << "x: " << x << ", y: " << y << endl;
+
+    return 0;
+}
+
 ```
 
 ---
