@@ -1081,17 +1081,113 @@ public:
 
 ### **Operator Overloading**
 Extending the functionality of operators.
+We can define operator function using 2 ways:
+  Member function
+  Non member function
+By defining operator function, we are increasing capability of exsiting operators. This process of
+givining extension to the meaning of the operator is called as operator overloading.
 
-#### Example:
-```cpp
-class Complex {
-    int real, imag;
+# Example: Addition (+) Operator Overloading using member function
+
+```c
+#include<iostream>
+using namespace std;
+class Test{
+private:
+int Num1;
+int Num2;
 public:
-    Complex(int r, int i) : real(r), imag(i) {}
-    Complex operator + (Complex const &obj) {
-        return Complex(real + obj.real, imag + obj.imag);
-    }
+Test( void ){
+this->Num1 = 0;
+this->Num2 = 0;
+}
+Test( int Num1, int Num2 ){
+this->Num1 = Num1;
+this->Num2 = Num2;
+}
+//Test other = t2
+//Test *const this = &t1
+Test operator+( Test other ){
+Test result;
+result.Num1 = this->Num1 + other.Num1;
+result.Num2 = this->Num2 + other.Num2;
+return result;
+}
+void printRecord( void ){
+cout << "Num1 Number : " << this->Num1 <<endl;
+cout << "Num2 Number : " << this->Num2 <<endl;
+}
 };
+int main( void ){
+Test t1( 10, 20 );
+Test t2( 30, 40 );
+Test t3;
+t3 = t1 + t2; // t3 = t1.operator+( t2 )
+t3.printRecord( );
+return 0;
+}
+```
+# Example: Addition (+) Operator Overloading using non member function
+
+```c
+#include<iostream>
+using namespace std;
+class Test{
+private:
+int Num1;
+int Num2;
+public:
+Test( void ){
+this->Num1 = 0;
+this->Num2 = 0;
+}
+Test( int Num1, int Num2 ){
+this->Num1 = Num1;
+this->Num2 = Num2;
+}
+void printRecord( void ){
+cout << "Num1 Number : " << this->Num1 <<endl;
+cout << "Num2 Number : " << this->Num2 <<endl;
+}
+friend Test operator+( Test t1, Test t2 );
+};
+Test operator+( Test t1, Test t2 ){
+Test result;
+result.Num1 = t1.Num1 + t2.Num1;
+result.Num2 = t1.Num2 + t2.Num2;
+return result;
+}
+int main( void ){
+Test t1( 10, 20 );
+Test t2( 30, 40 );
+Test t3;
+t3 = t1 + t2; // t3 = operator+( t1, t2 )
+t3.printRecord( );
+return 0;
+}
+```
+Using operator overloading we can not create user defined operators rather we can increase capability
+of existing operators.
+# Limitations of operator overloading :
+
+We can not overload below operators using member function as well as non member function
+dot( .) / meber selection operator
+.* ( pointer to member selection operator )
+sizeof operator
+: scope resolution operator )
+Conditional ( ? : ) / Ternary operator
+typeid operator
+static_cast operator
+dyanmic_cast operator
+const_cast operator
+reinterpret_cast operator
+We can not overload below operators using non member function but we can overload it using
+member function
+Assignment operator( = )
+Index / subscript operator
+Call / Function call operator[ () ]
+Arrow( -> ) operator
+using operator overloading, we can change meaning of the operator.
 ```
 
 ---
