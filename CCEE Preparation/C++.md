@@ -649,3 +649,158 @@ for (int i = 0; i < 2; i++) {
     cout << endl;
 }
 
+
+
+
+# Functions in C++
+
+## **1. Different Forms of Functions**
+Functions in C++ can take various forms depending on their use case:
+
+### **a. Non-Parameterized Functions**
+Functions that do not take any arguments.
+```cpp
+void display() {
+    cout << "Hello, World!";
+}
+```
+
+### **b. Parameterized Functions**
+Functions that accept parameters to perform operations.
+```cpp
+int add(int a, int b) {
+    return a + b;
+}
+```
+
+### **c. Functions with Default Arguments**
+Provide default values to parameters.
+```cpp
+void greet(string name = "User") {
+    cout << "Hello, " << name;
+}
+```
+
+### **d. Overloaded Functions**
+Multiple functions with the same name but different parameters.
+```cpp
+int multiply(int a, int b) {
+    return a * b;
+}
+double multiply(double a, double b) {
+    return a * b;
+}
+```
+
+### **e. Recursive Functions**
+A function that calls itself.
+```cpp
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1);
+}
+```
+
+---
+
+## **2. Function Prototyping**
+A function prototype declares a function before defining it, ensuring type safety during calls.
+
+### **Syntax**
+```cpp
+dataType functionName(parameters);
+```
+
+#### Example:
+```cpp
+int add(int, int); // Function prototype
+
+int main() {
+    cout << add(5, 10);
+    return 0;
+}
+
+int add(int a, int b) { // Function definition
+    return a + b;
+}
+```
+
+---
+
+## **3. Call by Reference**
+Passing arguments by reference allows modification of the original values.
+
+### **Syntax**
+```cpp
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+```
+
+#### Example:
+```cpp
+int x = 10, y = 20;
+swap(x, y);
+cout << "x: " << x << ", y: " << y; // Output: x: 20, y: 10
+```
+
+---
+
+## **4. Inline Functions**
+Inline functions are expanded at the point of invocation to reduce the overhead of function calls.
+
+### **Syntax**
+```cpp
+inline int square(int x) {
+    return x * x;
+}
+```
+
+#### Example:
+```cpp
+cout << "Square of 5: " << square(5); // Output: Square of 5: 25
+```
+
+### **Advantages**
+- Reduces function call overhead.
+- Improves performance for small functions.
+
+### **Disadvantages**
+- Increases binary size for large functions.
+
+---
+
+## **5. Math Library Functions**
+C++ provides a variety of mathematical functions in the `<cmath>` library.
+
+### **Common Math Functions**
+
+| Function       | Description                      | Example             |
+|----------------|----------------------------------|---------------------|
+| `sqrt(x)`      | Square root                     | `sqrt(25) -> 5`     |
+| `pow(x, y)`    | Power (x^y)                    | `pow(2, 3) -> 8`    |
+| `abs(x)`       | Absolute value                 | `abs(-10) -> 10`    |
+| `ceil(x)`      | Rounds up to the nearest integer | `ceil(2.3) -> 3`    |
+| `floor(x)`     | Rounds down to the nearest integer| `floor(2.7) -> 2`   |
+| `sin(x)`       | Sine of angle (in radians)      | `sin(PI/2) -> 1`    |
+| `cos(x)`       | Cosine of angle (in radians)    | `cos(0) -> 1`       |
+| `log(x)`       | Natural logarithm              | `log(1) -> 0`       |
+
+#### Example:
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    cout << "Square root of 25: " << sqrt(25) << endl;
+    cout << "2^3: " << pow(2, 3) << endl;
+    cout << "Absolute value of -10: " << abs(-10) << endl;
+    return 0;
+}
+```
+
+---
+
