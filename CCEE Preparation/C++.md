@@ -1859,7 +1859,7 @@ int main() {
 
 ---
 ### Constructor & Destructor calling sequesce
-```
+```c
 #include <iostream>
 using namespace std;
 
@@ -1912,4 +1912,4 @@ Base class destructor called.
 */
 
 ```
-``
+```
