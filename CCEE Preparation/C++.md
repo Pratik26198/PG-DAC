@@ -776,10 +776,7 @@ inline int square(int x) {
 ```cpp
 cout << "Square of 5: " << square(5); // Output: Square of 5: 25
 ```
-If you write:
-```cpp
-cout << "Square of 5: " << square(5);
-```
+
 The compiler transforms it into:
 ```c
 cout << "Square of 5: " << (5 * 5);
