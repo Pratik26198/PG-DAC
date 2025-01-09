@@ -823,3 +823,185 @@ int main() {
 
 ---
 
+# Memory Management in C++
+
+## **1. Introduction to Memory Management in C++**
+Memory management in C++ involves allocating and deallocating memory for program objects dynamically. It ensures efficient use of resources and prevents memory leaks.
+
+### **Types of Memory in C++**
+1. **Stack Memory**:
+   - Used for local variables.
+   - Automatically managed (allocated and deallocated when function calls are made).
+
+2. **Heap Memory**:
+   - Used for dynamically allocated variables.
+   - Requires manual allocation (`new`) and deallocation (`delete`).
+
+---
+
+## **2. Pointers in C++**
+A pointer is a variable that stores the memory address of another variable.
+
+### **Syntax**
+```cpp
+int *ptr;
+ptr = &var; // Store address of 'var' in 'ptr'
+```
+
+### **Example**
+```cpp
+int a = 10;
+int *p = &a;
+cout << "Value of a: " << *p << endl; // Dereference pointer
+```
+
+---
+
+## **3. Arrays Using Pointers**
+Arrays can be manipulated using pointers, as arrays decay to pointers when passed to functions.
+
+### **Example**
+```cpp
+int arr[3] = {1, 2, 3};
+int *p = arr;
+for (int i = 0; i < 3; i++) {
+    cout << *(p + i) << " "; // Access elements using pointer arithmetic
+}
+```
+
+---
+
+## **4. Enumeration**
+An enumeration (`enum`) is a user-defined type that assigns names to integral constants.
+
+### **Syntax**
+```cpp
+enum Color { RED, GREEN, BLUE };
+```
+
+### **Example**
+```cpp
+enum Days { MON, TUE, WED };
+Days today = MON;
+if (today == MON) {
+    cout << "It's Monday!";
+}
+```
+
+---
+
+## **5. Typedef**
+`typedef` is used to define a new name for an existing type.
+
+### **Syntax**
+```cpp
+typedef existing_type new_name;
+```
+
+### **Example**
+```cpp
+typedef unsigned int uint;
+uint age = 25;
+```
+
+---
+
+## **6. Using `new` Operator**
+The `new` operator allocates memory dynamically on the heap.
+
+### **Syntax**
+```cpp
+dataType *pointer = new dataType;
+```
+
+### **Example**
+```cpp
+int *p = new int(10);
+cout << *p; // Output: 10
+```
+
+For arrays:
+```cpp
+int *arr = new int[5];
+for (int i = 0; i < 5; i++) arr[i] = i * 10;
+delete[] arr; // Free memory
+```
+
+---
+
+## **7. Class Pointer**
+Pointers can be used to create and manage objects dynamically.
+
+### **Example**
+```cpp
+class Person {
+public:
+    string name;
+    Person(string n) : name(n) {}
+    void display() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+Person *p = new Person("John");
+p->display();
+delete p;
+```
+
+---
+
+## **8. `this` Pointer**
+The `this` pointer is an implicit pointer passed to member functions of a class. It points to the calling object.
+
+### **Example**
+```cpp
+class Person {
+    string name;
+public:
+    Person(string name) { this->name = name; }
+    void display() {
+        cout << "Name: " << this->name << endl;
+    }
+};
+```
+
+---
+
+## **9. Comparison of `new` with `malloc`, `calloc`, and `realloc`**
+
+| Feature               | `new`           | `malloc`         | `calloc`         | `realloc`        |
+|-----------------------|-----------------|------------------|------------------|------------------|
+| Memory allocation     | Dynamically     | Dynamically      | Dynamically      | Dynamically      |
+| Initialization        | Yes (constructor)| No               | Zero-initialized | No               |
+| Type safety           | Yes             | No               | No               | No               |
+| Syntax                | Operator        | Function         | Function         | Function         |
+| Requires `delete`     | Yes             | No               | No               | No               |
+
+### Example Comparison:
+```cpp
+int *p1 = new int(5);    // Allocates memory and initializes with 5
+int *p2 = (int*)malloc(sizeof(int)); // Only allocates memory, no initialization
+```
+
+---
+
+## **10. Memory Freeing Using `delete` Operator**
+The `delete` operator deallocates memory allocated by `new`.
+
+### **Syntax**
+```cpp
+delete pointer;       // For single variables
+delete[] pointer;     // For arrays
+```
+
+### **Example**
+```cpp
+int *p = new int(10);
+delete p;
+
+int *arr = new int[5];
+delete[] arr;
+```
+
+---
+
