@@ -1080,12 +1080,12 @@ public:
 ```
 
 ### **Operator Overloading**
-Extending the functionality of operators.
-We can define operator function using 2 ways:
-  Member function
-  Non member function
-By defining operator function, we are increasing capability of exsiting operators. This process of
-givining extension to the meaning of the operator is called as operator overloading.
+- Extending the functionality of operators.
+- We can define operator function using 2 ways:
+    Member function
+    Non member function
+- By defining operator function, we are increasing capability of exsiting operators. This process of givining extension to the meaning of the operator is called as operator overloading.
+- Using operator overloading we can not create user defined operators rather we can increase capability of existing operators.
 
 # Example: Addition (+) Operator Overloading using member function
 
@@ -1166,31 +1166,41 @@ int main( void ){
   return 0;
 }
 ```
-Using operator overloading we can not create user defined operators rather we can increase capability
-of existing operators.
-# Limitations of operator overloading :
 
-We can not overload below operators using member function as well as non member function
-dot( .) / meber selection operator
-.* ( pointer to member selection operator )
-sizeof operator
-: scope resolution operator )
-Conditional ( ? : ) / Ternary operator
-typeid operator
-static_cast operator
-dyanmic_cast operator
-const_cast operator
-reinterpret_cast operator
-We can not overload below operators using non member function but we can overload it using
-member function
-Assignment operator( = )
-Index / subscript operator
-Call / Function call operator[ () ]
-Arrow( -> ) operator
-using operator overloading, we can change meaning of the operator.
+# C++ Operators Overloading Table
+
+| **Operator**              | **Can Be Overloaded?** | **Notes**                                   |
+|----------------------------|------------------------|---------------------------------------------|
+| `+`, `-`, `*`, `/`, `%`   | Yes                    | Arithmetic operators.                       |
+| `==`, `!=`, `<`, `>`       | Yes                    | Comparison operators.                       |
+| `<=`, `>=`                | Yes                    | Comparison operators.                       |
+| `&&`, `||`, `!`           | Yes                    | Logical operators.                          |
+| `&`, `|`, `^`, `~`        | Yes                    | Bitwise operators.                          |
+| `<<`, `>>`                | Yes                    | Bitwise shift operators.                    |
+| `++`, `--`                | Yes                    | Increment and decrement operators.          |
+| `=`                       | Yes                    | Assignment operator.                        |
+| `+=`, `-=`, `*=`, `/=`    | Yes                    | Compound assignment operators.              |
+| `%=`                      | Yes                    | Compound assignment operator.               |
+| `&=`, `|=`, `^=`          | Yes                    | Compound assignment operators.              |
+| `<<=`, `>>=`              | Yes                    | Compound bitwise shift operators.           |
+| `[]`                      | Yes                    | Subscript operator.                         |
+| `()`                      | Yes                    | Function call operator.                     |
+| `->`                      | Yes                    | Member access through pointer.              |
+| `*`                       | Yes                    | Dereference operator.                       |
+| `,`                       | Yes                    | Comma operator.                             |
+| `new`, `delete`           | Yes                    | Memory management operators.                |
+| `new[]`, `delete[]`       | Yes                    | Memory management operators for arrays.     |
+| `type conversion`         | Yes                    | User-defined type conversion.               |
+| `::`                      | No                     | Scope resolution operator.                  |
+| `.`                       | No                     | Member access operator.                     |
+| `.*`                      | No                     | Pointer-to-member access operator.          |
+| `sizeof`                  | No                     | Size determination operator.                |
+| `typeid`                  | No                     | Runtime type information operator.          |
+| `alignof`                 | No                     | Alignment requirement operator.             |
+| `? :`                     | No                     | Conditional (ternary) operator.             |
+| `co_await`                | No                     | Coroutine operator.                         |
+
 ```
-
----
 ```
 ## **5. Inheritance**
 Inheritance allows a class (child) to acquire properties and methods of another class (parent).
