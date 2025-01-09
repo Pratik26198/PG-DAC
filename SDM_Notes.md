@@ -715,3 +715,139 @@ E --> F[Monitor Progress]
 F --> G[Complete Sprint]
 G --> H[Retrospective]
 ```
+
+
+# DevOps and Containerization Topics
+
+## Introduction to DevOps
+DevOps is a set of practices, tools, and cultural philosophies aimed at automating and integrating the processes between software development (Dev) and IT operations (Ops). The primary goal of DevOps is to shorten the development lifecycle and deliver high-quality software continuously.
+
+### Key Principles of DevOps
+1. **Collaboration:** Improve communication between development and operations teams.
+2. **Automation:** Automate repetitive tasks such as testing, deployment, and monitoring.
+3. **Continuous Delivery (CD):** Ensure software is always in a deployable state.
+4. **Customer-Centric Action:** Prioritize customer feedback in development cycles.
+
+---
+
+## DevOps Ecosystem
+The DevOps ecosystem consists of various tools and technologies that enable DevOps practices. These tools are categorized based on their roles in the DevOps lifecycle.
+
+| **Category**           | **Examples**                                                                                         |
+|-------------------------|-----------------------------------------------------------------------------------------------------|
+| **Version Control**     | Git, GitHub, GitLab, Bitbucket                                                                      |
+| **Build Automation**    | Jenkins, CircleCI, Travis CI, Bamboo                                                               |
+| **Containerization**    | Docker, Kubernetes                                                                                 |
+| **Configuration Mgmt.** | Ansible, Chef, Puppet, Terraform                                                                    |
+| **Monitoring**          | Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana)                                    |
+| **Collaboration**       | Slack, Microsoft Teams, Jira                                                                       |
+
+---
+
+## DevOps Phases
+DevOps phases can be represented as part of a continuous loop called the **DevOps Infinity Loop**. These phases include:
+
+1. **Plan:** Define objectives and requirements.
+2. **Develop:** Write and build code.
+3. **Build:** Compile and integrate code.
+4. **Test:** Validate functionality and performance.
+5. **Release:** Package the application for deployment.
+6. **Deploy:** Deploy the application in production.
+7. **Operate:** Monitor and manage the production environment.
+8. **Monitor:** Analyze logs and gather feedback for improvement.
+
+---
+
+## Introduction to Containerization
+**Containerization** is the process of bundling an application and its dependencies into a single lightweight package called a **container**. Containers are isolated from each other but share the same operating system kernel, making them portable and efficient.
+
+### Benefits of Containerization
+1. **Portability:** Run containers on any environment (e.g., development, staging, production).
+2. **Resource Efficiency:** Containers use fewer resources compared to virtual machines.
+3. **Isolation:** Applications in containers run independently, reducing conflicts.
+
+---
+
+## Introduction to Docker
+**Docker** is an open-source platform for developing, shipping, and running applications in containers. It simplifies container creation and management.
+
+### Key Components of Docker
+1. **Docker Engine:** Core runtime for managing containers.
+2. **Docker Images:** Templates used to create containers.
+3. **Docker Containers:** Running instances of Docker images.
+4. **Docker Hub:** A repository for sharing and storing Docker images.
+
+---
+
+## Creating Docker Images Using Dockerfile
+A **Dockerfile** is a text file containing instructions to build a Docker image.
+
+### Steps to Create a Docker Image
+1. **Write a Dockerfile:**
+
+   Example:
+   ```dockerfile
+   # Base Image
+   FROM python:3.9-slim
+   
+   # Set Working Directory
+   WORKDIR /app
+   
+   # Copy Application Code
+   COPY . /app
+   
+   # Install Dependencies
+   RUN pip install -r requirements.txt
+   
+   # Expose Port
+   EXPOSE 5000
+   
+   # Run Application
+   CMD ["python", "app.py"]
+   ```
+
+2. **Build the Docker Image:**
+   ```bash
+   docker build -t my-python-app .
+   ```
+
+3. **Run the Docker Container:**
+   ```bash
+   docker run -p 5000:5000 my-python-app
+   ```
+
+---
+
+## Container Life Cycle
+The life cycle of a container involves the following states:
+
+1. **Created:** The container is created but not running.
+2. **Running:** The container is executing the specified process.
+3. **Paused:** The container’s processes are paused.
+4. **Stopped:** The container is stopped but still exists.
+5. **Deleted:** The container is removed from the system.
+
+### Container Management Commands
+- **List Running Containers:**
+  ```bash
+  docker ps
+  ```
+- **Stop a Container:**
+  ```bash
+  docker stop <container_id>
+  ```
+- **Remove a Container:**
+  ```bash
+  docker rm <container_id>
+  ```
+
+---
+
+## Flowchart: Docker Container Lifecycle
+```mermaid
+graph TD
+A[Create Container] --> B[Start Container]
+B --> C[Pause Container]
+C --> D[Stop Container]
+D --> E[Delete Container]
+```
