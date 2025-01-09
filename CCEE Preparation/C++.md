@@ -1739,8 +1739,12 @@ class GrandChild : public Child1, public Child2 {
 
 int main() {
     GrandChild obj;
-    obj.displayChild1();
-    obj.displayChild2();
+    obj.displayChild1();                          //This is Child1.
+    obj.displayChild2();                          //This is Child2.
+    obj.displayParent();                          // Error, due to ambiguity between child1 instance or child2 instance
+    obj.Child1::displayParent();                  //This is Parent.
+    obj.Child2::displayParent();                  //This is Parent.
+
     return 0;
 }
 ```
