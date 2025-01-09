@@ -407,7 +407,8 @@ int main() {
 
     return 0;
 }
-
+```
+---
 
 # Operators, Conditional Statements, Looping Statements, and Arrays in C++
 
@@ -648,7 +649,8 @@ for (int i = 0; i < 2; i++) {
     }
     cout << endl;
 }
-
+```
+---
 
 
 
