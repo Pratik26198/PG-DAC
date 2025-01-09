@@ -1005,3 +1005,185 @@ delete[] arr;
 
 ---
 
+# Object-Oriented Programming (OOP) Concepts in C++
+
+## **1. Introduction to Object-Oriented Concepts**
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which contain data (attributes) and methods (functions). OOP aims to model real-world systems by breaking them into smaller, manageable entities.
+
+### **Key Concepts of OOP**:
+1. **Encapsulation**: Wrapping data and methods together in a single unit (class).
+2. **Abstraction**: Hiding internal details and showing only the required functionality.
+3. **Inheritance**: Reusing existing code by deriving new classes from existing ones.
+4. **Polymorphism**: The ability to take multiple forms, often achieved through method overloading or overriding.
+
+---
+
+## **2. Classes and Objects**
+- **Class**: A blueprint for creating objects. It defines attributes (data members) and methods (member functions).
+- **Object**: An instance of a class.
+
+### **Syntax**
+```cpp
+class ClassName {
+public:
+    int data; // Attribute
+    void display() { // Method
+        cout << "Data: " << data << endl;
+    }
+};
+
+int main() {
+    ClassName obj; // Create an object
+    obj.data = 10;
+    obj.display();
+    return 0;
+}
+```
+
+---
+
+## **3. Access Specifiers**
+Access specifiers define the accessibility of class members.
+
+| Specifier  | Description                                    |
+|------------|------------------------------------------------|
+| `public`   | Accessible from anywhere in the program.       |
+| `private`  | Accessible only within the class.              |
+| `protected`| Accessible within the class and derived classes.|
+
+#### Example:
+```cpp
+class Example {
+private:
+    int privateData;
+protected:
+    int protectedData;
+public:
+    int publicData;
+};
+```
+
+---
+
+## **4. Overloading**
+
+### **Function Overloading**
+Functions with the same name but different parameter lists.
+
+#### Example:
+```cpp
+class Math {
+public:
+    int add(int a, int b) { return a + b; }
+    double add(double a, double b) { return a + b; }
+};
+```
+
+### **Operator Overloading**
+Extending the functionality of operators.
+
+#### Example:
+```cpp
+class Complex {
+    int real, imag;
+public:
+    Complex(int r, int i) : real(r), imag(i) {}
+    Complex operator + (Complex const &obj) {
+        return Complex(real + obj.real, imag + obj.imag);
+    }
+};
+```
+
+---
+
+## **5. Inheritance**
+Inheritance allows a class (child) to acquire properties and methods of another class (parent).
+
+### **Types of Inheritance**:
+1. **Single Inheritance**
+2. **Multilevel Inheritance**
+3. **Multiple Inheritance**
+
+#### Example:
+```cpp
+class Parent {
+public:
+    void display() {
+        cout << "Parent Class" << endl;
+    }
+};
+
+class Child : public Parent {
+};
+
+int main() {
+    Child obj;
+    obj.display(); // Access Parent's method
+    return 0;
+}
+```
+
+---
+
+## **6. Polymorphism**
+Polymorphism allows functions or methods to behave differently based on the context.
+
+### **Types**:
+1. **Compile-time Polymorphism (Static)**: Achieved through function and operator overloading.
+2. **Runtime Polymorphism (Dynamic)**: Achieved through method overriding and virtual functions.
+
+#### Virtual Functions Example:
+```cpp
+class Base {
+public:
+    virtual void show() {
+        cout << "Base Class" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        cout << "Derived Class" << endl;
+    }
+};
+
+int main() {
+    Base *bptr;
+    Derived d;
+    bptr = &d;
+    bptr->show(); // Output: Derived Class
+    return 0;
+}
+```
+
+---
+
+## **7. Namespaces**
+Namespaces are used to group identifiers to avoid name conflicts.
+
+### **Syntax**
+```cpp
+namespace NamespaceName {
+    int data;
+    void display() {
+        cout << "Namespace Function";
+    }
+}
+
+int main() {
+    NamespaceName::data = 10;
+    NamespaceName::display();
+    return 0;
+}
+```
+
+### **`using` Keyword**
+To avoid specifying the namespace repeatedly.
+```cpp
+using namespace NamespaceName;
+data = 10;
+display();
+```
+
+---
