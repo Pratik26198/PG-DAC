@@ -330,3 +330,99 @@ D --> E[Testing]
 E --> F[Deployment]
 F --> G[Maintenance]
 ```
+
+
+# Software Engineering Topics: Requirements and Design
+
+## Requirements Engineering
+Requirements Engineering is the process of defining, documenting, and maintaining the requirements for a software project.
+
+### Types of Requirements
+1. **Functional Requirements:** Define the functionalities the system must perform.
+2. **Non-Functional Requirements:** Specify the quality attributes or constraints of the system.
+3. **Domain Requirements:** Capture specific constraints or rules from the application domain.
+4. **Business Requirements:** High-level objectives of the organization or client.
+
+### Steps in Requirements Engineering
+1. **Requirements Elicitation:** Gather requirements through interviews, surveys, and observation.
+2. **Requirements Analysis:** Identify conflicts, refine requirements, and assess feasibility.
+3. **Requirements Specification:** Document the requirements in a clear and structured format.
+4. **Requirements Validation:** Ensure the documented requirements meet stakeholder needs.
+5. **Requirements Management:** Maintain and track requirements throughout the development lifecycle.
+
+### Requirement Analysis Modelling
+- **Use Case Diagrams:** Capture interactions between users and the system.
+- **Data Flow Diagrams (DFDs):** Represent data movement within the system.
+- **Entity-Relationship Diagrams (ERDs):** Model data relationships.
+- **Class Diagrams:** Show system classes and their relationships.
+
+---
+
+## Design and Architectural Engineering
+
+### Characteristics of Good Design
+1. **Clarity:** Easy to understand and communicate.
+2. **Flexibility:** Adapts to future changes.
+3. **Reusability:** Promotes reuse of components.
+4. **Efficiency:** Optimally uses resources.
+5. **Scalability:** Handles increasing demands effectively.
+
+### Function-Oriented vs Object-Oriented Systems
+| **Aspect**             | **Function-Oriented System**              | **Object-Oriented System**                  |
+|-------------------------|-------------------------------------------|---------------------------------------------|
+| **Focus**              | Functions or procedures.                  | Objects and their interactions.            |
+| **Modularity**         | Based on functional decomposition.        | Based on objects encapsulating data/behavior.|
+| **Reusability**        | Limited to procedural reuse.              | High due to object inheritance/polymorphism.|
+| **Design Representation**| Data Flow Diagrams (DFD).               | Unified Modeling Language (UML).           |
+
+### Key Concepts
+1. **Modularity:** Dividing the system into smaller, manageable modules.
+2. **Cohesion:** Degree to which elements within a module are related. (Higher cohesion = Better module design.)
+3. **Coupling:** Measure of interdependence between modules. (Lower coupling = Better design.)
+4. **Layering:** Structuring a system into layers (e.g., Presentation, Business Logic, Data Access).
+
+### Design Models
+1. **Architectural Models:** Define system components and their interactions.
+2. **Component Models:** Represent individual modules.
+3. **Dynamic Models:** Show system behavior over time (e.g., state diagrams).
+4. **Deployment Models:** Illustrate physical deployment of components.
+
+### Unified Modeling Language (UML)
+- **Class Diagrams:** Represent classes and their relationships.
+- **Sequence Diagrams:** Show interactions between objects over time.
+- **Activity Diagrams:** Depict workflows.
+- **State Diagrams:** Represent states and transitions of objects.
+
+---
+
+## Coding
+
+### Programming Principles
+1. **DRY (Don't Repeat Yourself):** Avoid code duplication.
+2. **KISS (Keep It Simple, Stupid):** Simplify code as much as possible.
+3. **SOLID Principles:** Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.
+
+### Coding Conventions
+1. Use meaningful variable names.
+2. Follow consistent indentation.
+3. Write comments for complex logic.
+4. Adhere to naming conventions (e.g., camelCase for variables, PascalCase for classes).
+
+---
+
+## Object-Oriented Analysis and Design
+
+### Steps in OOAD
+1. **Identify Objects:** Determine entities relevant to the system.
+2. **Define Relationships:** Establish relationships between objects.
+3. **Design Class Hierarchies:** Use inheritance and polymorphism.
+4. **Model System Behavior:** Use sequence diagrams, state diagrams, and activity diagrams.
+
+### Flowchart: OOAD Process
+```mermaid
+graph TD
+A[Identify Objects] --> B[Define Relationships]
+B --> C[Design Class Hierarchies]
+C --> D[Model System Behavior]
+D --> E[Refine Design]
+```
