@@ -1199,7 +1199,7 @@ int main( void ){
 | Conditional Operator    | `? :`        | Used for conditional expressions.               |
 | Typeid Operator         | `typeid`     | Retrieves runtime type information.             |
 | Alignof Operator        | `alignof`    | Gets alignment requirements of a type.          |
-| Coroutine Operator      | `co_await`   | Used in coroutine implementations.  
+| Coroutine Operator      | `co_await`   | Used in coroutine implementations. 
 ```
 ```
 ## **5. Inheritance**
