@@ -408,3 +408,244 @@ int main() {
     return 0;
 }
 
+
+# Operators, Conditional Statements, Looping Statements, and Arrays in C++
+
+## **1. Operators**
+
+### **Arithmetic Operators**
+Used to perform basic mathematical operations.
+
+| Operator | Description       | Example          |
+|----------|-------------------|------------------|
+| `+`      | Addition          | `a + b`          |
+| `-`      | Subtraction       | `a - b`          |
+| `*`      | Multiplication    | `a * b`          |
+| `/`      | Division          | `a / b`          |
+| `%`      | Modulus (remainder)| `a % b`         |
+
+#### Example:
+```cpp
+int a = 10, b = 3;
+cout << "Sum: " << a + b << endl;
+cout << "Remainder: " << a % b << endl;
+```
+
+---
+
+### **Relational Operators**
+Used to compare two values.
+
+| Operator | Description      | Example         |
+|----------|------------------|-----------------|
+| `==`     | Equal to         | `a == b`        |
+| `!=`     | Not equal to     | `a != b`        |
+| `<`      | Less than        | `a < b`         |
+| `>`      | Greater than     | `a > b`         |
+| `<=`     | Less than or equal to | `a <= b` |
+| `>=`     | Greater than or equal to | `a >= b` |
+
+#### Example:
+```cpp
+int a = 5, b = 10;
+cout << (a < b); // Output: 1 (true)
+```
+
+---
+
+### **Logical Operators**
+Used for logical expressions.
+
+| Operator | Description      | Example              |
+|----------|------------------|----------------------|
+| `&&`     | Logical AND      | `(a > 0 && b > 0)`   |
+| `||`     | Logical OR       | `(a > 0 || b < 0)`   |
+| `!`      | Logical NOT      | `!(a > b)`           |
+
+#### Example:
+```cpp
+bool x = true, y = false;
+cout << (x && y); // Output: 0 (false)
+```
+
+---
+
+### **Unary Operators**
+Operate on a single operand.
+
+| Operator | Description         | Example          |
+|----------|---------------------|------------------|
+| `+`      | Unary plus          | `+a`             |
+| `-`      | Unary minus         | `-a`             |
+| `++`     | Increment           | `++a` or `a++`   |
+| `--`     | Decrement           | `--a` or `a--`   |
+| `!`      | Logical NOT         | `!a`             |
+
+---
+
+### **Ternary Operator**
+Short form for an `if-else` statement.
+```cpp
+condition ? expression1 : expression2;
+```
+
+#### Example:
+```cpp
+int a = 5, b = 10;
+int max = (a > b) ? a : b;
+cout << "Max: " << max;
+```
+
+---
+
+### **Assignment Operators**
+Used to assign values to variables.
+
+| Operator | Description   | Example    |
+|----------|---------------|------------|
+| `=`      | Assign        | `a = b`    |
+| `+=`     | Add and assign| `a += b`   |
+| `-=`     | Subtract and assign | `a -= b` |
+| `*=`     | Multiply and assign | `a *= b` |
+| `/=`     | Divide and assign | `a /= b` |
+| `%=`     | Modulus and assign | `a %= b` |
+
+---
+
+## **2. Conditional Statements**
+
+### **if-else Statement**
+```cpp
+int a = 10;
+if (a > 5) {
+    cout << "a is greater than 5";
+} else {
+    cout << "a is less than or equal to 5";
+}
+```
+
+---
+
+### **else-if Statement**
+```cpp
+int a = 10;
+if (a < 5) {
+    cout << "a is less than 5";
+} else if (a == 10) {
+    cout << "a is 10";
+} else {
+    cout << "a is greater than 5 but not 10";
+}
+```
+
+---
+
+### **switch Statement**
+```cpp
+int choice = 2;
+switch (choice) {
+    case 1: cout << "Choice is 1"; break;
+    case 2: cout << "Choice is 2"; break;
+    default: cout << "Invalid choice";
+}
+```
+
+---
+
+## **3. Looping Statements**
+
+### **for Loop**
+```cpp
+for (int i = 0; i < 5; i++) {
+    cout << i << " ";
+}
+```
+
+---
+
+### **while Loop**
+```cpp
+int i = 0;
+while (i < 5) {
+    cout << i << " ";
+    i++;
+}
+```
+
+---
+
+### **do-while Loop**
+```cpp
+int i = 0;
+do {
+    cout << i << " ";
+    i++;
+} while (i < 5);
+```
+
+---
+
+## **4. Jump Statements**
+
+### **break**
+Exits the loop prematurely.
+```cpp
+for (int i = 0; i < 5; i++) {
+    if (i == 3) break;
+    cout << i << " ";
+}
+```
+
+### **continue**
+Skips the current iteration.
+```cpp
+for (int i = 0; i < 5; i++) {
+    if (i == 3) continue;
+    cout << i << " ";
+}
+```
+
+### **return**
+Exits a function and optionally returns a value.
+```cpp
+int add(int a, int b) {
+    return a + b;
+}
+```
+
+---
+
+## **5. Arrays**
+
+### **Declaration and Initialization**
+```cpp
+int arr[5] = {1, 2, 3, 4, 5}; // Declaration and initialization
+```
+
+### **Accessing Array Elements**
+```cpp
+cout << arr[0]; // Access first element
+```
+
+---
+
+### **1-D Array**
+```cpp
+int arr[5] = {1, 2, 3, 4, 5};
+for (int i = 0; i < 5; i++) {
+    cout << arr[i] << " ";
+}
+```
+
+---
+
+### **2-D Array**
+```cpp
+int arr[2][3] = {{1, 2, 3}, {4, 5, 6}};
+for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 3; j++) {
+        cout << arr[i][j] << " ";
+    }
+    cout << endl;
+}
+
