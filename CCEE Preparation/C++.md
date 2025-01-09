@@ -1756,27 +1756,48 @@ A virtual base class prevents multiple "instances" of a base class in the inheri
 
 ### **Example**
 ```cpp
+ 
+#include <iostream>
+using namespace std;
+#include <iostream>
+using namespace std;
+
 class Base {
 public:
-    void display() {
+    virtual void display() { // Mark as virtual for overriding
         cout << "This is the Base class." << endl;
     }
 };
 
 class Derived1 : virtual public Base {
+public:
+    void display() override { // Correctly overrides Base's display
+        cout << "This is Derived1." << endl;
+    }
 };
 
 class Derived2 : virtual public Base {
+public:
+    void display() override { // Correctly overrides Base's display
+        cout << "This is Derived2." << endl;
+    }
 };
 
 class FinalDerived : public Derived1, public Derived2 {
+public:
+    void display() override { // Explicitly resolve ambiguity
+        cout << "This is FinalDerived." << endl;
+    }
 };
 
 int main() {
     FinalDerived obj;
-    obj.display(); // Only one instance of Base is created
+    obj.display(); // Calls FinalDerived's display
+    obj.Derived1::display();
+     obj.Derived2::display();
     return 0;
 }
+
 ```
 
 ---
