@@ -1087,7 +1087,7 @@ public:
 - By defining operator function, we are increasing capability of exsiting operators. This process of givining extension to the meaning of the operator is called as operator overloading.
 - Using operator overloading we can not create user defined operators rather we can increase capability of existing operators.
 
-# Example: Addition (+) Operator Overloading using member function
+### Example: Addition (+) Operator Overloading using member function
 
 ```c
 #include<iostream>
@@ -1127,7 +1127,7 @@ int main( void ){
   return 0;
 }
 ```
-# Example: Addition (+) Operator Overloading using non member function
+### Example: Addition (+) Operator Overloading using non member function
 
 ```c
 #include<iostream>
