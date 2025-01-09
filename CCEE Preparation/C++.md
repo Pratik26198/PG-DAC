@@ -1858,3 +1858,58 @@ int main() {
 ```
 
 ---
+### Constructor & Destructor calling sequesce
+```
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    Base() {
+        cout << "Base class constructor called." << endl;
+    }
+    virtual ~Base() {
+        cout << "Base class destructor called." << endl;
+    }
+};
+
+class Derived1 : public Base {
+public:
+    Derived1() {
+        cout << "Derived1 class constructor called." << endl;
+    }
+    ~Derived1() {
+        cout << "Derived1 class destructor called." << endl;
+    }
+};
+
+class Derived2 : public Derived1 {
+public:
+    Derived2() {
+        cout << "Derived2 class constructor called." << endl;
+    }
+    ~Derived2() {
+        cout << "Derived2 class destructor called." << endl;
+    }
+};
+
+int main() {
+    cout << "Creating object of Derived2:" << endl;
+    Derived2 obj;  // Constructor sequence will be called
+    cout << "Object of Derived2 goes out of scope:" << endl;
+    return 0;      // Destructor sequence will be called
+
+}
+/*
+Creating object of Derived2:
+Base class constructor called.
+Derived1 class constructor called.
+Derived2 class constructor called.
+Object of Derived2 goes out of scope:
+Derived2 class destructor called.
+Derived1 class destructor called.
+Base class destructor called.
+*/
+
+```
+``
