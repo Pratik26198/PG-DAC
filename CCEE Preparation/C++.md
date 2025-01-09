@@ -1287,9 +1287,26 @@ int main() {
 ### **`using` Keyword**
 To avoid specifying the namespace repeatedly.
 ```cpp
-using namespace NamespaceName;
-data = 10;
-display();
+#include <iostream>
+
+// Define a namespace
+namespace NamespaceName {
+    int data; // Namespace variable
+    void display() { // Namespace function
+        std::cout << "Namespace Function" << std::endl;
+    }
+}
+
+int main() {
+    // Use the `using` keyword to avoid prefixing `NamespaceName::`
+    using namespace NamespaceName;
+
+    data = 10;      // Directly access the `data` variable from the namespace
+    display();      // Directly call the `display` function from the namespace
+
+    return 0;
+}
+
 ```
 
 ---
