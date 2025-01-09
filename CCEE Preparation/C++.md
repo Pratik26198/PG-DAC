@@ -1913,3 +1913,143 @@ Base class destructor called.
 
 ```
 ```
+
+# Polymorphism and Related Concepts in C++
+
+## **1. Types of Polymorphism**
+Polymorphism in C++ allows entities like functions or operators to take multiple forms. It is classified into:
+
+### **Compile-time Polymorphism**
+1. Achieved through **function overloading** and **operator overloading**.
+2. The decision about which function or operator to invoke is made at compile time.
+
+### **Run-time Polymorphism**
+1. Achieved through **method overriding** using virtual functions.
+2. The decision about which method to call is made during runtime.
+
+---
+
+## **2. Overloading Functions**
+Function overloading allows multiple functions with the same name but different parameter lists.
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Math {
+public:
+    int add(int a, int b) {
+        return a + b;
+    }
+    double add(double a, double b) {
+        return a + b;
+    }
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+};
+
+int main() {
+    Math obj;
+    cout << "Sum (int, int): " << obj.add(10, 20) << endl;
+    cout << "Sum (double, double): " << obj.add(5.5, 4.5) << endl;
+    cout << "Sum (int, int, int): " << obj.add(1, 2, 3) << endl;
+    return 0;
+}
+```
+
+---
+
+## **3. Overloading Operators**
+Operator overloading allows redefining the behavior of operators for user-defined types.
+
+### **Example: Overloading `+` Operator**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Complex {
+    int real, imag;
+public:
+    Complex(int r = 0, int i = 0) : real(r), imag(i) {}
+
+    // Overload + operator
+    Complex operator + (const Complex &obj) {
+        return Complex(real + obj.real, imag + obj.imag);
+    }
+
+    void display() {
+        cout << real << " + " << imag << "i" << endl;
+    }
+};
+
+int main() {
+    Complex c1(3, 4), c2(1, 2);
+    Complex c3 = c1 + c2; // Using overloaded + operator
+    c3.display();
+    return 0;
+}
+```
+
+---
+
+## **4. Friend Functions**
+Friend functions allow external functions to access private and protected members of a class.
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Box {
+    int width;
+public:
+    Box(int w) : width(w) {}
+    friend void displayWidth(Box b); // Friend function declaration
+};
+
+void displayWidth(Box b) {
+    cout << "Width: " << b.width << endl; // Access private member
+}
+
+int main() {
+    Box box(10);
+    displayWidth(box);
+    return 0;
+}
+```
+
+---
+
+## **5. Constant Functions**
+Constant functions are member functions that do not modify the state of the object. They are declared using the `const` keyword.
+
+### **Syntax**
+```cpp
+dataType functionName() const;
+```
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Circle {
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+
+    double getRadius() const {
+        return radius; // Function does not modify the state
+    }
+};
+
+int main() {
+    Circle c(5.0);
+    cout << "Radius: " << c.getRadius() << endl;
+    return 0;
+}
+```
+
+---
