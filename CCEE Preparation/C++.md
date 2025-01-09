@@ -975,7 +975,7 @@ public:
 | Initialization        | Yes (constructor)| No               | Zero-initialized | No               |
 | Type safety           | Yes             | No               | No               | No               |
 | Syntax                | Operator        | Function         | Function         | Function         |
-| Requires `delete`     | Yes             | No               | No               | No               |
+| Requires `delete`     | Yes             | No (uses "free (obj name)")               | No (uses "free (obj name)")               | No (uses "free (obj name)")              |
 
 ### Example Comparison:
 ```cpp
