@@ -1310,3 +1310,221 @@ int main() {
 ```
 
 ---
+
+# Constructors and Destructors in C++
+
+## **1. Constructors**
+A constructor is a special member function in a class that initializes objects of the class. It is automatically invoked when an object is created.
+
+### **Key Features**
+- Same name as the class.
+- No return type (not even `void`).
+
+### **Syntax**
+```cpp
+class ClassName {
+public:
+    ClassName() {
+        // Constructor body
+    }
+};
+```
+
+#### Example:
+```cpp
+class Example {
+public:
+    Example() {
+        cout << "Constructor called!" << endl;
+    }
+};
+
+int main() {
+    Example obj; // Constructor is invoked automatically
+    return 0;
+}
+```
+
+---
+
+## **2. Parameterized Constructors**
+Constructors that accept arguments to initialize objects with specific values.
+
+### **Syntax**
+```cpp
+class ClassName {
+public:
+    ClassName(dataType arg1, dataType arg2) {
+        // Initialization
+    }
+};
+```
+
+#### Example:
+```cpp
+class Rectangle {
+    int length, breadth;
+public:
+    Rectangle(int l, int b) {
+        length = l;
+        breadth = b;
+    }
+    void display() {
+        cout << "Area: " << length * breadth << endl;
+    }
+};
+
+int main() {
+    Rectangle rect(10, 5); // Parameterized constructor
+    rect.display();
+    return 0;
+}
+```
+
+---
+
+## **3. Multiple Constructors in a Class**
+A class can have multiple constructors with different parameter lists (constructor overloading).
+
+#### Example:
+```cpp
+class Box {
+    int height, width;
+public:
+    Box() { // Default constructor
+        height = width = 0;
+    }
+    Box(int h) { // Single parameter constructor
+        height = width = h;
+    }
+    Box(int h, int w) { // Parameterized constructor
+        height = h;
+        width = w;
+    }
+    void display() {
+        cout << "Height: " << height << ", Width: " << width << endl;
+    }
+};
+
+int main() {
+    Box b1;
+    Box b2(5);
+    Box b3(10, 15);
+
+    b1.display();
+    b2.display();
+    b3.display();
+    return 0;
+}
+```
+
+---
+
+## **4. Dynamic Initialization of Objects**
+Objects can be initialized dynamically during runtime using constructors.
+
+#### Example:
+```cpp
+class Circle {
+    double radius;
+public:
+    Circle(double r) {
+        radius = r;
+    }
+    void display() {
+        cout << "Area: " << 3.14 * radius * radius << endl;
+    }
+};
+
+int main() {
+    double r;
+    cout << "Enter radius: ";
+    cin >> r;
+    Circle c(r); // Dynamic initialization
+    c.display();
+    return 0;
+}
+```
+
+---
+
+## **5. Copy Constructor**
+A copy constructor creates a new object by copying an existing object. It is automatically invoked during object copying.
+
+### **Syntax**
+```cpp
+ClassName(const ClassName &obj);
+```
+
+#### Example:
+```cpp
+class Person {
+    string name;
+public:
+    Person(string n) { // Parameterized constructor
+        name = n;
+    }
+    Person(const Person &p) { // Copy constructor
+        name = p.name;
+    }
+    void display() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+int main() {
+    Person p1("Alice");
+    Person p2 = p1; // Copy constructor is called
+    p2.display();
+    return 0;
+}
+```
+
+---
+
+## **6. Destructor**
+A destructor is a special member function that destroys objects of a class. It is automatically invoked when an object goes out of scope.
+
+### **Key Features**
+- Same name as the class, preceded by a `~`.
+- No return type and no arguments.
+
+### **Syntax**
+```cpp
+class ClassName {
+public:
+    ~ClassName() {
+        // Destructor body
+    }
+};
+```
+
+#### Example:
+```cpp
+class Demo {
+public:
+    Demo() {
+        cout << "Constructor called!" << endl;
+    }
+    ~Demo() {
+        cout << "Destructor called!" << endl;
+    }
+};
+
+int main() {
+    Demo obj; // Constructor is called
+    return 0; // Destructor is automatically called
+}
+```
+
+---
+
+### **Key Differences: Constructor vs Destructor**
+| Feature       | Constructor             | Destructor            |
+|---------------|-------------------------|-----------------------|
+| Invocation    | Automatically invoked when object is created. | Automatically invoked when object is destroyed. |
+| Naming        | Same name as class.     | Same name as class, preceded by `~`. |
+| Arguments     | Can take arguments.     | Cannot take arguments. |
+| Purpose       | Initializes the object. | Cleans up resources.  |
+
+---
