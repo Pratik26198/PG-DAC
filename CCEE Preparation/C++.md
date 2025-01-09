@@ -1528,3 +1528,308 @@ int main() {
 | Purpose       | Initializes the object. | Cleans up resources.  |
 
 ---
+
+# Inheritance in C++
+
+## **1. Types of Inheritance**
+Inheritance in C++ allows a class (derived class) to acquire the properties and behaviors of another class (base class). The types of inheritance include:
+
+1. **Single Inheritance**
+2. **Multiple Inheritance**
+3. **Multilevel Inheritance**
+4. **Hierarchical Inheritance**
+5. **Hybrid Inheritance**
+
+---
+
+## **2. Single Inheritance**
+In single inheritance, a derived class inherits from a single base class.
+
+### **Syntax**
+```cpp
+class Base {
+    // Base class members
+};
+class Derived : public Base {
+    // Derived class members
+};
+```
+
+### **Example**
+```cpp
+class Parent {
+public:
+    void display() {
+        cout << "This is the Parent class." << endl;
+    }
+};
+
+class Child : public Parent {
+};
+
+int main() {
+    Child obj;
+    obj.display();
+    return 0;
+}
+```
+
+---
+
+## **3. Multiple Inheritance**
+A derived class inherits from two or more base classes.
+
+### **Syntax**
+```cpp
+class Base1 {
+    // Base1 class members
+};
+class Base2 {
+    // Base2 class members
+};
+class Derived : public Base1, public Base2 {
+    // Derived class members
+};
+```
+
+### **Example**
+```cpp
+class Parent1 {
+public:
+    void display1() {
+        cout << "This is Parent1." << endl;
+    }
+};
+
+class Parent2 {
+public:
+    void display2() {
+        cout << "This is Parent2." << endl;
+    }
+};
+
+class Child : public Parent1, public Parent2 {
+};
+
+int main() {
+    Child obj;
+    obj.display1();
+    obj.display2();
+    return 0;
+}
+```
+
+---
+
+## **4. Multilevel Inheritance**
+In multilevel inheritance, a derived class inherits from another derived class.
+
+### **Syntax**
+```cpp
+class Base {
+    // Base class members
+};
+class Intermediate : public Base {
+    // Intermediate class members
+};
+class Derived : public Intermediate {
+    // Derived class members
+};
+```
+
+### **Example**
+```cpp
+class GrandParent {
+public:
+    void display1() {
+        cout << "This is GrandParent." << endl;
+    }
+};
+
+class Parent : public GrandParent {
+public:
+    void display2() {
+        cout << "This is Parent." << endl;
+    }
+};
+
+class Child : public Parent {
+};
+
+int main() {
+    Child obj;
+    obj.display1();
+    obj.display2();
+    return 0;
+}
+```
+
+---
+
+## **5. Hierarchical Inheritance**
+In hierarchical inheritance, multiple derived classes inherit from a single base class.
+
+### **Syntax**
+```cpp
+class Base {
+    // Base class members
+};
+class Derived1 : public Base {
+    // Derived1 class members
+};
+class Derived2 : public Base {
+    // Derived2 class members
+};
+```
+
+### **Example**
+```cpp
+class Parent {
+public:
+    void display() {
+        cout << "This is the Parent class." << endl;
+    }
+};
+
+class Child1 : public Parent {
+};
+
+class Child2 : public Parent {
+};
+
+int main() {
+    Child1 obj1;
+    Child2 obj2;
+    obj1.display();
+    obj2.display();
+    return 0;
+}
+```
+
+---
+
+## **6. Hybrid Inheritance**
+Hybrid inheritance is a combination of two or more types of inheritance.
+
+### **Example**
+```cpp
+class Parent {
+public:
+    void displayParent() {
+        cout << "This is Parent." << endl;
+    }
+};
+
+class Child1 : public Parent {
+public:
+    void displayChild1() {
+        cout << "This is Child1." << endl;
+    }
+};
+
+class Child2 : public Parent {
+public:
+    void displayChild2() {
+        cout << "This is Child2." << endl;
+    }
+};
+
+class GrandChild : public Child1, public Child2 {
+};
+
+int main() {
+    GrandChild obj;
+    obj.displayChild1();
+    obj.displayChild2();
+    return 0;
+}
+```
+
+---
+
+## **7. Virtual Base Class**
+A virtual base class prevents multiple "instances" of a base class in the inheritance hierarchy.
+
+### **Example**
+```cpp
+class Base {
+public:
+    void display() {
+        cout << "This is the Base class." << endl;
+    }
+};
+
+class Derived1 : virtual public Base {
+};
+
+class Derived2 : virtual public Base {
+};
+
+class FinalDerived : public Derived1, public Derived2 {
+};
+
+int main() {
+    FinalDerived obj;
+    obj.display(); // Only one instance of Base is created
+    return 0;
+}
+```
+
+---
+
+## **8. Constructors in Derived Class**
+When a derived class object is created, the base class constructor is called first, followed by the derived class constructor.
+
+### **Example**
+```cpp
+class Base {
+public:
+    Base() {
+        cout << "Base class constructor called." << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    Derived() {
+        cout << "Derived class constructor called." << endl;
+    }
+};
+
+int main() {
+    Derived obj;
+    return 0;
+}
+```
+
+---
+
+### **Order of Constructor Calls in Multilevel Inheritance**
+1. Base class constructor is called first.
+2. Intermediate class constructor is called next.
+3. Finally, the derived class constructor is called.
+
+#### Example:
+```cpp
+class A {
+public:
+    A() { cout << "Constructor of A." << endl; }
+};
+
+class B : public A {
+public:
+    B() { cout << "Constructor of B." << endl; }
+};
+
+class C : public B {
+public:
+    C() { cout << "Constructor of C." << endl; }
+};
+
+int main() {
+    C obj;
+    return 0;
+}
+```
+
+---
