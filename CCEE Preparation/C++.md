@@ -944,7 +944,7 @@ public:
 };
 
 Person *p = new Person("John");
-p->display();
+p->display();       //Output = Name: John
 delete p;
 ```
 
