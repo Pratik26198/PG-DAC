@@ -1167,39 +1167,39 @@ int main( void ){
 }
 ```
 
-# C++ Operators Overloading Table
+## Operators That Can Be Overloaded
 
-| **Operator**              | **Can Be Overloaded?** | **Notes**                                   |
-|----------------------------|------------------------|---------------------------------------------|
-| `+`, `-`, `*`, `/`, `%`   | Yes                    | Arithmetic operators.                       |
-| `==`, `!=`, `<`, `>`       | Yes                    | Comparison operators.                       |
-| `<=`, `>=`                | Yes                    | Comparison operators.                       |
-| `&&`, `||`, `!`           | Yes                    | Logical operators.                          |
-| `&`, `|`, `^`, `~`        | Yes                    | Bitwise operators.                          |
-| `<<`, `>>`                | Yes                    | Bitwise shift operators.                    |
-| `++`, `--`                | Yes                    | Increment and decrement operators.          |
-| `=`                       | Yes                    | Assignment operator.                        |
-| `+=`, `-=`, `*=`, `/=`    | Yes                    | Compound assignment operators.              |
-| `%=`                      | Yes                    | Compound assignment operator.               |
-| `&=`, `|=`, `^=`          | Yes                    | Compound assignment operators.              |
-| `<<=`, `>>=`              | Yes                    | Compound bitwise shift operators.           |
-| `[]`                      | Yes                    | Subscript operator.                         |
-| `()`                      | Yes                    | Function call operator.                     |
-| `->`                      | Yes                    | Member access through pointer.              |
-| `*`                       | Yes                    | Dereference operator.                       |
-| `,`                       | Yes                    | Comma operator.                             |
-| `new`, `delete`           | Yes                    | Memory management operators.                |
-| `new[]`, `delete[]`       | Yes                    | Memory management operators for arrays.     |
-| `type conversion`         | Yes                    | User-defined type conversion.               |
-| `::`                      | No                     | Scope resolution operator.                  |
-| `.`                       | No                     | Member access operator.                     |
-| `.*`                      | No                     | Pointer-to-member access operator.          |
-| `sizeof`                  | No                     | Size determination operator.                |
-| `typeid`                  | No                     | Runtime type information operator.          |
-| `alignof`                 | No                     | Alignment requirement operator.             |
-| `? :`                     | No                     | Conditional (ternary) operator.             |
-| `co_await`                | No                     | Coroutine operator.                         |
+| **Category**             | **Operators**                             | **Notes**                                       |
+|--------------------------|-------------------------------------------|------------------------------------------------|
+| Arithmetic Operators      | `+`, `-`, `*`, `/`, `%`                  | Used for arithmetic operations.                |
+| Relational Operators      | `==`, `!=`, `<`, `>`, `<=`, `>=`         | Used for comparison between objects.           |
+| Logical Operators         | `&&`, `||`, `!`                          | Used for custom boolean logic.                 |
+| Bitwise Operators         | `&`, `|`, `^`, `~`, `<<`, `>>`           | Used for bitwise manipulation.                 |
+| Assignment Operators      | `=`, `+=`, `-=`, `*=`, `/=`, `%=`        | Used for custom assignment operations.         |
+|                          | `<<=`, `>>=`, `&=`, `|=`, `^=`            | Compound assignment operators.                 |
+| Unary Operators           | `+`, `-`, `++`, `--`, `*`, `&`           | Used for unary operations like increment/decrement. |
+| Subscript Operator        | `[]`                                     | Enables array-like behavior for objects.       |
+| Function Call Operator    | `()`                                     | Makes objects callable like functions.         |
+| Member Access Operator    | `->`                                     | Custom pointer-like behavior.                  |
+| Dereference Operator      | `*`                                      | Custom dereferencing.                          |
+| Comma Operator            | `,`                                      | Enables sequential operations.                 |
+| New and Delete Operators  | `new`, `delete`, `new[]`, `delete[]`     | Custom memory management.                      |
+| Type Conversion Operators | Custom type conversion                   | Enables object conversion to another type.     |
 
+---
+
+## Operators That Cannot Be Overloaded
+
+| **Operator**           | **Symbol**   | **Reason**                                       |
+|-------------------------|--------------|-------------------------------------------------|
+| Scope Resolution        | `::`         | Used to access class or namespace members.      |
+| Pointer-to-Member Access| `.*`         | Access class members using pointers.            |
+| Member Access           | `.`          | Directly accesses object members.               |
+| Sizeof Operator         | `sizeof`     | Determines the size of a type or object.        |
+| Conditional Operator    | `? :`        | Used for conditional expressions.               |
+| Typeid Operator         | `typeid`     | Retrieves runtime type information.             |
+| Alignof Operator        | `alignof`    | Gets alignment requirements of a type.          |
+| Coroutine Operator      | `co_await`   | Used in coroutine implementations.  
 ```
 ```
 ## **5. Inheritance**
