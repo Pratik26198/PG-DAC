@@ -2054,3 +2054,198 @@ int main() {
 ```
 
 ---
+
+
+# Advanced Polymorphism and Type Casting in C++
+
+## **1. Run Time Polymorphism**
+Run-time polymorphism is achieved through method overriding using virtual functions. The method to be invoked is determined at runtime based on the type of the object being pointed to by the base class pointer.
+
+### **Key Features**:
+- Achieved via **virtual functions**.
+- Requires a base class pointer or reference pointing to a derived class object.
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void show() { // Virtual function
+        cout << "Base class show()" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        cout << "Derived class show()" << endl;
+    }
+};
+
+int main() {
+    Base *bptr;
+    Derived d;
+    bptr = &d;
+    bptr->show(); // Calls Derived class's show()
+    return 0;
+}
+```
+
+---
+
+## **2. Virtual Functions and Pure Virtual Functions**
+
+### **Virtual Functions**
+- A virtual function is a function in a base class that can be overridden in a derived class.
+- Declared using the `virtual` keyword.
+
+### **Pure Virtual Functions**
+- A pure virtual function is a function that has no definition in the base class.
+- It is declared by assigning `0` in the base class.
+- Classes containing at least one pure virtual function become **abstract classes**.
+
+### **Example**: Pure Virtual Function
+```cpp
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual void draw() = 0; // Pure virtual function
+};
+
+class Circle : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing Circle" << endl;
+    }
+};
+
+int main() {
+    Shape *shape = new Circle();
+    shape->draw();
+    delete shape;
+    return 0;
+}
+```
+
+---
+
+## **3. Type Casting in C++**
+C++ provides four types of type casting:
+
+### **a. `dynamic_cast`**
+- Used for safe downcasting of pointers and references in polymorphic hierarchies.
+- Requires the base class to have at least one virtual function.
+
+#### Example:
+```cpp
+Base *bptr = new Derived();
+Derived *dptr = dynamic_cast<Derived*>(bptr);
+if (dptr) {
+    cout << "Downcasting successful" << endl;
+}
+```
+
+### **b. `static_cast`**
+- Used for compile-time type checking.
+- Can perform conversions between related types, such as `int` to `float` or base to derived.
+
+#### Example:
+```cpp
+int a = 10;
+double b = static_cast<double>(a);
+cout << b; // Output: 10.0
+```
+
+### **c. `const_cast`**
+- Used to cast away the `const` qualifier from a variable.
+
+#### Example:
+```cpp
+const int x = 10;
+int &y = const_cast<int&>(x);
+y = 20;
+cout << x << " " << y; // Output may be undefined (UB).
+```
+
+### **d. `reinterpret_cast`**
+- Used for low-level, unsafe type casting (e.g., converting pointers to unrelated types).
+
+#### Example:
+```cpp
+int a = 10;
+void *ptr = &a;
+int *iptr = reinterpret_cast<int*>(ptr);
+cout << *iptr; // Output: 10
+```
+
+---
+
+## **4. Interfaces**
+An interface in C++ is implemented using **abstract classes**. An abstract class with only pure virtual functions serves as an interface.
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class IShape { // Interface
+public:
+    virtual void draw() = 0; // Pure virtual function
+    virtual ~IShape() {}     // Virtual destructor
+};
+
+class Rectangle : public IShape {
+public:
+    void draw() override {
+        cout << "Drawing Rectangle" << endl;
+    }
+};
+
+int main() {
+    IShape *shape = new Rectangle();
+    shape->draw();
+    delete shape;
+    return 0;
+}
+```
+
+---
+
+## **5. Abstract Classes**
+An abstract class is a class that cannot be instantiated and is meant to be inherited. It typically contains at least one pure virtual function.
+
+### **Example**
+```cpp
+#include <iostream>
+using namespace std;
+
+class AbstractBase {
+public:
+    virtual void display() = 0; // Pure virtual function
+    void commonFunction() {
+        cout << "Common functionality" << endl;
+    }
+};
+
+class ConcreteClass : public AbstractBase {
+public:
+    void display() override {
+        cout << "Implementation of display" << endl;
+    }
+};
+
+int main() {
+    AbstractBase *obj = new ConcreteClass();
+    obj->display();
+    obj->commonFunction();
+    delete obj;
+    return 0;
+}
+```
+
+---
+
