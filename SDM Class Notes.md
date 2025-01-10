@@ -260,7 +260,7 @@ GitHub is a **centralized, personalized, and collaborative code repository** for
 ---
 
 ## Requirement Engineering
-
+- **SRS (Software Requirements Specification):** Collect and define all the functional and non-functional requirements for the software.
 ### SRS Document for Online Shopping
 #### Title:
 System Requirement Specification for Online Shopping Portal for Vijay Sales.
@@ -333,10 +333,7 @@ graph TD;
     C --> D[Order Shipment];
     D --> E[Order Delivery];
 ```
-## Requirement Gathering
-- **SRS (Software Requirements Specification):** Collect and define all the functional and non-functional requirements for the software.
 
----
 
 ## Design
 
