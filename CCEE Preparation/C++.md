@@ -2725,3 +2725,183 @@ fstream file("example.txt", ios::in | ios::out | ios::binary);
 ```
 
 ---
+
+# Templates in C++
+
+## **1. Introduction to Templates**
+Templates in C++ allow writing generic and reusable code that works with different data types. Templates are widely used in cases where the same logic needs to operate on various data types without duplicating the code.
+
+### **Key Features**:
+- Code reusability.
+- Type safety.
+- Supports both functions and classes.
+
+### **Types of Templates**:
+1. **Function Templates**: For creating generic functions.
+2. **Class Templates**: For creating generic classes.
+
+---
+
+## **2. Function Templates**
+Function templates allow defining a single function that can operate on different data types.
+
+### **Syntax**
+```cpp
+template <typename T>
+returnType functionName(T parameter1, T parameter2) {
+    // Function logic
+}
+```
+
+### **Example**: Function Template
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    cout << "Sum of integers: " << add(5, 10) << endl;
+    cout << "Sum of doubles: " << add(3.14, 2.71) << endl;
+    return 0;
+}
+```
+
+### **Multiple Template Parameters**
+You can define functions with multiple template parameters.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T, typename U>
+void display(T a, U b) {
+    cout << "First: " << a << ", Second: " << b << endl;
+}
+
+int main() {
+    display(10, "Hello");
+    display(3.14, 42);
+    return 0;
+}
+```
+
+---
+
+## **3. Class Templates**
+Class templates allow creating generic classes that work with different data types.
+
+### **Syntax**
+```cpp
+template <typename T>
+class ClassName {
+    T data;
+public:
+    ClassName(T value) : data(value) {}
+    void display() {
+        cout << data << endl;
+    }
+};
+```
+
+### **Example**: Class Template
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Box {
+    T data;
+public:
+    Box(T value) : data(value) {}
+    void display() {
+        cout << "Box contains: " << data << endl;
+    }
+};
+
+int main() {
+    Box<int> intBox(123);
+    Box<string> strBox("Templates in C++");
+
+    intBox.display();
+    strBox.display();
+
+    return 0;
+}
+```
+
+### **Class Template with Multiple Parameters**
+Templates can also take multiple type parameters.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+template <typename T, typename U>
+class Pair {
+    T first;
+    U second;
+public:
+    Pair(T a, U b) : first(a), second(b) {}
+    void display() {
+        cout << "First: " << first << ", Second: " << second << endl;
+    }
+};
+
+int main() {
+    Pair<int, string> p(1, "One");
+    Pair<double, char> q(3.14, 'A');
+
+    p.display();
+    q.display();
+
+    return 0;
+}
+```
+
+---
+
+### **Specialization of Class Templates**
+Class templates can be specialized for specific types when the general template logic needs modification.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+// Generic template
+template <typename T>
+class Calculator {
+public:
+    T add(T a, T b) {
+        return a + b;
+    }
+};
+
+// Specialized template for strings
+template <>
+class Calculator<string> {
+public:
+    string add(string a, string b) {
+        return a + " " + b;
+    }
+};
+
+int main() {
+    Calculator<int> intCalc;
+    Calculator<string> strCalc;
+
+    cout << "Integer addition: " << intCalc.add(10, 20) << endl;
+    cout << "String concatenation: " << strCalc.add("Hello", "World") << endl;
+
+    return 0;
+}
+```
+
+---
+
