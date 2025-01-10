@@ -2588,3 +2588,140 @@ int main() {
 
 ---
 
+# File Handling in C++
+
+## **1. Definition of File**
+A **file** in computing is a collection of data stored on a disk or other storage medium. It allows data to be permanently stored and retrieved when needed.
+
+### **Key Points**:
+- A file is used for storing data in a non-volatile medium (e.g., hard drive, SSD).
+- Files can be text or binary.
+- C++ provides classes and functions to handle file operations like reading and writing.
+
+---
+
+## **2. File Handling in C++**
+File handling in C++ is done using the **fstream** library, which provides classes for creating, reading, and writing files.
+
+### **Classes for File Handling**:
+| Class      | Description                                  |
+|------------|----------------------------------------------|
+| `ifstream` | Input file stream for reading from files.    |
+| `ofstream` | Output file stream for writing to files.     |
+| `fstream`  | File stream for both reading and writing.    |
+
+### **Including File Handling Library**:
+To use file handling in C++, include the `<fstream>` header:
+```cpp
+#include <fstream>
+```
+
+---
+
+## **3. Reading and Writing Operations in Files**
+
+### **a. Writing to a File**
+The `ofstream` or `fstream` class is used to write data into a file.
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <fstream> // Required for file handling
+using namespace std;
+
+int main() {
+    ofstream outFile("example.txt"); // Open a file for writing
+
+    if (!outFile) {
+        cout << "File could not be opened." << endl;
+        return 1;
+    }
+
+    outFile << "Hello, File Handling in C++!" << endl;
+    outFile << "Writing data into the file." << endl;
+
+    outFile.close(); // Close the file
+    cout << "Data written to file successfully." << endl;
+
+    return 0;
+}
+```
+
+### **b. Reading from a File**
+The `ifstream` or `fstream` class is used to read data from a file.
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream inFile("example.txt"); // Open a file for reading
+
+    if (!inFile) {
+        cout << "File could not be opened." << endl;
+        return 1;
+    }
+
+    string line;
+    while (getline(inFile, line)) { // Read line by line
+        cout << line << endl;
+    }
+
+    inFile.close(); // Close the file
+    return 0;
+}
+```
+
+### **c. Reading and Writing with `fstream`**
+The `fstream` class can be used for both reading and writing operations.
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    fstream file("example.txt", ios::in | ios::out | ios::app); // Open file for reading and appending
+
+    if (!file) {
+        cout << "File could not be opened." << endl;
+        return 1;
+    }
+
+    // Write to the file
+    file << "Appending new data to the file." << endl;
+
+    // Read from the file
+    file.seekg(0); // Move the pointer to the beginning for reading
+    string line;
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+
+    file.close(); // Close the file
+    return 0;
+}
+```
+
+---
+
+## **4. Common File Modes**
+When opening files, you can specify modes to determine how the file is accessed.
+
+| Mode         | Description                          |
+|--------------|--------------------------------------|
+| `ios::in`    | Open for reading.                   |
+| `ios::out`   | Open for writing.                   |
+| `ios::app`   | Open for appending.                 |
+| `ios::trunc` | Truncate the file if it exists.     |
+| `ios::binary`| Open file in binary mode.           |
+
+### **Example**: Open a file in multiple modes
+```cpp
+fstream file("example.txt", ios::in | ios::out | ios::binary);
+```
+
+---
