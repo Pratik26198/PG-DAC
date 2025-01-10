@@ -2905,3 +2905,228 @@ int main() {
 
 ---
 
+# STL and RTTI in C++
+
+## **1. Introduction to the C++ Standard Library**
+The **C++ Standard Library (STL)** is a collection of pre-written classes and functions for data structures, algorithms, and iterators. STL is designed to provide reusable and efficient components to simplify development.
+
+### **Components of the C++ Standard Library**:
+1. **Containers**: Data structures like `vector`, `list`, `map`, and `queue`.
+2. **Algorithms**: Functions for searching, sorting, etc.
+3. **Iterators**: Objects for accessing elements in containers.
+
+---
+
+## **2. Working with Stack, Vector, Queue, and Map**
+
+### **a. Stack**
+A stack is a container adapter that works on the **Last In, First Out (LIFO)** principle.
+
+#### **Functions in Stack**:
+| Function       | Description                   |
+|----------------|-------------------------------|
+| `push()`       | Adds an element to the stack. |
+| `pop()`        | Removes the top element.      |
+| `top()`        | Accesses the top element.     |
+| `empty()`      | Checks if the stack is empty. |
+| `size()`       | Returns the number of elements in the stack. |
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    stack<int> s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+
+    cout << "Top element: " << s.top() << endl;
+    s.pop();
+    cout << "After pop, top element: " << s.top() << endl;
+
+    return 0;
+}
+```
+
+---
+
+### **b. Vector**
+A `vector` is a dynamic array that can grow and shrink in size.
+
+#### **Functions in Vector**:
+| Function       | Description                                   |
+|----------------|-----------------------------------------------|
+| `push_back()`  | Adds an element to the end.                  |
+| `pop_back()`   | Removes the last element.                    |
+| `size()`       | Returns the number of elements.              |
+| `at()`         | Accesses an element at a specific position.  |
+| `begin()`/`end()` | Returns iterators to the start and end.     |
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {1, 2, 3, 4};
+    v.push_back(5);
+
+    cout << "Vector elements: ";
+    for (int i : v) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    v.pop_back();
+    cout << "After pop_back: ";
+    for (int i : v) {
+        cout << i << " ";
+    }
+
+    return 0;
+}
+```
+
+---
+
+### **c. Queue**
+A queue is a container adapter that works on the **First In, First Out (FIFO)** principle.
+
+#### **Functions in Queue**:
+| Function       | Description                    |
+|----------------|--------------------------------|
+| `push()`       | Adds an element to the queue.  |
+| `pop()`        | Removes the front element.     |
+| `front()`      | Accesses the front element.    |
+| `back()`       | Accesses the last element.     |
+| `empty()`      | Checks if the queue is empty.  |
+| `size()`       | Returns the number of elements.|
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    queue<int> q;
+    q.push(10);
+    q.push(20);
+    q.push(30);
+
+    cout << "Front element: " << q.front() << endl;
+    q.pop();
+    cout << "After pop, front element: " << q.front() << endl;
+
+    return 0;
+}
+```
+
+---
+
+### **d. Map**
+A `map` is an associative container that stores key-value pairs, where each key is unique.
+
+#### **Functions in Map**:
+| Function       | Description                                   |
+|----------------|-----------------------------------------------|
+| `insert()`     | Inserts a key-value pair.                    |
+| `erase()`      | Removes an element by key.                   |
+| `find()`       | Searches for an element by key.              |
+| `size()`       | Returns the number of elements.              |
+| `[]` operator  | Accesses or modifies the value of a key.     |
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+    map<string, int> m;
+    m["Alice"] = 25;
+    m["Bob"] = 30;
+    m.insert({"Charlie", 35});
+
+    for (auto &pair : m) {
+        cout << pair.first << ": " << pair.second << endl;
+    }
+
+    return 0;
+}
+```
+
+---
+
+## **3. Introduction to RTTI (Run-Time Type Information)**
+Run-Time Type Information (RTTI) in C++ allows identifying the type of an object during runtime. It is primarily used with polymorphism to ensure type safety.
+
+### **Key Features**:
+- Requires at least one virtual function in the base class.
+- Provides operators like `typeid` and `dynamic_cast`.
+
+### **RTTI Operators**:
+
+#### **a. `typeid`**
+- Used to retrieve the type information of an object.
+- Returns a reference to a `std::type_info` object.
+
+#### **Example**:
+```cpp
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+class Base {};
+class Derived : public Base {};
+
+int main() {
+    Base *b = new Derived;
+    cout << "Type of object: " << typeid(*b).name() << endl;
+
+    delete b;
+    return 0;
+}
+```
+
+#### **b. `dynamic_cast`**
+- Used for safe downcasting in polymorphic hierarchies.
+- Returns `nullptr` if the cast is invalid.
+
+#### **Example**:
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void show() {}
+};
+
+class Derived : public Base {
+public:
+    void display() { cout << "Derived class" << endl; }
+};
+
+int main() {
+    Base *b = new Derived;
+    Derived *d = dynamic_cast<Derived *>(b);
+
+    if (d) {
+        d->display();
+    } else {
+        cout << "Invalid cast" << endl;
+    }
+
+    delete b;
+    return 0;
+}
+```
+
+---
+
+
