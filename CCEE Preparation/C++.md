@@ -2131,6 +2131,34 @@ int main() {
 }
 ```
 
+### Combination of Virtual Function & Pure Virtual Function
+```c
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void display() = 0;  // Pure virtual function
+    virtual void show() {        // Virtual function with definition
+        cout << "Base::show" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void display() override {  // Override pure virtual function
+        cout << "Derived::display" << endl;
+    }
+};
+
+int main() {
+    // Base base; // Error: Cannot instantiate an abstract class
+    Derived derived;
+    derived.display();  // Output: Derived::display
+    derived.show();     // Output: Base::show
+    return 0;
+}
+```
 ---
 
 ## **3. Type Casting in C++**
