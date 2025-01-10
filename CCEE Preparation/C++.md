@@ -2170,11 +2170,28 @@ C++ provides four types of type casting:
 
 #### Example:
 ```cpp
-Base *bptr = new Derived();
-Derived *dptr = dynamic_cast<Derived*>(bptr);
-if (dptr) {
-    cout << "Downcasting successful" << endl;
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual ~Base() {}  // Virtual destructor for RTTI
+};
+
+class Derived : public Base {};
+
+int main() {
+    Base *bptr = new Derived();
+    Derived *dptr = dynamic_cast<Derived*>(bptr);
+    if (dptr) {
+        cout << "Downcasting successful" << endl;
+    } else {
+        cout << "Downcasting failed" << endl;
+    }
+    delete bptr;
+    return 0;
 }
+
 ```
 
 ### **b. `static_cast`**
