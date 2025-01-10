@@ -2944,8 +2944,8 @@ int main() {
     s.push(30);
 
     cout << "Top element: " << s.top() << endl;
-    s.pop();
-    cout << "After pop, top element: " << s.top() << endl;
+    s.pop();  // 30
+    cout << "After pop, top element: " << s.top() << endl; //20
 
     return 0;
 }
