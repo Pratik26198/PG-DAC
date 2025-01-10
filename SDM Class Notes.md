@@ -576,39 +576,38 @@ Answer: C) They are self-organizing and collaborate closely
 
 
 11. What is the main objective of the deployment phase in SDLC?
-A.To gather the initial requirements
-B.To write the source code  
-C.To deliver the software to the customer or users  
-D.To test the software for bugs
+A) To gather the initial requirements
+B) To write the source code  
+C) To deliver the software to the customer or users  
+D) To test the software for bugs
 Ans: C
 
-12. Which phase in SDLC is responsible for fixing any issues found during testing?
-A.Requirements Gathering  
-B.Design 
-C.Coding
-D.Maintenance
+13. Which phase in SDLC is responsible for fixing any issues found during testing?
+A) Requirements Gathering  
+B) Design 
+C) Coding
+D) Maintenance
 Answer: D
 
 14. Which of the following is an example of a functional requirement in an SRS?
-The system should respond within 2 seconds
-A.The system should respond within 2 seconds  
-B.The system should have 24/7 availability  
-C.The system should allow users to register an account  
-D.The system should be secure against unauthorized access
+A) The system should respond within 2 seconds  
+B) The system should have 24/7 availability  
+C) The system should allow users to register an account  
+D) The system should be secure against unauthorized access
 Answer: C
 
 15. The SRS document should include which of the following to ensure the software will meet user expectations?
-A.User interface wireframes  
-B.The project budget
-C.The marketing strategy
-D.Functional and non-functional Requirements
+A) User interface wireframes  
+B) The project budget
+C) The marketing strategy
+D) Functional and non-functional Requirements
 Answer: D
 
 17. Which SDLC model is best suited for projects with well-defined requirements that are unlikely to change?
-A.Spiral Model----incremental iterative development process
-B.Agile Model-----delivering working software in periodic cycle
-C.V Model---------Balancing act with SDLC using Testing approach for validate
-D.Waterfall Model--- well-defined requirements that are unlikely to change
+A) Spiral Model----incremental iterative development process
+B) Agile Model-----delivering working software in periodic cycle
+C) V Model---------Balancing act with SDLC using Testing approach for validate
+D) Waterfall Model--- well-defined requirements that are unlikely to change
 Answer: D
 
 
