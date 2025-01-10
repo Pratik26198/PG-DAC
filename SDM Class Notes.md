@@ -332,3 +332,149 @@ graph TD;
     B --> C[Payment Gateway];
     C --> D[Order Shipment];
     D --> E[Order Delivery];
+```
+## Requirement Gathering
+- **SRS (Software Requirements Specification):** Collect and define all the functional and non-functional requirements for the software.
+
+---
+
+## Design
+
+### Documentation
+- Created by:
+  - Software Architect
+  - System Design Expert
+  - Senior Software Developer
+
+### Characteristics of a Good Design
+1. **Functionality:**
+   - Features: Product catalog, shopping cart, membership, roles management, order processing, payment processing, shipment, CRM.
+
+2. **Aesthetic:**
+   - Design elements: Notations, text, geometric shapes, diagram conventions.
+
+3. **Usability:**
+   - Target Audience:
+     - Front-end Developers
+     - Back-end Developers
+     - Database Developers
+     - Testers
+     - DevOps Engineers
+
+4. **Simplicity:**
+   - Combine:
+     - Functionality + Data
+     - UML Diagrams + Functionality
+
+---
+
+### Design Details
+#### **ER Diagram**
+- Represents:
+  - **Data**: Entities and their relationships.
+
+#### **Operations**
+1. **DFD (Data Flow Diagrams):** Illustrates the flow of data within the system.
+2. **CRUD Operations:**
+   - CREATE, INSERT, UPDATE, DELETE.
+3. **Query Operations:**
+   - SQL Queries, Joins, Nested Queries.
+4. **Reusable Operations:**
+   - Stored Procedures.
+5. **Event-Driven Operations:**
+   - Triggers:
+     - `onInsert`
+     - `onUpdate`
+
+#### **High-Level Design for E-Commerce**
+- Target Audience:
+  - Architects
+  - Customers (to provide a bird's-eye view)
+- Focus Areas:
+  - Infrastructure
+  - Components
+  - Connectivity
+  - Availability
+
+---
+
+### UML Diagrams
+1. **Use Case Diagram:**
+   - Represents actors and use cases (business scenarios).
+   - **User Scenarios:**
+     - Written in simple English to describe user interactions with the system.
+
+   **Examples of Use Cases in Online Shopping:**
+   - **Product Catalog:**
+     1. End user selects a category of interest.
+     2. System displays a list of products.
+     3. User clicks the details link for a product.
+     4. Product details are displayed.
+   - **User Registration:**
+     1. User clicks the "Register" link on the homepage.
+     2. Registration page is displayed.
+     3. User enters credentials.
+     4. User clicks the "Register" button.
+
+2. **Sequence Diagram:**
+   - Displays the sequence of operations for a particular functionality.
+
+3. **Class Diagram:**
+   - Illustrates classes, their attributes, and relationships.
+
+4. **Activity Diagram:**
+   - Represents workflows within the system.
+
+5. **Composite Diagram:**
+   - Combines multiple UML elements to provide an overview.
+
+6. **Deployment Diagram:**
+   - Depicts physical deployment of components on nodes.
+
+---
+
+## Identifying Entities
+- **Entities (Nouns):**
+  - User
+  - Customer
+  - Product
+  - Category
+  - Item
+  - Cart
+  - Order
+  - Payment
+
+## Identifying Operations
+- **Operations (Verbs):**
+  - Show
+  - Details
+  - Create
+  - Insert
+  - Update
+  - AddDiscount
+  - Validate
+  - Register
+
+---
+
+### Data Flow Diagrams
+- Represent the movement of data within the system and interactions between entities.
+
+---
+
+## Implementation Phase (SDLC)
+- **Software Lifecycle Statistics:**
+  - 100 software projects being built:
+    - 20% deployed and in use on production.
+    - 80% discarded or abandoned.
+
+---
+
+## Software Process Model
+
+### Agile Model
+- **Agile Manifesto:**
+  - Values:
+    - [Details of Agile values and principles can be added here.]
+
+---
