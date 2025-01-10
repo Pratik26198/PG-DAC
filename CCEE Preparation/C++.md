@@ -2294,3 +2294,157 @@ int main() {
 
 ---
 
+# Exception Handling in C++
+
+## **1. Introduction to Exception Handling**
+Exception handling in C++ provides a mechanism to handle runtime errors or exceptions in a program. The primary objective is to ensure that the program does not terminate abruptly and can handle errors gracefully.
+
+### **Key Components**:
+1. **`try` block**: Contains the code that might throw an exception.
+2. **`throw` statement**: Used to throw an exception.
+3. **`catch` block**: Used to handle the exception.
+
+---
+
+## **2. Exception Handling: Throwing, Catching, and Re-throwing**
+
+### **a. Throwing Exceptions**
+The `throw` keyword is used to signal that an exception has occurred.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+void divide(int a, int b) {
+    if (b == 0) {
+        throw "Division by zero error!";
+    }
+    cout << "Result: " << a / b << endl;
+}
+
+int main() {
+    try {
+        divide(10, 0);
+    } catch (const char *msg) {
+        cout << "Exception: " << msg << endl;
+    }
+    return 0;
+}
+```
+
+### **b. Catching Exceptions**
+The `catch` block is used to handle exceptions thrown in the `try` block. Each `catch` block is associated with a specific exception type.
+
+#### Example:
+```cpp
+try {
+    throw 42;
+} catch (int e) {
+    cout << "Caught an integer exception: " << e << endl;
+}
+```
+
+### **c. Re-throwing Exceptions**
+An exception can be re-thrown from a `catch` block using the `throw;` statement. This allows the exception to propagate to an outer `try-catch` block.
+
+#### Example:
+```cpp
+void function() {
+    try {
+        throw "An error occurred!";
+    } catch (const char *msg) {
+        cout << "Caught inside function, re-throwing..." << endl;
+        throw; // Re-throw exception
+    }
+}
+
+int main() {
+    try {
+        function();
+    } catch (const char *msg) {
+        cout << "Caught in main: " << msg << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+## **3. Specifying Exceptions**
+In C++, the `throw` specifier can be used to specify which exceptions a function might throw. However, this feature is deprecated in C++11 and removed in C++17.
+
+### **Syntax**
+```cpp
+void function() throw(type1, type2);
+```
+
+### **Example**
+```cpp
+void function() throw(int, char) {
+    throw 42; // Can throw an int or char
+}
+
+int main() {
+    try {
+        function();
+    } catch (int e) {
+        cout << "Caught exception: " << e << endl;
+    }
+    return 0;
+}
+```
+
+### Modern Alternative:
+Instead of `throw`, use **`noexcept`** to indicate that a function does not throw exceptions.
+
+#### Example:
+```cpp
+void function() noexcept {
+    cout << "This function does not throw exceptions." << endl;
+}
+```
+
+---
+
+## **4. Catch-All Handlers**
+C++ provides a catch-all handler that can catch exceptions of any type.
+
+### **Syntax**
+```cpp
+catch (...) {
+    // Handle any exception
+}
+```
+
+#### Example:
+```cpp
+try {
+    throw 3.14;
+} catch (...) {
+    cout << "Caught an unknown exception!" << endl;
+}
+```
+
+---
+
+## **5. Nested Try-Catch Blocks**
+C++ allows nesting of `try-catch` blocks for handling exceptions at different levels.
+
+#### Example:
+```cpp
+try {
+    try {
+        throw "Nested exception!";
+    } catch (const char *msg) {
+        cout << "Caught inside nested try-catch: " << msg << endl;
+        throw; // Re-throw exception
+    }
+} catch (...) {
+    cout << "Caught outside nested try-catch." << endl;
+}
+```
+
+---
+
+
