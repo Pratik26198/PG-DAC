@@ -2447,4 +2447,144 @@ try {
 
 ---
 
+# Managing Console I/O Operations in C++
+
+## **1. Introduction**
+Console Input/Output (I/O) operations in C++ are managed using streams. Streams provide a standard way to perform input (reading data) and output (writing data) in a program. The `<iostream>` header defines the basic classes and objects for handling I/O operations.
+
+### **Key Points**:
+- **Input**: Using `std::cin` to read data from the keyboard.
+- **Output**: Using `std::cout` to write data to the console.
+- **Error Messages**: Using `std::cerr` for error output.
+- **Log Messages**: Using `std::clog` for logging.
+
+---
+
+## **2. C++ Streams**
+Streams in C++ represent a sequence of bytes for input or output.
+
+### **Types of Streams**:
+1. **Input Streams**: Used for reading data (e.g., `std::cin`).
+2. **Output Streams**: Used for writing data (e.g., `std::cout`).
+3. **Bidirectional Streams**: Used for both input and output (e.g., `fstream` in file handling).
+
+### **Predefined Stream Objects**:
+| Object   | Description                    |
+|----------|--------------------------------|
+| `std::cin` | Standard input stream (keyboard). |
+| `std::cout`| Standard output stream (console). |
+| `std::cerr`| Unbuffered error stream.         |
+| `std::clog`| Buffered error stream.           |
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int age;
+    cout << "Enter your age: ";
+    cin >> age;
+    cout << "You entered: " << age << endl;
+    return 0;
+}
+```
+
+---
+
+## **3. C++ Stream Classes**
+C++ provides several classes in the `<iostream>` header for managing I/O operations.
+
+| Class       | Description                                   |
+|-------------|-----------------------------------------------|
+| `istream`   | Base class for input stream.                  |
+| `ostream`   | Base class for output stream.                 |
+| `iostream`  | Derived class for bidirectional streams.       |
+| `ifstream`  | Input file stream.                            |
+| `ofstream`  | Output file stream.                           |
+| `fstream`   | Input and output file stream.                 |
+
+---
+
+## **4. Unformatted I/O Operations**
+Unformatted I/O operations deal with data as raw sequences of bytes without formatting.
+
+### **Key Functions**:
+1. `get()`: Reads a single character.
+2. `getline()`: Reads an entire line.
+3. `put()`: Outputs a single character.
+4. `write()`: Outputs raw byte data.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    char ch;
+    cout << "Enter a character: ";
+    cin.get(ch);
+    cout << "You entered: ";
+    cout.put(ch);
+    cout << endl;
+
+    return 0;
+}
+```
+
+---
+
+## **5. Formatted I/O Operations**
+Formatted I/O operations allow reading and writing data in a structured or formatted way.
+
+### **Using Stream Insertion (`<<`) and Extraction (`>>`) Operators**:
+These operators automatically format data based on the data type.
+
+#### Example:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a;
+    double b;
+
+    cout << "Enter an integer and a double: ";
+    cin >> a >> b;
+
+    cout << "Integer: " << a << ", Double: " << b << endl;
+    return 0;
+}
+```
+
+---
+
+## **6. Managing Output with Manipulators**
+Manipulators are used to control the formatting of output.
+
+### **Common Manipulators** (from `<iomanip>`):
+| Manipulator   | Description                             |
+|---------------|-----------------------------------------|
+| `setw(n)`     | Sets the width of the output field.     |
+| `setprecision(n)`| Sets the number of digits for floating-point output. |
+| `setfill(c)`  | Fills empty spaces with character `c`.  |
+| `fixed`       | Displays floating-point numbers in fixed-point notation. |
+| `scientific`  | Displays floating-point numbers in scientific notation. |
+| `hex`, `oct`, `dec` | Displays integers in hexadecimal, octal, or decimal format. |
+
+#### Example:
+```cpp
+#include <iostream>
+#include <iomanip> // Required for manipulators
+using namespace std;
+
+int main() {
+    cout << setw(10) << setfill('-') << 123 << endl; // Output: -------123
+    cout << fixed << setprecision(2) << 3.14159 << endl; // Output: 3.14
+    cout << hex << 255 << endl; // Output: ff (hexadecimal)
+    return 0;
+}
+```
+
+---
 
