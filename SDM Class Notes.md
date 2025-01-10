@@ -474,26 +474,24 @@ graph TD;
   - Values:
     - [Details of Agile values and principles can be added here.]
 
-Which of the following is a key characteristic of Agile teams?
 
+Which of the following is a key characteristic of Agile teams?
 A.They work independently without the need for communication
 B.They operate in long phases with limited feedback loops
 C.They are self-organizing and collaborate closely
 D.They follow a rigid, predefined structure
-
-
+Answer : C
 
 What does the term "increment" refer to in Agile methodology?
-
 A.A single task that needs to be completed
 B.A deliverable piece of software that adds value to the product
 C.A detailed document specifying the requirements
 D.The process of breaking down large tasks into smaller ones
+Answer : D
 
-Agile Framework: Scrum Framewrok
+### Agile Framework: Scrum Framewrok
 
 Multiple-choice questions (MCQs) related to Agile Methodology:
-
 1. Which of the following is NOT a core value of the Agile Manifesto?**
 A) Individuals and interactions over processes and tools  
 B) Working software over comprehensive documentation  
@@ -577,37 +575,41 @@ D) They follow a rigid, predefined structure
 Answer: C) They are self-organizing and collaborate closely
 
 
-What is the main objective of the deployment phase in SDLC?
+11. What is the main objective of the deployment phase in SDLC?
 A.To gather the initial requirements
 B.To write the source code  
 C.To deliver the software to the customer or users  
 D.To test the software for bugs
 Ans: C
 
-Which phase in SDLC is responsible for fixing any issues found during testing?
+12. Which phase in SDLC is responsible for fixing any issues found during testing?
 A.Requirements Gathering  
 B.Design 
 C.Coding
 D.Maintenance
+Answer: D
 
-Which of the following is an example of a functional requirement in an SRS?
+14. Which of the following is an example of a functional requirement in an SRS?
 The system should respond within 2 seconds
 A.The system should respond within 2 seconds  
 B.The system should have 24/7 availability  
 C.The system should allow users to register an account  
 D.The system should be secure against unauthorized access
+Answer: C
 
-The SRS document should include which of the following to ensure the software will meet user expectations?
+15. The SRS document should include which of the following to ensure the software will meet user expectations?
 A.User interface wireframes  
 B.The project budget
 C.The marketing strategy
 D.Functional and non-functional Requirements
+Answer: D
 
-Which SDLC model is best suited for projects with well-defined requirements that are unlikely to change?
+17. Which SDLC model is best suited for projects with well-defined requirements that are unlikely to change?
 A.Spiral Model----incremental iterative development process
 B.Agile Model-----delivering working software in periodic cycle
 C.V Model---------Balancing act with SDLC using Testing approach for validate
 D.Waterfall Model--- well-defined requirements that are unlikely to change
+Answer: D
 
 
 ---
