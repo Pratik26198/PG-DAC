@@ -784,7 +784,7 @@ session.invalidate();
 
 #### Advantages:
 - Data stored securely on the server.
-- Handles session timeout automatically.
+- Handles session timeout automatically (### 30 min by default).
 
 #### Disadvantages:
 - Increases server memory usage.
