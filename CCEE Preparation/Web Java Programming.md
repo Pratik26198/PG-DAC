@@ -987,6 +987,9 @@ MVC (Model-View-Controller) is an architectural design pattern used in web devel
 
 # **Design Pattern: MVC Pattern**
 
+<img width="1398" alt="MVC diagrams" src="https://github.com/user-attachments/assets/59ddbc1a-edbd-4575-bbfd-55e1bf9adb79" />
+
+
 The MVC (Model-View-Controller) pattern is a widely used software design pattern that decouples the user interface (View) from the business logic (Model) and user input (Controller).
 
 ### Benefits of MVC:
