@@ -454,7 +454,7 @@ J2EE provides support for building and deploying web services, enabling communic
 | (Communication Layer)   |
 +-------------------------+
 ```
-```
+
 
 
 # Servlets: A Comprehensive Guide
