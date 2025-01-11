@@ -1170,5 +1170,270 @@ JSTL provides a set of tags to simplify common tasks like iteration, conditional
 - **SQL Tags:** For database operations.
   - `<sql:query>`: Executes a SQL query.
 
+```
+```
+
+# Hibernate Framework Deep Dive
+
+## Introduction to Hibernate Framework
+
+Hibernate is an **open-source Object-Relational Mapping (ORM) framework** for Java. It simplifies the development of Java applications by providing a framework to map Java objects to database tables and vice versa. By abstracting away the complexities of JDBC and SQL, Hibernate allows developers to focus on business logic rather than database connectivity.
+
+### Key Features:
+- **Lightweight and Open-Source:** Hibernate is freely available and easy to integrate.
+- **ORM Tool:** Maps Java objects to relational database tables.
+- **Database Independence:** Supports multiple databases, enabling easy portability.
+- **HQL (Hibernate Query Language):** An object-oriented query language similar to SQL.
+- **Caching:** Supports first-level and second-level caching for better performance.
+- **Automatic Table Generation:** Automatically creates and updates database tables based on entity mappings.
+- **Transaction Management:** Integrates seamlessly with JTA and other transaction management APIs.
+
+---
+
+## Hibernate Architecture
+
+The architecture of Hibernate consists of the following core components:
+
+### 1. **SessionFactory**
+- A heavyweight object that provides Session objects.
+- Created once per application and is thread-safe.
+
+### 2. **Session**
+- Represents a single unit of work with the database.
+- Provides methods for CRUD operations.
+
+### 3. **Transaction**
+- Manages transaction boundaries.
+- Ensures data consistency and rollback in case of failures.
+
+### 4. **Query**
+- Provides methods to execute HQL or native SQL queries.
+
+### 5. **Configuration**
+- Reads the `hibernate.cfg.xml` file or annotations to initialize Hibernate.
+- Configures database settings and mapping files.
+
+### 6. **Entities**
+- Java classes that represent database tables.
+
+#### Hibernate Architecture Diagram:
+```mermaid
+graph TD
+    A[Configuration] --> B[SessionFactory]
+    B --> C[Session]
+    C --> D[Transaction]
+    C --> E[Entities]
+    C --> F[Query]
+    D --> G[Database]
+    F --> G
+```
+
+---
+
+## Hibernate in IDE
+
+### Creating a Web Application Using Hibernate API
+1. **Setup Project:**
+   - Create a Maven or Gradle project.
+   - Add Hibernate and database dependencies to `pom.xml` or `build.gradle`.
+
+2. **Configure Hibernate:**
+   - Create `hibernate.cfg.xml`:
+     ```xml
+     <?xml version="1.0"?>
+     <!DOCTYPE hibernate-configuration PUBLIC
+       "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+       "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+     <hibernate-configuration>
+         <session-factory>
+             <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+             <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mydb</property>
+             <property name="hibernate.connection.username">root</property>
+             <property name="hibernate.connection.password">password</property>
+             <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+             <property name="hibernate.hbm2ddl.auto">update</property>
+         </session-factory>
+     </hibernate-configuration>
+     ```
+
+3. **Create Entity Class:**
+   ```java
+   @Entity
+   @Table(name = "Employee")
+   public class Employee {
+       @Id
+       @GeneratedValue(strategy = GenerationType.IDENTITY)
+       private int id;
+
+       private String name;
+
+       private String department;
+
+       // Getters and setters
+   }
+   ```
+
+4. **Perform CRUD Operations:**
+   ```java
+   SessionFactory factory = new Configuration().configure().buildSessionFactory();
+   Session session = factory.openSession();
+   Transaction tx = session.beginTransaction();
+
+   Employee emp = new Employee();
+   emp.setName("John");
+   emp.setDepartment("IT");
+
+   session.save(emp);
+   tx.commit();
+   session.close();
+   ```
+
+### Lifecycle of Hibernate Entities
+1. **Transient State:** Object is created but not associated with Hibernate.
+2. **Persistent State:** Object is associated with a Session and mapped to a database.
+3. **Detached State:** Object is no longer associated with a Session.
+
+#### Entity Lifecycle Diagram:
+```mermaid
+graph LR
+    A[Transient] --> B[Persistent]
+    B --> C[Detached]
+    B --> D[Deleted]
+```
+
+---
+
+## Hibernate with Annotations Example
+
+Annotations in Hibernate simplify mapping by using Java metadata instead of XML files.
+
+### Example:
+```java
+@Entity
+@Table(name = "Product")
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "product_name")
+    private String name;
+
+    private double price;
+
+    // Getters and setters
+}
+```
+
+---
+
+## Hibernate Mappings and Relationships
+
+### Types of Mappings:
+1. **One-to-One Mapping**
+   ```java
+   @OneToOne
+   @JoinColumn(name = "address_id")
+   private Address address;
+   ```
+
+2. **One-to-Many Mapping**
+   ```java
+   @OneToMany(mappedBy = "employee")
+   private List<Project> projects;
+   ```
+
+3. **Many-to-Many Mapping**
+   ```java
+   @ManyToMany
+   @JoinTable(
+       name = "employee_project",
+       joinColumns = @JoinColumn(name = "employee_id"),
+       inverseJoinColumns = @JoinColumn(name = "project_id")
+   )
+   private List<Project> projects;
+   ```
+
+### Relationship Diagram:
+```mermaid
+graph TD
+    A[Employee] -- OneToOne --> B[Address]
+    A -- OneToMany --> C[Project]
+    A -- ManyToMany --> D[Department]
+```
+
+---
+
+## Collection and Component Mapping
+
+### Collection Mapping:
+- Used for mapping collections like `List`, `Set`, `Map`.
+
+```java
+@Entity
+public class Department {
+
+    @Id
+    private int id;
+
+    @ElementCollection
+    @CollectionTable(name = "employees", joinColumns = @JoinColumn(name = "department_id"))
+    @Column(name = "employee_name")
+    private List<String> employees;
+}
+```
+
+### Component Mapping:
+- Embeds a dependent object within another entity.
+
+```java
+@Embeddable
+public class Address {
+    private String city;
+    private String state;
+}
+
+@Entity
+public class Employee {
+    @Embedded
+    private Address address;
+}
+```
+
+---
+
+## HQL, Named Queries, and Criteria Queries
+
+### HQL (Hibernate Query Language):
+A powerful query language similar to SQL, but it works with entities instead of tables.
+
+```java
+List<Employee> employees = session.createQuery("FROM Employee WHERE department = 'IT'").list();
+```
+
+### Named Queries:
+Predefined queries that can be reused.
+
+```java
+@NamedQuery(name = "findByDepartment", query = "FROM Employee WHERE department = :dept")
+public class Employee {
+}
+```
+
+### Criteria Queries:
+API for building queries programmatically.
+
+```java
+CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaQuery<Employee> query = builder.createQuery(Employee.class);
+Root<Employee> root = query.from(Employee.class);
+query.select(root).where(builder.equal(root.get("department"), "IT"));
+List<Employee> employees = session.createQuery(query).getResultList();
+```
+
+---
+
+This detailed guide provides an in-depth look into the core aspects of Hibernate, including its architecture, mappings, and advanced query techniques, offering a solid foundation for mastering Hibernate.
 
 
