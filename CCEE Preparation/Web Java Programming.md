@@ -1434,6 +1434,42 @@ List<Employee> employees = session.createQuery(query).getResultList();
 
 ---
 
-This detailed guide provides an in-depth look into the core aspects of Hibernate, including its architecture, mappings, and advanced query techniques, offering a solid foundation for mastering Hibernate.
+## JPQL (Java Persistence Query Language)
+JPQL is a query language defined as part of JPA (Java Persistence API). It is similar to HQL and operates on entity objects rather than database tables.
+
+### Features:
+- Database-independent.
+- Object-oriented.
+- Supports joins, grouping, and aggregation.
+
+### Example:
+#### Basic Query:
+```java
+TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.name = :name", User.class);
+query.setParameter("name", "John");
+List<User> users = query.getResultList();
+```
+
+#### Aggregation Query:
+```java
+Query query = entityManager.createQuery("SELECT COUNT(u) FROM User u");
+Long userCount = (Long) query.getSingleResult();
+```
+
+#### Joins:
+```java
+TypedQuery<Order> query = entityManager.createQuery("SELECT o FROM Order o JOIN o.user u WHERE u.name = :name", Order.class);
+query.setParameter("name", "John");
+List<Order> orders = query.getResultList();
+```
+
+### JPQL vs SQL:
+| Feature               | JPQL                          | SQL                           |
+|-----------------------|-------------------------------|-------------------------------|
+| Operates on           | Entity objects                | Database tables               |
+| Database dependency   | No                            | Yes                           |
+| Abstraction           | High                          | Low                           |
+
+---
 
 
