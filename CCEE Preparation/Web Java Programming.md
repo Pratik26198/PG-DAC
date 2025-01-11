@@ -158,6 +158,7 @@ System.out.println("Employee Name: " + cstmt.getString(2));
 ```
 
 ---
+![jdbc overview](https://github.com/user-attachments/assets/cf445ea6-f2b1-492e-8c07-6a5d8c5d8e6c)
 
 ## SQL Injection Overview and Prevention
 
