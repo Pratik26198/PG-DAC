@@ -1672,6 +1672,7 @@ Spring is composed of several modules organized into the following categories:
 ## **Understanding Spring 4 Annotations (Basic Introduction)**
 
 Spring 4 introduced many annotations to simplify development by eliminating XML-based configuration. Here are some key annotations:
+<img width="836" alt="xml vs annotations" src="https://github.com/user-attachments/assets/c74d1b34-6427-4d95-9cb2-ff26848cef46" />
 
 1. **@Component:** Marks a class as a Spring-managed component.
 2. **@Controller:** Indicates that a class serves as a web controller in Spring MVC.
