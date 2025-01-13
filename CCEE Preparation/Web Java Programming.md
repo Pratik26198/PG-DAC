@@ -1641,6 +1641,7 @@ The Spring MVC (Model-View-Controller) framework is a key part of Spring, design
 ## **Spring Modules Overview**
 
 Spring is composed of several modules organized into the following categories:
+![spring-framework-modules](https://github.com/user-attachments/assets/a9ca303b-4682-47a3-a7f4-9d4579948c8e)
 
 1. **Core Container:**
    - **Beans:** Provides the BeanFactory for DI.
