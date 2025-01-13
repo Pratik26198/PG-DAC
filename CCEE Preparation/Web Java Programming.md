@@ -1740,7 +1740,6 @@ public class Main {
 }
 ```
 ---
-# Spring MVC and Core Concepts
 
 ## **Dependency Injection**
 **Dependency Injection (DI)** is a design pattern that allows a class to receive its dependencies from an external source rather than creating them internally.
