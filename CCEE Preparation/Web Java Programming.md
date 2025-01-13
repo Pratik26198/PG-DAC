@@ -1584,7 +1584,7 @@ The **Spring Framework** is a powerful, lightweight, and widely-used framework f
 ## **Overview of Spring Architecture**
 
 The Spring Framework is built on a modular architecture. Its core is the **Inversion of Control (IoC)** container, and it extends support through additional modules for web applications, data access, security, and more.
-
+![spring-framework-modules](https://github.com/user-attachments/assets/a9ca303b-4682-47a3-a7f4-9d4579948c8e)
 ### Key Layers in Spring Architecture:
 1. **Core Container:**
    - Includes **Beans**, **Core**, **Context**, and **Expression Language** modules.
@@ -1610,6 +1610,7 @@ The Spring Framework is built on a modular architecture. Its core is the **Inver
 ## **Spring MVC Architecture**
 
 The Spring MVC (Model-View-Controller) framework is a key part of Spring, designed to simplify web application development.
+<img width="1602" alt="Spring MVC Flow" src="https://github.com/user-attachments/assets/b14658c0-3e58-4036-91ad-670d3a2de19f" />
 
 ### Key Components of Spring MVC:
 1. **DispatcherServlet:**
@@ -1641,7 +1642,7 @@ The Spring MVC (Model-View-Controller) framework is a key part of Spring, design
 ## **Spring Modules Overview**
 
 Spring is composed of several modules organized into the following categories:
-![spring-framework-modules](https://github.com/user-attachments/assets/a9ca303b-4682-47a3-a7f4-9d4579948c8e)
+
 
 1. **Core Container:**
    - **Beans:** Provides the BeanFactory for DI.
