@@ -1610,7 +1610,8 @@ The Spring Framework is built on a modular architecture. Its core is the **Inver
 ## **Spring MVC Architecture**
 
 The Spring MVC (Model-View-Controller) framework is a key part of Spring, designed to simplify web application development.
-<img width="1602" alt="Spring MVC Flow" src="https://github.com/user-attachments/assets/b14658c0-3e58-4036-91ad-670d3a2de19f" />
+<img width="2072" alt="Spring MVC flow diagram" src="https://github.com/user-attachments/assets/cfaf06d4-8647-4ae1-b88c-4aa07af16851" />
+
 
 ### Key Components of Spring MVC:
 1. **DispatcherServlet:**
@@ -1738,6 +1739,212 @@ public class Main {
     }
 }
 ```
+---
+# Spring MVC and Core Concepts
+
+## **Dependency Injection**
+**Dependency Injection (DI)** is a design pattern that allows a class to receive its dependencies from an external source rather than creating them internally.
+
+### Types of Dependency Injection in Spring:
+1. **Constructor Injection:**
+   - Dependencies are provided via the class constructor.
+   ```java
+   public class Example {
+       private final Dependency dependency;
+
+       public Example(Dependency dependency) {
+           this.dependency = dependency;
+       }
+   }
+   ```
+
+2. **Setter Injection:**
+   - Dependencies are provided via setter methods.
+   ```java
+   public class Example {
+       private Dependency dependency;
+
+       public void setDependency(Dependency dependency) {
+           this.dependency = dependency;
+       }
+   }
+   ```
+
+3. **Field Injection:**
+   - Dependencies are injected directly into fields using annotations (e.g., `@Autowired`).
+   ```java
+   @Component
+   public class Example {
+       @Autowired
+       private Dependency dependency;
+   }
+   ```
+
+---
+
+## **Spring Beans**
+A **Spring Bean** is an object managed by the Spring IoC container. Beans are the backbone of a Spring application, and their lifecycle is controlled by the container.
+
+### Defining Beans:
+1. **Using XML Configuration:**
+   ```xml
+   <bean id="exampleBean" class="com.example.Example"/>
+   ```
+
+2. **Using Annotations:**
+   - Annotate the class with `@Component`, `@Service`, `@Repository`, or `@Controller`.
+   ```java
+   @Component
+   public class Example {
+   }
+   ```
+
+3. **Using Java Configurations:**
+   - Define beans in a configuration class using the `@Bean` annotation.
+   ```java
+   @Configuration
+   public class AppConfig {
+       @Bean
+       public Example exampleBean() {
+           return new Example();
+       }
+   }
+   ```
+
+---
+
+## **Autowiring Beans**
+**Autowiring** automatically resolves and injects bean dependencies without explicit configuration.
+
+### Autowiring Modes:
+1. **@Autowired:** Automatically wires a bean by type.
+   ```java
+   @Autowired
+   private Example example;
+   ```
+
+2. **@Qualifier:** Used to resolve ambiguity when multiple beans of the same type exist.
+   ```java
+   @Autowired
+   @Qualifier("specificBean")
+   private Example example;
+   ```
+
+3. **@Primary:** Marks a bean as the default choice when multiple beans are available.
+   ```java
+   @Bean
+   @Primary
+   public Example defaultExample() {
+       return new Example();
+   }
+   ```
+
+---
+
+## **Bean Scopes**
+Spring supports several bean scopes to define the lifecycle and visibility of beans.
+
+### Common Scopes:
+1. **Singleton (Default):**
+   - A single instance per Spring IoC container.
+   ```java
+   @Scope("singleton")
+   ```
+
+2. **Prototype:**
+   - A new instance is created every time the bean is requested.
+   ```java
+   @Scope("prototype")
+   ```
+
+3. **Request:**
+   - One instance per HTTP request (used in web applications).
+   ```java
+   @Scope(value = WebApplicationContext.SCOPE_REQUEST)
+   ```
+
+4. **Session:**
+   - One instance per HTTP session (used in web applications).
+   ```java
+   @Scope(value = WebApplicationContext.SCOPE_SESSION)
+   ```
+
+---
+
+## **Spring MVC**
+Spring MVC is a web framework built on the Model-View-Controller design pattern, simplifying web application development.
+
+### Components of Spring MVC:
+1. **DispatcherServlet:**
+   - The front controller that handles all HTTP requests and responses.
+
+2. **Controller:**
+   - Processes user requests and interacts with the service layer.
+
+3. **Model:**
+   - Holds application data and passes it between the controller and the view.
+
+4. **View:**
+   - Represents the user interface and displays data from the model.
+
+---
+
+## **Model, ModelAndView, HandlerMapping, and ViewResolver**
+
+### **Model:**
+- Used to store data and pass it from the controller to the view.
+- Example:
+  ```java
+  @Controller
+  public class ExampleController {
+      @GetMapping("/example")
+      public String showExample(Model model) {
+          model.addAttribute("message", "Hello, Spring MVC!");
+          return "exampleView";
+      }
+  }
+  ```
+
+### **ModelAndView:**
+- Combines the model data and view name into a single object.
+- Example:
+  ```java
+  @Controller
+  public class ExampleController {
+      @GetMapping("/example")
+      public ModelAndView showExample() {
+          ModelAndView mav = new ModelAndView("exampleView");
+          mav.addObject("message", "Hello, Spring MVC!");
+          return mav;
+      }
+  }
+  ```
+
+### **HandlerMapping:**
+- Maps HTTP requests to appropriate controller methods.
+- Example:
+  ```java
+  @RequestMapping("/example")
+  public String handleRequest() {
+      return "viewName";
+  }
+  ```
+
+### **ViewResolver:**
+- Resolves logical view names to actual views (e.g., JSP, Thymeleaf).
+- Example:
+  ```java
+  @Configuration
+  public class WebConfig implements WebMvcConfigurer {
+      @Bean
+      public InternalResourceViewResolver viewResolver() {
+          InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+          resolver.setPrefix("/WEB-INF/views/");
+          resolver.setSuffix(".jsp");
+          return resolver;
+      }
+  }
+  ```
 
 
 
