@@ -116,4 +116,162 @@ An OS interacts with various hardware components in the system. Below is a diagr
   - File operations: `open()`, `read()`, `write()`.
   - Process control: `fork()`, `exec()`.
 
+```
+---
+# Linux Basics
+
+## Introduction to Linux
+
+Linux is a powerful open-source operating system that serves as the backbone for servers, desktops, and embedded systems. It provides a robust environment for managing hardware, running software, and performing tasks efficiently.
+
+---
+
+## Working Basics of the File System
+
+The Linux file system is hierarchical, starting with the **root directory (`/`)**. All files and directories are organized under this root.
+
+### Important Directories in Linux:
+| **Directory** | **Purpose**                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| `/`           | Root directory. Starting point of the file system hierarchy.               |
+| `/home`       | Contains user directories. Example: `/home/user1` for user-specific data.  |
+| `/etc`        | Configuration files for the system and software.                           |
+| `/bin`        | Essential binaries (commands like `ls`, `cp`, `mv`).                       |
+| `/var`        | Variable files like logs and caches.                                       |
+| `/tmp`        | Temporary files created by processes.                                      |
+| `/dev`        | Device files for accessing hardware (e.g., disks, USBs).                   |
+
+---
+
+## Commands Associated with Files/Directories & Other Basic Commands
+
+### File and Directory Commands
+| **Command**    | **Description**                                  | **Example**                      |
+|----------------|--------------------------------------------------|----------------------------------|
+| `ls`           | Lists files and directories.                    | `ls -al`                        |
+| `cd`           | Changes directory.                              | `cd /home/user`                 |
+| `pwd`          | Prints the current directory.                   | `pwd`                           |
+| `mkdir`        | Creates a directory.                            | `mkdir new_folder`              |
+| `rmdir`        | Removes an empty directory.                     | `rmdir old_folder`              |
+| `cp`           | Copies files or directories.                    | `cp file1 file2`                |
+| `mv`           | Moves or renames files.                         | `mv old_name new_name`          |
+| `rm`           | Removes files or directories.                   | `rm file` / `rm -r directory`   |
+| `find`         | Searches files and directories.                 | `find /home -name "*.txt"`      |
+| `touch`        | Creates an empty file.                          | `touch newfile.txt`             |
+
+---
+
+### Redirection and Pipes
+
+#### Redirection Operators:
+| **Operator** | **Description**                          | **Example**                      |
+|--------------|------------------------------------------|----------------------------------|
+| `>`          | Redirects output to a file (overwrites). | `echo "Hello" > file.txt`        |
+| `>>`         | Appends output to a file.                | `echo "World" >> file.txt`       |
+| `<`          | Takes input from a file.                | `cat < file.txt`                 |
+
+#### Pipes (`|`):
+- Used to pass the output of one command as input to another.
+- **Example**: `cat file.txt | grep "search_term"`
+
+---
+
+## File Permissions and How to Set Them
+
+Linux uses a permission model to manage access to files and directories. Permissions are represented as **rwx** (read, write, execute) for the owner, group, and others.
+
+### Permission Format:
+```
+-rwxr-xr--  1 user group 1234 Jan 14 10:30 file.txt
+```
+| **Field**    | **Meaning**                  |
+|--------------|------------------------------|
+| `-`          | File type (`-` for file, `d` for directory). |
+| `rwxr-xr--`  | Permissions (owner, group, others).          |
+| `user`       | File owner.                                  |
+| `group`      | File group.                                  |
+
+### Setting Permissions with `chmod`:
+- **Symbolic Method**: `chmod u+x file.txt` (adds execute permission for the owner).
+- **Octal Method**: `chmod 754 file.txt`
+  - `7`: Full (rwx).
+  - `5`: Read and execute (r-x).
+  - `4`: Read-only (r--).
+
+### Changing Ownership with `chown`:
+- Syntax: `chown user:group file.txt`
+
+---
+
+## Access Control List (ACL)
+ACL provides fine-grained permissions beyond the traditional model.
+- **Set ACL**: `setfacl -m u:user1:rw file.txt`
+- **View ACL**: `getfacl file.txt`
+
+---
+
+## Network Commands
+
+| **Command**  | **Description**                                  | **Example**                  |
+|--------------|--------------------------------------------------|------------------------------|
+| `telnet`     | Connects to a remote host using Telnet protocol. | `telnet 192.168.1.1`         |
+| `ftp`        | Transfers files using FTP protocol.              | `ftp ftp.example.com`        |
+| `ssh`        | Secure shell login to a remote machine.          | `ssh user@hostname`          |
+| `sftp`       | Secure file transfer using SSH.                  | `sftp user@hostname`         |
+| `finger`     | Displays user information.                       | `finger username`            |
+
+---
+
+## System Variables (e.g., PS1, PS2)
+
+### Common System Variables:
+| **Variable** | **Description**                                  |
+|--------------|--------------------------------------------------|
+| `PS1`        | Primary prompt string. Customizes the shell prompt. |
+| `PS2`        | Secondary prompt string (used for multi-line commands). |
+
+### Setting System Variables:
+- Temporarily: `export PS1="\u:\w\$ "` (Custom prompt).
+- Permanently: Add to `.bashrc` or `.zshrc`.
+
+---
+
+## Flowchart: File System Permission Workflow
+```plaintext
+          +-----------------------+
+          | Check Current Owner   |
+          +-----------------------+
+                      |
+                      v
+      +-----------------------------+
+      | Change Owner (`chown`)      |
+      +-----------------------------+
+                      |
+                      v
+      +------------------------------------+
+      | Modify Permissions (`chmod`)      |
+      +------------------------------------+
+                      |
+                      v
+       +---------------------------------+
+       | Validate Changes (`ls -l`)     |
+       +---------------------------------+
+```
+
+---
+
+## Code Snippet: Automating Permission Setup
+```bash
+#!/bin/bash
+# Script to set permissions for a directory
+
+DIR_PATH=$1
+if [ -d "$DIR_PATH" ]; then
+    chmod -R 755 "$DIR_PATH"
+    echo "Permissions set to 755 for $DIR_PATH"
+else
+    echo "Directory does not exist!"
+fi
+```
+
 
