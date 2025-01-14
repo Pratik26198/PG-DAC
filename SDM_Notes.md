@@ -698,3 +698,222 @@ D --> E[Delete Container]
 9. **`sudo docker kill "container id"`**: Stop the container. This will remove the running container instance but leave the image intact.
 10. **`sudo docker run`**: Restart the Docker container.
 
+```
+---
+# **Introduction to YAML**
+
+**YAML** (YAML Ain't Markup Language) is a human-readable data serialization standard used for configuration files and data exchange between programming languages. It is widely used in DevOps tools like Kubernetes, Ansible, and Docker Compose.
+
+## **Features of YAML**
+- **Human-friendly:** Designed to be easy to read and write.
+- **Indentation-based:** Uses indentation to represent data hierarchy.
+- **Data serialization:** Supports mapping, sequences, and scalars.
+- **Language-agnostic:** Compatible with multiple programming languages.
+
+## **YAML Syntax**
+### 1. Scalars (Strings, Numbers, Booleans):
+```yaml
+name: John Doe
+age: 30
+is_developer: true
+```
+
+### 2. Lists (Sequences):
+```yaml
+skills:
+  - Python
+  - Java
+  - Docker
+```
+
+### 3. Mappings (Dictionaries):
+```yaml
+address:
+  street: 123 Main St
+  city: Example City
+```
+
+### 4. Nested Structures:
+```yaml
+employee:
+  name: Jane
+  role:
+    department: IT
+    title: Engineer
+```
+
+## **YAML in DevOps**
+### Docker Compose File Example:
+```yaml
+version: "3.8"
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+```
+
+---
+
+# **Introduction to Docker Swarm and Docker Stack**
+
+## **Docker Swarm**
+**Docker Swarm** is a native clustering and orchestration tool for Docker containers. It allows you to manage a group of Docker hosts as a single virtual server.
+
+### **Key Features of Docker Swarm**
+1. **Decentralized Design:** Nodes in a swarm can act as managers or workers.
+2. **Service Discovery:** Automatically assigns tasks to nodes.
+3. **Scaling:** Scale up or down services easily.
+4. **Fault Tolerance:** Redistributes workloads if a node fails.
+
+## **Docker Stack**
+**Docker Stack** is a higher-level abstraction over Docker Swarm that uses a YAML-based configuration file (`docker-compose.yml`) to deploy multi-container applications.
+
+### **Example: Deploying a Stack**
+1. Create a `docker-compose.yml` file:
+   ```yaml
+   version: "3.8"
+   services:
+     web:
+       image: nginx
+       ports:
+         - "80:80"
+   ```
+2. Deploy the stack:
+   ```bash
+   docker stack deploy -c docker-compose.yml my_stack
+   ```
+
+### **Flowchart: Docker Swarm Workflow**
+```plaintext
+Manager Node
+   └── Worker Nodes
+       ├── Containers
+       ├── Services
+       └── Tasks
+```
+
+---
+
+# **Introduction to Kubernetes**
+
+**Kubernetes** is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+
+## **Key Features of Kubernetes**
+1. **Automated Rollouts and Rollbacks:** Manages updates and failures.
+2. **Scaling:** Horizontal scaling of applications.
+3. **Self-Healing:** Restarts failed containers automatically.
+4. **Service Discovery and Load Balancing:** Assigns IPs and load balances traffic.
+
+## **Kubernetes Architecture**
+### 1. Master Node:
+   - API Server
+   - Scheduler
+   - Controller Manager
+   - etcd (key-value store)
+### 2. Worker Nodes:
+   - Kubelet
+   - Kube-proxy
+   - Container Runtime
+
+### **Diagram: Kubernetes Architecture**
+```plaintext
+API Server
+   ├── Scheduler
+   ├── etcd
+   └── Nodes
+       ├── Pod
+       │   └── Container
+       └── Kubelet
+```
+
+---
+
+# **Creating Kubernetes Cluster**
+
+## **Using `minikube` (Single Node Cluster)**
+
+### Steps:
+1. Install Minikube:
+   ```bash
+   curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+   sudo install minikube-linux-amd64 /usr/local/bin/minikube
+   ```
+
+2. Start the cluster:
+   ```bash
+   minikube start
+   ```
+
+3. Verify:
+   ```bash
+   kubectl cluster-info
+   ```
+
+---
+
+# **Creating Service in Kubernetes**
+
+A **service** exposes an application running on a set of pods.
+
+## **Example: Create a Service**
+
+### 1. Create a deployment:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+```
+
+### 2. Expose as a service:
+```bash
+kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
+```
+
+### 3. View service:
+```bash
+kubectl get svc nginx-service
+```
+
+---
+
+# **Deploying an Application Using Dashboard**
+
+## **Step-by-Step Guide**
+
+1. Enable the Kubernetes dashboard:
+   ```bash
+   minikube dashboard
+   ```
+
+2. Access the dashboard URL.
+
+3. Deploy application:
+   - Click **"Create" > "Upload YAML."**
+   - Upload your YAML file.
+
+4. Monitor Deployment:
+   - Check the status of pods, services, and deployments.
+
+---
+
+Let me know if further details are needed or if you'd like more examples!
+
