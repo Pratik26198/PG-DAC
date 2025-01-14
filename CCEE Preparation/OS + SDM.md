@@ -1248,28 +1248,6 @@ int main() {
     return 0;
 }
 ```
-- **Definition**: Creates a child process by duplicating the current process.
-- **Return Value**:
-  - `0`: In the child process.
-  - `>0`: Process ID of the child in the parent process.
-  - `<0`: Error in process creation.
-
-#### Example:
-```c
-#include <stdio.h>
-#include <unistd.h>
-
-int main() {
-    pid_t pid = fork();
-
-    if (pid == 0) {
-        printf("Child Process: PID = %d\n", getpid());
-    } else {
-        printf("Parent Process: PID = %d\n", getpid());
-    }
-    return 0;
-}
-```
 
 ---
 
