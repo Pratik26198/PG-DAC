@@ -668,3 +668,33 @@ B --> C[Pause Container]
 C --> D[Stop Container]
 D --> E[Delete Container]
 ```
+## AWS Docker Commands
+
+### General Commands for AWS Docker:
+- **`sudo apt update`**: Use this at the start of the Linux machine to update package lists.
+- **`sudo apt install nodejs`**: Install Node.js on the system.
+- **`sudo apt install npm`**: Install npm on the system.
+
+### Docker Commands:
+- **`sudo apt update`**: Use this at the start of the Linux machine to update package lists.
+- **`docker -v`**: Check if Docker is installed.
+- **`sudo apt install docker.io`**: Install Docker on the system.
+- **`sudo docker status`**: Check the status of Docker.
+- **`sudo docker images`**: List available images in Docker.
+- **`sudo docker ps`**: List processes running in Docker.
+- **`sudo docker pull hello-world`**: Pull the "hello-world" image from Docker Hub.
+- **`sudo docker run hello-world`**: Run the "hello-world" image in Docker.
+
+### Docker with GitHub:
+1. **`sudo apt update`**: Update package lists.
+2. **`docker -v`**: Verify Docker installation.
+3. **`sudo apt install docker.io`**: Install Docker.
+4. **`sudo docker status`**: Check Docker status.
+5. **`git clone "repo name"`**: Clone the repository into the AWS instance.
+6. **`sudo docker build -t "imagename"`**: Create a Docker image from the repository (replace `"imagename"` with your desired name). Ensure you are in the cloned repository folder; use `cd` to navigate if necessary.
+   - Example: `sudo docker build -t tflstoreapp .`
+7. **`sudo docker run --name tfl -d -p 8000:8000 tflstoreapp`**: Run the Docker container with specified configurations.
+8. **`sudo docker rmi "image name"`**: Remove a Docker image.
+9. **`sudo docker kill "container id"`**: Stop the container. This will remove the running container instance but leave the image intact.
+10. **`sudo docker run`**: Restart the Docker container.
+
