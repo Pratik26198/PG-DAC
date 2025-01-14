@@ -437,6 +437,54 @@ Jira is a project management tool widely used in Agile software development. It 
 2. Click **Start Sprint**, set a duration (e.g., 2 weeks), and add sprint goals.
 3. Monitor progress using the Sprint Board.
 
+### JIRA for Agile Teams
+
+#### **Scrum in JIRA**
+1. Plan sprints using the backlog.
+2. Track progress via the sprint board.
+3. Conduct retrospectives using JIRA reports.
+
+#### **Kanban in JIRA**
+1. Define columns (e.g., To Do, In Progress, Testing, Done).
+2. Set Work In Progress (WIP) limits to optimize workflow.
+3. Track bottlenecks and ensure continuous delivery.
+
+---
+
+### Benefits of JIRA
+
+1. **Streamlined Task Management:**
+   - Centralized platform for all project-related tasks.
+2. **Team Collaboration:**
+   - Facilitates communication through comments and notifications.
+3. **Scalability:**
+   - Suitable for teams of all sizes, from startups to enterprises.
+4. **Transparency:**
+   - Provides real-time visibility into project progress.
+5. **Integration:**
+   - Connects seamlessly with tools like Confluence, Bitbucket, Slack, and GitHub.
+---
+
+### Best Practices for JIRA
+1. Define clear workflows for your team.
+2. Use epics to group related tasks.
+3. Regularly groom the backlog to keep it up-to-date.
+4. Leverage JIRA reports to monitor team performance.
+5. Train team members to use JIRA effectively.
+
+---
+
+### Flowchart: JIRA Workflow Example
+```mermaid
+graph TD
+A[Create Project] --> B[Add Issues]
+B --> C[Backlog Prioritization]
+C --> D[Plan Sprint]
+D --> E[Execute Tasks]
+E --> F[Monitor Progress]
+F --> G[Complete Sprint]
+G --> H[Retrospective]
+```
 ---
 
 ## Case Study: Developing a Web Application Using Agile Methodology
@@ -478,162 +526,6 @@ B --> C[Execute Sprint]
 C --> D[Daily Standups]
 D --> E[Review and Retrospective]
 E --> F[Deploy Increment]
-```
-
-
-## Detailed Explanation of JIRA
-
-JIRA is a project management tool developed by Atlassian, primarily used for tracking issues, bugs, and tasks in software development projects. It's widely adopted in Agile methodologies, such as Scrum and Kanban, to manage workflows efficiently.
-
-### Key Features of JIRA
-1. **Agile Project Management:**
-   - Supports Scrum and Kanban boards to track progress and manage tasks.
-
-2. **Custom Workflows:**
-   - Allows creation of tailored workflows to match team processes.
-
-3. **Issue and Bug Tracking:**
-   - Helps track and manage issues, bugs, and enhancements.
-
-4. **Backlog Management:**
-   - Organizes and prioritizes tasks in a centralized backlog.
-
-5. **Reporting and Analytics:**
-   - Provides detailed reports (e.g., burndown charts, velocity charts) for performance monitoring.
-
-6. **Integrations:**
-   - Integrates with other Atlassian tools (e.g., Confluence, Bitbucket) and third-party apps.
-
----
-
-### Core Concepts in JIRA
-
-#### 1. **Projects**
-   - A project is a collection of issues.
-   - Types of projects:
-     - **Software Project:** For Agile teams using Scrum/Kanban.
-     - **Business Project:** For workflows outside software (e.g., HR, marketing).
-     - **Service Management Project:** For IT service teams.
-
-#### 2. **Issues**
-   - Represents a single task, bug, or feature.
-   - Types of issues:
-     - **Epic:** Large body of work that can be broken into smaller tasks.
-     - **Story:** A requirement or feature from the user’s perspective.
-     - **Task:** General work items.
-     - **Bug:** Reported defects in the system.
-     - **Sub-Task:** A smaller piece of work that contributes to a parent issue.
-
-#### 3. **Boards**
-   - **Scrum Board:**
-     - Used for iterative development with sprints.
-   - **Kanban Board:**
-     - Visualizes workflows for continuous delivery.
-
-#### 4. **Workflows**
-   - Defines the lifecycle of an issue.
-   - Common workflow stages:
-     - To Do → In Progress → Review → Done.
-
----
-
-### Using JIRA
-
-#### **1. Creating a Project**
-1. Go to the JIRA dashboard and click **Create Project**.
-2. Select a template (e.g., Scrum, Kanban, Bug Tracking).
-3. Configure project settings:
-   - Name the project.
-   - Set permissions.
-   - Assign team members.
-
-#### **2. Adding Tasks and Sub-Tasks**
-1. Navigate to the project’s backlog or board.
-2. Click **Create Issue** to add a new task.
-3. Fill in:
-   - Summary: Brief description of the task.
-   - Type: Task, Bug, Story, etc.
-   - Priority: Low, Medium, High, Critical.
-   - Assignee: Assign to a team member.
-4. Create sub-tasks under the main task for detailed tracking.
-
-#### **3. Managing Backlog**
-- Add user stories and prioritize them.
-- Drag and drop tasks to reorder.
-
-#### **4. Creating and Managing Sprints**
-1. Navigate to the **Backlog**.
-2. Select tasks to include in a sprint.
-3. Click **Start Sprint**, set the sprint duration (e.g., 2 weeks), and define sprint goals.
-4. Use the sprint board to track progress:
-   - Move tasks across columns (e.g., To Do → In Progress → Done).
-
-#### **5. Tracking Progress**
-- **Dashboards:** Customizable dashboards show progress metrics.
-- **Reports:**
-  - Burndown Chart: Tracks work completed vs. remaining.
-  - Velocity Chart: Shows team productivity over sprints.
-
-#### **6. Workflow Customization**
-- Modify default workflows or create new ones to fit your processes.
-- Example:
-  - Default: To Do → In Progress → Done.
-  - Custom: To Do → Development → Testing → Review → Done.
-
----
-
-### JIRA for Agile Teams
-
-#### **Scrum in JIRA**
-1. Plan sprints using the backlog.
-2. Track progress via the sprint board.
-3. Conduct retrospectives using JIRA reports.
-
-#### **Kanban in JIRA**
-1. Define columns (e.g., To Do, In Progress, Testing, Done).
-2. Set Work In Progress (WIP) limits to optimize workflow.
-3. Track bottlenecks and ensure continuous delivery.
-
----
-
-### Benefits of JIRA
-
-1. **Streamlined Task Management:**
-   - Centralized platform for all project-related tasks.
-
-2. **Team Collaboration:**
-   - Facilitates communication through comments and notifications.
-
-3. **Scalability:**
-   - Suitable for teams of all sizes, from startups to enterprises.
-
-4. **Transparency:**
-   - Provides real-time visibility into project progress.
-
-5. **Integration:**
-   - Connects seamlessly with tools like Confluence, Bitbucket, Slack, and GitHub.
-
----
-
-### Best Practices for JIRA
-1. Define clear workflows for your team.
-2. Use epics to group related tasks.
-3. Regularly groom the backlog to keep it up-to-date.
-4. Leverage JIRA reports to monitor team performance.
-5. Train team members to use JIRA effectively.
-
----
-
-### Flowchart: JIRA Workflow Example
-```mermaid
-graph TD
-A[Create Project] --> B[Add Issues]
-B --> C[Backlog Prioritization]
-C --> D[Plan Sprint]
-D --> E[Execute Tasks]
-E --> F[Monitor Progress]
-F --> G[Complete Sprint]
-G --> H[Retrospective]
 ```
 
 
