@@ -533,7 +533,8 @@ E --> F[Deploy Increment]
 
 ## Introduction to DevOps
 DevOps is a set of practices, tools, and cultural philosophies aimed at automating and integrating the processes between software development (Dev) and IT operations (Ops). The primary goal of DevOps is to shorten the development lifecycle and deliver high-quality software continuously.
-![image](https://github.com/user-attachments/assets/fe717c98-3135-445f-834b-a9c376bd9a5f)
+![image](https://github.com/user-attachments/assets/b493903d-39cd-4805-aefc-8926c40730a7)
+
 
 ### Key Principles of DevOps
 1. **Collaboration:** Improve communication between development and operations teams.
@@ -573,6 +574,7 @@ DevOps phases can be represented as part of a continuous loop called the **DevOp
 
 ## Introduction to Containerization
 **Containerization** is the process of bundling an application and its dependencies into a single lightweight package called a **container**. Containers are isolated from each other but share the same operating system kernel, making them portable and efficient.
+![image](https://github.com/user-attachments/assets/3ff274eb-e3d4-491b-b9d6-4b60ca386876)
 
 ### Benefits of Containerization
 1. **Portability:** Run containers on any environment (e.g., development, staging, production).
@@ -583,6 +585,8 @@ DevOps phases can be represented as part of a continuous loop called the **DevOp
 
 ## Introduction to Docker
 **Docker** is an open-source platform for developing, shipping, and running applications in containers. It simplifies container creation and management.
+![image](https://github.com/user-attachments/assets/f40a5d62-0548-4110-a970-07f1816c752c)
+![image](https://github.com/user-attachments/assets/4ab7bba4-d9fb-438a-8680-a38cabcaa42e)
 
 ### Key Components of Docker
 1. **Docker Engine:** Core runtime for managing containers.
