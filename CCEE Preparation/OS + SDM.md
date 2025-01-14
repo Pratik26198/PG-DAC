@@ -117,7 +117,7 @@ An OS interacts with various hardware components in the system. Below is a diagr
   - Process control: `fork()`, `exec()`.
 
 ```
----
+```
 # Linux Basics
 
 ## Introduction to Linux
