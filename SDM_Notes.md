@@ -533,6 +533,7 @@ E --> F[Deploy Increment]
 
 ## Introduction to DevOps
 DevOps is a set of practices, tools, and cultural philosophies aimed at automating and integrating the processes between software development (Dev) and IT operations (Ops). The primary goal of DevOps is to shorten the development lifecycle and deliver high-quality software continuously.
+![image](https://github.com/user-attachments/assets/fe717c98-3135-445f-834b-a9c376bd9a5f)
 
 ### Key Principles of DevOps
 1. **Collaboration:** Improve communication between development and operations teams.
