@@ -929,23 +929,6 @@ Process scheduling algorithms determine the order in which processes are execute
 **Formulas**:
 - **Turnaround Time (TAT)**: `Completion Time - Arrival Time`
 - **Waiting Time (WT)**: `Turnaround Time - Burst Time`
-- **Definition**: Processes are executed in the order they arrive in the ready queue.
-- **Advantages**:
-  - Simple to implement.
-  - No starvation.
-- **Disadvantages**:
-  - Can cause the "convoy effect," where smaller processes are delayed by larger ones.
-
-#### Example:
-| **Process** | **Arrival Time** | **Burst Time** | **Completion Time** | **Turnaround Time (TAT)** | **Waiting Time (WT)** |
-|-------------|------------------|----------------|-----------------------|---------------------------|-----------------------|
-| P1          | 0                | 5              | 5                     | 5                         | 0                     |
-| P2          | 1                | 3              | 8                     | 7                         | 4                     |
-| P3          | 2                | 8              | 16                    | 14                        | 6                     |
-
-**Formulas**:
-- **Turnaround Time (TAT)**: `Completion Time - Arrival Time`
-- **Waiting Time (WT)**: `Turnaround Time - Burst Time`
 
 ---
 
