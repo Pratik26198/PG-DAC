@@ -1450,7 +1450,7 @@ int main() {
 Consider memory blocks of sizes: **100KB**, **500KB**, **200KB**, and **300KB**.  
 Process sizes: **212KB**, **417KB**, and **112KB**.
 
-## Strategy
+#### Strategy
 
 | Strategy    | Allocation Order      |
 |-------------|-----------------------|
