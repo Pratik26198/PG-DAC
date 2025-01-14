@@ -832,8 +832,6 @@ API Server
 ```
 ![image](https://github.com/user-attachments/assets/c4ac211a-905e-4099-bedd-7a1c98ab9e17)
 
-```
-
 ---
 
 # **Creating Kubernetes Cluster**
