@@ -145,19 +145,61 @@ The Linux file system is hierarchical, starting with the **root directory (`/`)*
 
 ## Commands Associated with Files/Directories & Other Basic Commands
 
-### File and Directory Commands
-| **Command**    | **Description**                                  | **Example**                      |
-|----------------|--------------------------------------------------|----------------------------------|
-| `ls`           | Lists files and directories.                    | `ls -al`                        |
-| `cd`           | Changes directory.                              | `cd /home/user`                 |
-| `pwd`          | Prints the current directory.                   | `pwd`                           |
-| `mkdir`        | Creates a directory.                            | `mkdir new_folder`              |
-| `rmdir`        | Removes an empty directory.                     | `rmdir old_folder`              |
-| `cp`           | Copies files or directories.                    | `cp file1 file2`                |
-| `mv`           | Moves or renames files.                         | `mv old_name new_name`          |
-| `rm`           | Removes files or directories.                   | `rm file` / `rm -r directory`   |
-| `find`         | Searches files and directories.                 | `find /home -name "*.txt"`      |
-| `touch`        | Creates an empty file.                          | `touch newfile.txt`             |
+
+| **Command**          | **Description**                                                                                       | **Example**                                         |
+|-----------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `ls`                 | Lists files and directories in the current directory.                                                | `ls -al`                                           |
+| `pwd`                | Prints the current working directory.                                                                | `pwd`                                              |
+| `cd`                 | Changes the current working directory.                                                               | `cd /home/user`                                    |
+| `mkdir`              | Creates a new directory.                                                                             | `mkdir new_folder`                                 |
+| `mv`                 | Moves or renames files or directories.                                                               | `mv file1 file2`                                   |
+| `cp`                 | Copies files or directories.                                                                         | `cp file1 file2`                                   |
+| `rm`                 | Removes files or directories.                                                                        | `rm -r folder_name`                                |
+| `touch`              | Creates an empty file.                                                                               | `touch newfile.txt`                                |
+| `ln`                 | Creates a symbolic or hard link to a file or directory.                                              | `ln -s source_file link_name`                      |
+| `clear`              | Clears the terminal screen.                                                                          | `clear`                                            |
+| `cat`                | Displays the content of a file.                                                                      | `cat file.txt`                                     |
+| `echo`               | Prints text to the terminal or writes it to a file.                                                  | `echo "Hello" > file.txt`                          |
+| `less`               | Views file content one screen at a time.                                                             | `less file.txt`                                    |
+| `man`                | Displays the manual for a command.                                                                   | `man ls`                                           |
+| `uname`              | Shows system information such as kernel name and version.                                            | `uname -a`                                         |
+| `whoami`             | Displays the current logged-in user.                                                                 | `whoami`                                           |
+| `tar`                | Archives files and directories into a single file.                                                   | `tar -cvf archive.tar folder/`                     |
+| `grep`               | Searches for a pattern in a file.                                                                    | `grep "text" file.txt`                             |
+| `head`               | Displays the first lines of a file.                                                                  | `head -n 10 file.txt`                              |
+| `tail`               | Displays the last lines of a file.                                                                   | `tail -n 10 file.txt`                              |
+| `diff`               | Compares two files line by line.                                                                     | `diff file1.txt file2.txt`                         |
+| `cmp`                | Compares two files byte by byte.                                                                     | `cmp file1.txt file2.txt`                          |
+| `comm`               | Compares two sorted files line by line.                                                              | `comm file1.txt file2.txt`                         |
+| `sort`               | Sorts the contents of a file.                                                                        | `sort file.txt`                                    |
+| `export`             | Sets environment variables.                                                                          | `export PATH=$PATH:/new/path`                      |
+| `zip`                | Compresses files into a `.zip` archive.                                                              | `zip archive.zip file1 file2`                      |
+| `unzip`              | Extracts files from a `.zip` archive.                                                                | `unzip archive.zip`                                |
+| `ssh`                | Connects to a remote system securely via SSH.                                                        | `ssh user@host`                                    |
+| `service`            | Manages services on the system (start, stop, restart).                                               | `service apache2 start`                            |
+| `ps`                 | Displays currently running processes.                                                                | `ps aux`                                           |
+| `kill` and `killall` | Terminates processes using their PID or name.                                                        | `kill 1234` / `killall process_name`               |
+| `df`                 | Displays disk usage of file systems.                                                                 | `df -h`                                            |
+| `mount`              | Mounts a filesystem to a directory.                                                                  | `mount /dev/sdb1 /mnt`                             |
+| `chmod`              | Changes file or directory permissions.                                                               | `chmod 755 file.txt`                               |
+| `chown`              | Changes the ownership of a file or directory.                                                        | `chown user:group file.txt`                        |
+| `ifconfig`           | Displays or configures network interfaces.                                                           | `ifconfig eth0`                                    |
+| `traceroute`         | Displays the route packets take to a network destination.                                            | `traceroute google.com`                            |
+| `wget`               | Downloads files from the internet.                                                                   | `wget http://example.com/file.zip`                 |
+| `ufw`                | Manages the firewall (Uncomplicated Firewall).                                                       | `ufw allow 22`                                     |
+| `iptables`           | Configures network packet filtering rules.                                                           | `iptables -L`                                      |
+| `apt`, `pacman`, `yum`, `rpm` | Package managers for installing and managing software on different distributions.           | `apt install package` / `yum update`              |
+| `sudo`               | Executes a command as a superuser.                                                                   | `sudo apt update`                                  |
+| `cal`                | Displays a calendar in the terminal.                                                                 | `cal`                                              |
+| `alias`              | Creates shortcuts for commands.                                                                      | `alias ll='ls -al'`                                |
+| `dd`                 | Copies and converts data at the byte level.                                                          | `dd if=/dev/sda of=backup.img bs=4M`               |
+| `whereis`            | Locates binaries, sources, and manuals for a command.                                                | `whereis ls`                                       |
+| `whatis`             | Displays a short description of a command.                                                           | `whatis ls`                                        |
+| `top`                | Displays real-time system resource usage.                                                            | `top`                                              |
+| `useradd`            | Adds a new user to the system.                                                                       | `sudo useradd newuser`                             |
+| `passwd`             | Changes the password for a user.                                                                     | `passwd`                                           |
+
+
 
 ---
 
