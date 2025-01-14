@@ -942,30 +942,130 @@ Process scheduling algorithms determine the order in which processes are execute
 
 ---
 
-### 3. Priority Scheduling
-- **Definition**: Processes are executed based on their priority. Higher priority processes are executed first.
-- **Advantages**:
-  - Suitable for critical tasks.
-- **Disadvantages**:
-  - Can cause starvation of low-priority processes.
+## 3. Priority Scheduling
+
+### Definition
+Processes are executed based on their priority. Higher priority processes are executed first.
+
+### Advantages
+- Suitable for critical tasks.
+
+### Disadvantages
+- Can cause starvation of low-priority processes.
+
+### Example
+| **Process** | **Arrival Time** | **Burst Time** | **Priority** | **Completion Time** | **Turnaround Time** | **Waiting Time** |
+|-------------|------------------|----------------|--------------|---------------------|---------------------|------------------|
+| P1          | 0                | 8              | 3            | 16                  | 16                  | 8                |
+| P2          | 1                | 4              | 1            | 5                   | 4                   | 0                |
+| P3          | 2                | 9              | 2            | 14                  | 12                  | 3                |
+
+### Step-by-Step Calculation
+
+#### Order of Execution
+- P2 (Highest priority: 1)
+- P3 (Priority: 2)
+- P1 (Lowest priority: 3)
+
+#### Calculations
+1. **P2**:
+   - Completion Time = Arrival Time + Burst Time = 1 + 4 = **5**
+   - Turnaround Time = Completion Time - Arrival Time = 5 - 1 = **4**
+   - Waiting Time = Turnaround Time - Burst Time = 4 - 4 = **0**
+
+2. **P3**:
+   - Completion Time = Completion of P2 + Burst Time = 5 + 9 = **14**
+   - Turnaround Time = Completion Time - Arrival Time = 14 - 2 = **12**
+   - Waiting Time = Turnaround Time - Burst Time = 12 - 9 = **3**
+
+3. **P1**:
+   - Completion Time = Completion of P3 + Burst Time = 14 + 8 = **16**
+   - Turnaround Time = Completion Time - Arrival Time = 16 - 0 = **16**
+   - Waiting Time = Turnaround Time - Burst Time = 16 - 8 = **8**
 
 ---
 
-### 4. Round Robin (RR)
-- **Definition**: Each process is executed for a fixed time quantum in a cyclic order.
-- **Advantages**:
-  - Provides fairness and prevents starvation.
-- **Disadvantages**:
-  - High context-switching overhead.
+## 4. Round Robin (RR)
 
-#### Example:
+### Definition
+Each process is executed for a fixed time quantum in a cyclic order.
+
+### Advantages
+- Provides fairness and prevents starvation.
+
+### Disadvantages
+- High context-switching overhead.
+
+### Example
+| **Process** | **Arrival Time** | **Burst Time** | **Time Quantum = 4** | **Completion Time** | **Turnaround Time** | **Waiting Time** |
+|-------------|------------------|----------------|-----------------------|---------------------|---------------------|------------------|
+| P1          | 0                | 8              | 12                    | 12                  | 12                  | 4                |
+| P2          | 1                | 4              | 5                     | 5                   | 4                   | 0                |
+| P3          | 2                | 9              | 17                    | 17                  | 15                  | 6                |
+
+### Step-by-Step Calculation
+
+#### Time Slices
+1. P1 executes from 0 to 4 (Remaining Burst = 4).
+2. P2 executes from 4 to 8 (Remaining Burst = 0).
+3. P3 executes from 8 to 12 (Remaining Burst = 5).
+4. P1 executes from 12 to 16 (Remaining Burst = 0).
+5. P3 executes from 16 to 17 (Remaining Burst = 0).
+
+#### Completion Times
+- **P1**: Completes at **12**.
+- **P2**: Completes at **5**.
+- **P3**: Completes at **17**.
+
+#### Turnaround Time
+- **P1**: Completion Time - Arrival Time = 12 - 0 = **12**.
+- **P2**: Completion Time - Arrival Time = 5 - 1 = **4**.
+- **P3**: Completion Time - Arrival Time = 17 - 2 = **15**.
+
+#### Waiting Time
+- **P1**: Turnaround Time - Burst Time = 12 - 8 = **4**.
+- **P2**: Turnaround Time - Burst Time = 4 - 4 = **0**.
+- **P3**: Turnaround Time - Burst Time = 15 - 9 = **6**.
+
+---
+
+### Additional Round Robin Example
+
 | **Process** | **Arrival Time** | **Burst Time** | **Time Quantum = 4** | **Turnaround Time** | **Waiting Time** |
 |-------------|------------------|----------------|-----------------------|---------------------|------------------|
 | P1          | 0                | 5              | 9                     | 9                   | 4                |
 | P2          | 1                | 3              | 7                     | 6                   | 3                |
 | P3          | 2                | 8              | 14                    | 12                  | 4                |
 
+#### Time Slices
+1. P1 executes from 0 to 4 (Remaining Burst = 1).
+2. P2 executes from 4 to 7 (Remaining Burst = 0).
+3. P3 executes from 7 to 11 (Remaining Burst = 4).
+4. P1 executes from 11 to 12 (Remaining Burst = 0).
+5. P3 executes from 12 to 14 (Remaining Burst = 0).
+
+#### Completion Times
+- **P1**: Completes at **9**.
+- **P2**: Completes at **7**.
+- **P3**: Completes at **14**.
+
+#### Turnaround Times
+- **P1**: Completion Time - Arrival Time = 9 - 0 = **9**.
+- **P2**: Completion Time - Arrival Time = 7 - 1 = **6**.
+- **P3**: Completion Time - Arrival Time = 14 - 2 = **12**.
+
+#### Waiting Times
+- **P1**: Turnaround Time - Burst Time = 9 - 5 = **4**.
+- **P2**: Turnaround Time - Burst Time = 6 - 3 = **3**.
+- **P3**: Turnaround Time - Burst Time = 12 - 8 = **4**.
+
 ---
+
+## 5. Multilevel Queue Scheduling
+
+(TODO: Add details as needed)
+
+
 
 ### 5. Multilevel Queue Scheduling
 - **Definition**: Processes are divided into different queues based on their priority or type.
