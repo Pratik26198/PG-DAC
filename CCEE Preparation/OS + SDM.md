@@ -1371,6 +1371,211 @@ int main() {
 ```
 
 ---
+# Memory Management
+
+## Types of Memories and the Need for Memory Management
+
+### Types of Memories:
+1. **Primary Memory (RAM)**:
+   - High-speed memory directly accessible by the CPU.
+   - Volatile, meaning data is lost when the system is powered off.
+
+2. **Secondary Memory (HDD/SSD)**:
+   - Non-volatile memory used for long-term storage.
+   - Slower but capable of storing large amounts of data.
+
+3. **Cache Memory**:
+   - Small, high-speed memory located close to the CPU.
+   - Stores frequently accessed data to reduce latency.
+
+4. **Virtual Memory**:
+   - Logical extension of primary memory using disk storage.
+   - Enables execution of large programs by swapping data in and out of physical memory.
+
+5. **Registers**:
+   - Smallest and fastest type of memory, located within the CPU.
+   - Stores immediate instructions and data.
+
+### Need for Memory Management:
+- **Efficient Utilization**: Ensures optimal use of available memory.
+- **Process Isolation**: Prevents processes from interfering with each other's memory space.
+- **Dynamic Allocation**: Allocates memory dynamically as per process requirements.
+- **Security**: Protects sensitive data from unauthorized access.
+- **Performance Optimization**: Reduces fragmentation and increases access speed.
+
+---
+
+## Continuous and Dynamic Allocation
+
+### Continuous Allocation:
+- Memory is allocated in contiguous blocks.
+- Simple to implement but suffers from **fragmentation**.
+
+### Dynamic Allocation:
+- Memory is allocated as needed during runtime.
+- Enables efficient use of memory but requires complex management algorithms.
+
+| Allocation Type      | Advantages                    | Disadvantages                 |
+|----------------------|------------------------------|-------------------------------|
+| Continuous Allocation| Simple and predictable      | Leads to fragmentation        |
+| Dynamic Allocation   | Flexible and efficient usage| Requires complex algorithms   |
+
+---
+
+## Memory Allocation Algorithms
+
+### 1. **First Fit**:
+- Allocates the first block of memory that is large enough.
+- **Advantage**: Fast.
+- **Disadvantage**: Leads to fragmentation over time.
+
+### 2. **Best Fit**:
+- Allocates the smallest block of memory that fits the requirement.
+- **Advantage**: Reduces wasted space.
+- **Disadvantage**: Slower due to the search for the best fit.
+
+### 3. **Worst Fit**:
+- Allocates the largest block of memory available.
+- **Advantage**: Avoids small leftover spaces.
+- **Disadvantage**: May lead to inefficient use of memory.
+
+| Algorithm  | Efficiency   | Fragmentation Handling  |
+|------------|--------------|-------------------------|
+| First Fit  | Fast         | Poor                   |
+| Best Fit   | Moderate     | Better                 |
+| Worst Fit  | Slow         | Poor                   |
+
+---
+
+## Compaction
+- **Definition**: Process of combining fragmented memory blocks into a single contiguous block.
+- **Purpose**: Reduces fragmentation and makes larger blocks available for allocation.
+
+### Example:
+Before compaction:
+```
+[Process A][Free][Process B][Free][Process C]
+```
+After compaction:
+```
+[Process A][Process B][Process C][Free]
+```
+
+---
+
+## Internal and External Fragmentation
+
+### Internal Fragmentation:
+- Wasted memory within allocated blocks.
+- Occurs when memory is allocated in fixed-size blocks larger than required.
+
+### External Fragmentation:
+- Wasted memory outside allocated blocks due to small free spaces.
+- Prevents allocation of larger blocks even if the total free space is sufficient.
+
+| Type                    | Cause                         | Solution                     |
+|-------------------------|-------------------------------|-----------------------------|
+| Internal Fragmentation  | Fixed-size block allocation   | Use dynamic allocation      |
+| External Fragmentation  | Non-contiguous allocation     | Use compaction or paging    |
+
+---
+
+## Segmentation
+
+### What is Segmentation?
+- Divides memory into variable-sized segments based on logical divisions such as functions or data structures.
+
+### Hardware Requirements:
+- **Segment Table**: Maps logical addresses to physical memory.
+- **Base Register**: Stores the starting address of a segment.
+- **Limit Register**: Stores the size of a segment.
+
+### Segmentation Table:
+| Segment | Base Address | Limit |
+|---------|--------------|-------|
+| 0       | 1000         | 500   |
+| 1       | 2000         | 300   |
+| 2       | 3000         | 800   |
+
+### Interpretation:
+- Logical addresses are translated into physical addresses using the base and limit values from the segmentation table.
+- Address validation ensures access stays within segment boundaries.
+
+---
+
+## Paging
+
+### What is Paging?
+- Divides memory into fixed-size pages.
+- Avoids external fragmentation by using equal-sized blocks for logical and physical memory.
+
+### Hardware Requirements:
+- **Page Table**: Maps logical pages to physical frames.
+- **Translation Lookaside Buffer (TLB)**: Cache for page table entries to speed up address translation.
+
+### Paging Table Example:
+| Logical Page | Physical Frame |
+|--------------|----------------|
+| 0            | 2              |
+| 1            | 5              |
+| 2            | 8              |
+
+### Translation Lookaside Buffer (TLB):
+- High-speed memory used to store a subset of page table entries.
+- Reduces the time needed for address translation.
+
+---
+
+## Concept of Dirty Bit
+- **Definition**: A flag in a page table entry indicating whether the associated page has been modified.
+- **Purpose**: Ensures that only modified pages are written back to disk, optimizing performance.
+- **Example**:
+  - If a page is modified (dirty bit = 1), it is saved to disk before being replaced.
+  - If not modified (dirty bit = 0), no save operation is needed.
+
+---
+
+## Shared Pages and Reentrant Code
+
+### Shared Pages:
+- Allows multiple processes to share common code or data.
+- Reduces memory usage by avoiding duplication.
+
+### Reentrant Code:
+- Code that can be safely executed by multiple processes concurrently.
+- Example: Shared libraries loaded into memory once and used by multiple programs.
+
+---
+
+## Throttling
+- **Definition**: Controlling the rate at which a process uses system resources to prevent overloading.
+- **Purpose**:
+  - Balances resource usage across processes.
+  - Prevents bottlenecks and system degradation.
+
+### Example:
+- Limiting the bandwidth of a process to ensure fair usage in a networked environment.
+
+---
+
+## IO Management
+
+### Overview:
+- Manages input/output operations between the system and peripherals such as disks, printers, and keyboards.
+- Ensures smooth data transfer and synchronization.
+
+### Techniques:
+| Technique  | Description                            |
+|------------|----------------------------------------|
+| Buffering  | Temporary storage during IO transfers |
+| Caching    | Storing frequently accessed data      |
+| Spooling   | Queuing jobs for sequential execution |
+
+### Components:
+- **Device Drivers**: Software interfaces for communication with hardware devices.
+- **Interrupt Handlers**: Manage IO operation notifications.
+- **IO Scheduler**: Optimizes the order of IO requests to enhance performance.
+
 
 
 
