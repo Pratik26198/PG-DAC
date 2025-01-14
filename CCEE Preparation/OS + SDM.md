@@ -485,5 +485,289 @@ else
     echo "Invalid directory!"
 fi
 ```
+# Advanced Shell Programming in Linux
+
+## Decision Loops in Shell Programming
+
+### 1. `if-else` Statement
+The `if-else` statement is used to execute a block of code based on a condition.
+
+#### Syntax:
+```bash
+if [ condition ]; then
+    # Code to execute if condition is true
+else
+    # Code to execute if condition is false
+fi
+```
+
+#### Example:
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+if [ $num -gt 0 ]; then
+    echo "Positive number"
+else
+    echo "Non-positive number"
+fi
+```
+
+---
+
+### 2. `test` Command
+The `test` command is used to evaluate expressions.
+
+#### Example:
+```bash
+#!/bin/bash
+if test $1 -gt 0; then
+    echo "$1 is greater than zero"
+else
+    echo "$1 is less than or equal to zero"
+fi
+```
+
+---
+
+### 3. Nested `if-else`
+Nested `if-else` allows multiple conditions to be checked.
+
+#### Example:
+```bash
+#!/bin/bash
+read -p "Enter your age: " age
+if [ $age -lt 18 ]; then
+    echo "You are a minor."
+elif [ $age -lt 65 ]; then
+    echo "You are an adult."
+else
+    echo "You are a senior citizen."
+fi
+```
+
+---
+
+### 4. `case` Statement
+The `case` statement is used for multiple conditional checks.
+
+#### Syntax:
+```bash
+case expression in
+    pattern1)
+        # Code for pattern1
+        ;;
+    pattern2)
+        # Code for pattern2
+        ;;
+    *)
+        # Default case
+        ;;
+esac
+```
+
+#### Example:
+```bash
+#!/bin/bash
+read -p "Enter a day of the week: " day
+case $day in
+    "Monday")
+        echo "Start of the work week!"
+        ;;
+    "Friday")
+        echo "Almost weekend!"
+        ;;
+    *)
+        echo "Have a great day!"
+        ;;
+esac
+```
+
+---
+
+### 5. `while` Loop
+The `while` loop runs as long as the condition is true.
+
+#### Syntax:
+```bash
+while [ condition ]; do
+    # Commands
+done
+```
+
+#### Example:
+```bash
+#!/bin/bash
+count=1
+while [ $count -le 5 ]; do
+    echo "Count: $count"
+    count=$((count + 1))
+done
+```
+
+---
+
+### 6. `until` Loop
+The `until` loop runs as long as the condition is false.
+
+#### Syntax:
+```bash
+until [ condition ]; do
+    # Commands
+done
+```
+
+#### Example:
+```bash
+#!/bin/bash
+count=1
+until [ $count -gt 5 ]; do
+    echo "Count: $count"
+    count=$((count + 1))
+done
+```
+
+---
+
+### 7. `for` Loop
+The `for` loop iterates over a list of items.
+
+#### Syntax:
+```bash
+for var in list; do
+    # Commands
+done
+```
+
+#### Example:
+```bash
+#!/bin/bash
+for name in Alice Bob Charlie; do
+    echo "Hello, $name!"
+done
+```
+
+---
+
+## Regular Expressions in Shell
+
+Regular expressions (regex) are patterns used to match text. In shell scripting, regex is often used with tools like `grep`, `sed`, or `awk`.
+
+#### Example: Regex with `grep`
+```bash
+#!/bin/bash
+echo "Enter a string:"
+read string
+if [[ $string =~ ^[A-Z][a-z]+$ ]]; then
+    echo "The string starts with an uppercase letter."
+else
+    echo "The string does not match the pattern."
+fi
+```
+
+#### Common Regex Symbols:
+| **Symbol**  | **Description**                  | **Example**                     |
+|-------------|----------------------------------|----------------------------------|
+| `.`         | Matches any single character.   | `a.c` matches `abc`, `aXc`.     |
+| `^`         | Matches the start of a line.    | `^abc` matches `abc` at start.  |
+| `$`         | Matches the end of a line.      | `xyz$` matches `xyz` at end.    |
+| `*`         | Matches zero or more occurrences.| `ab*` matches `a`, `ab`, `abb`. |
+| `[ ]`       | Matches any character in brackets.| `[a-c]` matches `a`, `b`, `c`.  |
+
+---
+
+## Arithmetic Expressions
+
+Shell scripting supports arithmetic operations using the `(( ))` syntax or the `expr` command.
+
+#### Example: Using `(( ))`
+```bash
+#!/bin/bash
+a=10
+b=5
+sum=$((a + b))
+echo "Sum: $sum"
+```
+
+#### Example: Using `expr`
+```bash
+#!/bin/bash
+a=10
+b=5
+sum=$(expr $a + $b)
+echo "Sum: $sum"
+```
+
+---
+
+## More Examples in Shell Programming
+
+### 1. Script to Check Even or Odd
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+if [ $((num % 2)) -eq 0 ]; then
+    echo "$num is even."
+else
+    echo "$num is odd."
+fi
+```
+
+---
+
+### 2. Script to Find Factorial
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+factorial=1
+for ((i = 1; i <= num; i++)); do
+    factorial=$((factorial * i))
+done
+echo "Factorial of $num is $factorial."
+```
+
+---
+
+### 3. Script to Display Prime Numbers
+```bash
+#!/bin/bash
+read -p "Enter a number: " num
+for ((i = 2; i <= num; i++)); do
+    is_prime=1
+    for ((j = 2; j < i; j++)); do
+        if [ $((i % j)) -eq 0 ]; then
+            is_prime=0
+            break
+        fi
+    done
+    if [ $is_prime -eq 1 ]; then
+        echo "$i is a prime number."
+    fi
+done
+```
+
+---
+
+### 4. Script for File Existence Check
+```bash
+#!/bin/bash
+read -p "Enter the filename: " filename
+if [ -e "$filename" ]; then
+    echo "File $filename exists."
+else
+    echo "File $filename does not exist."
+fi
+```
+
+---
+
+### 5. Script to Monitor Disk Usage
+```bash
+#!/bin/bash
+while true; do
+    df -h
+    sleep 5
+done
+```
+
 
 
