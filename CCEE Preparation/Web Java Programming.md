@@ -1778,6 +1778,17 @@ public class Main {
        private Dependency dependency;
    }
    ```
+### Key Differences and Considerations
+
+| Feature                   | Constructor Injection                          | Setter Injection                         |
+|---------------------------|-----------------------------------------------|------------------------------------------|
+| **Mandatory Dependencies**| Ensures all required dependencies are set at instantiation. | Cannot enforce mandatory dependencies.   |
+| **Optional Dependencies** | Not ideal for optional dependencies.          | Ideal for optional dependencies.         |
+| **Immutability**          | Promotes immutability.                        | Allows mutability of dependencies.       |
+| **Readability**           | Can be less readable with many arguments.     | More readable for fewer dependencies.    |
+| **Default Values**        | Dependencies must be provided in the constructor. | Can set default values for properties. |
+| **Flexibility**           | Dependencies are fixed after instantiation.   | Dependencies can be changed post-instantiation. |
+
 
 ---
 
