@@ -274,4 +274,174 @@ else
 fi
 ```
 
+# Shell Programming in Linux
+
+## What is a Shell?
+
+A **shell** is a command-line interpreter that provides a user interface for accessing the services of the operating system. It processes commands entered by the user and executes them, either directly or by passing them to the appropriate program.
+
+### Types of Shells in Linux
+| **Shell**      | **Description**                                                                                  |
+|-----------------|--------------------------------------------------------------------------------------------------|
+| **Bash**        | Bourne Again Shell, the most widely used shell. Supports scripting and advanced features.       |
+| **Zsh**         | Z Shell, similar to Bash but with additional features like themes and plugins.                  |
+| **Ksh**         | Korn Shell, combines features of the C Shell and Bourne Shell.                                  |
+| **Tcsh**        | T C Shell, an enhanced version of the C Shell with scripting improvements.                      |
+| **Fish**        | Friendly Interactive Shell, designed for user-friendliness and simplicity.                      |
+
+---
+
+## Shell Variables
+
+Shell variables are placeholders that store data used by shell scripts and commands.
+
+### Types of Variables
+1. **System Variables**: Predefined variables maintained by the shell.
+   - Examples: `$HOME`, `$PATH`, `$USER`
+2. **User-Defined Variables**: Custom variables created by the user.
+   - Example:
+     ```bash
+     MY_VAR="Hello"
+     echo $MY_VAR
+     ```
+
+### Scope of Variables
+- **Local Variables**: Available within the current shell or script.
+- **Environment Variables**: Available to all processes started from the shell.
+
+---
+
+## Wildcard Symbols
+
+Wildcards are symbols used to represent patterns in filenames or strings.
+
+| **Symbol** | **Description**                           | **Example**                |
+|------------|-------------------------------------------|----------------------------|
+| `*`        | Matches zero or more characters.          | `ls *.txt` (all `.txt` files) |
+| `?`        | Matches exactly one character.            | `ls file?.txt`            |
+| `[ ]`      | Matches any one character within brackets.| `ls file[1-3].txt`        |
+
+---
+
+## Shell Meta Characters
+
+Meta characters have special meanings in the shell and are used for various operations.
+
+| **Character** | **Description**                                   | **Example**                |
+|---------------|---------------------------------------------------|----------------------------|
+| `;`           | Separates multiple commands in a single line.    | `ls; pwd`                 |
+| `&`           | Executes a command in the background.            | `sleep 10 &`              |
+| `|`           | Pipes output of one command to another.          | `ls | grep file`          |
+| `>`           | Redirects output to a file (overwrites).         | `echo "data" > file.txt`  |
+| `>>`          | Redirects output to a file (appends).            | `echo "more data" >> file.txt` |
+| `<`           | Redirects input from a file.                     | `wc < file.txt`           |
+| `\`           | Escapes special characters.                      | `echo \$HOME`             |
+
+---
+
+## Command Line Arguments
+
+Command-line arguments allow users to pass inputs to scripts when executing them.
+
+### Example Script
+```bash
+#!/bin/bash
+echo "Script Name: $0"
+echo "First Argument: $1"
+echo "Second Argument: $2"
+echo "All Arguments: $*"
+echo "Number of Arguments: $#"
+```
+
+### Run the Script
+```bash
+./script.sh arg1 arg2
+```
+
+**Output**:
+```
+Script Name: ./script.sh
+First Argument: arg1
+Second Argument: arg2
+All Arguments: arg1 arg2
+Number of Arguments: 2
+```
+
+---
+
+## `read` and `echo` Commands
+
+### `read` Command
+Used to take input from the user during script execution.
+```bash
+#!/bin/bash
+echo "Enter your name:"
+read name
+echo "Hello, $name!"
+```
+
+**Run**:
+```
+$ ./script.sh
+Enter your name:
+John
+Hello, John!
+```
+
+### `echo` Command
+Used to display messages or output values of variables.
+```bash
+#!/bin/bash
+echo "This is a shell script!"
+VAR="Linux"
+echo "Welcome to $VAR"
+```
+
+**Output**:
+```
+This is a shell script!
+Welcome to Linux
+```
+
+---
+
+### Flowchart: Command Execution in Shell
+
+```plaintext
++---------------------+
+|  User Enters Command|
++---------------------+
+           |
+           v
++---------------------+
+| Shell Interprets    |
++---------------------+
+           |
+           v
++-----------------------------+
+| Shell Locates Command/Binary|
++-----------------------------+
+           |
+           v
++---------------------------+
+| Execute Command and Output|
++---------------------------+
+```
+
+---
+
+### Code Snippet: Using Wildcards and Arguments
+```bash
+#!/bin/bash
+# Script to count .txt files in a directory
+
+read -p "Enter directory path: " DIR
+if [ -d "$DIR" ]; then
+    COUNT=$(ls $DIR/*.txt 2>/dev/null | wc -l)
+    echo "Number of .txt files in $DIR: $COUNT"
+else
+    echo "Invalid directory!"
+fi
+```
+
 
