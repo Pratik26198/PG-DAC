@@ -899,6 +899,404 @@ int main() {
 
 ---
 
+# Process Scheduling and Management
+
+## Process Scheduling Algorithms
+
+Process scheduling algorithms determine the order in which processes are executed by the CPU. Below are the primary scheduling algorithms:
+
+### 1. First Come First Serve (FCFS)
+- **Definition**: Processes are executed in the order they arrive in the ready queue.
+- **Advantages**:
+  - Simple to implement.
+  - No starvation.
+- **Disadvantages**:
+  - Can cause the "convoy effect," where smaller processes are delayed by larger ones.
+  - Performance can degrade significantly if a long process arrives first, leading to high waiting times for shorter processes.
+
+#### Handling Different Workloads:
+- **Short Processes**: FCFS handles workloads with mostly short processes well, as it minimizes waiting time.
+- **Mix of Short and Long Processes**: When a long process arrives first, shorter processes may experience significant delays, leading to poor throughput and higher average waiting times.
+- **Impact on Throughput**: The throughput decreases as longer processes occupy the CPU, blocking subsequent processes, which causes inefficiency in high-demand systems.
+
+#### Example:
+| **Process** | **Arrival Time** | **Burst Time** | **Completion Time** | **Turnaround Time (TAT)** | **Waiting Time (WT)** |
+|-------------|------------------|----------------|-----------------------|---------------------------|-----------------------|
+| P1          | 0                | 5              | 5                     | 5                         | 0                     |
+| P2          | 1                | 3              | 8                     | 7                         | 4                     |
+| P3          | 2                | 8              | 16                    | 14                        | 6                     |
+
+**Formulas**:
+- **Turnaround Time (TAT)**: `Completion Time - Arrival Time`
+- **Waiting Time (WT)**: `Turnaround Time - Burst Time`
+- **Definition**: Processes are executed in the order they arrive in the ready queue.
+- **Advantages**:
+  - Simple to implement.
+  - No starvation.
+- **Disadvantages**:
+  - Can cause the "convoy effect," where smaller processes are delayed by larger ones.
+
+#### Example:
+| **Process** | **Arrival Time** | **Burst Time** | **Completion Time** | **Turnaround Time (TAT)** | **Waiting Time (WT)** |
+|-------------|------------------|----------------|-----------------------|---------------------------|-----------------------|
+| P1          | 0                | 5              | 5                     | 5                         | 0                     |
+| P2          | 1                | 3              | 8                     | 7                         | 4                     |
+| P3          | 2                | 8              | 16                    | 14                        | 6                     |
+
+**Formulas**:
+- **Turnaround Time (TAT)**: `Completion Time - Arrival Time`
+- **Waiting Time (WT)**: `Turnaround Time - Burst Time`
+
+---
+
+### 2. Shortest Job First (SJF)
+- **Definition**: Processes with the shortest burst time are executed first.
+- **Advantages**:
+  - Minimizes average waiting time.
+- **Disadvantages**:
+  - Not suitable for real-time systems.
+  - Starvation of longer processes.
+
+---
+
+### 3. Priority Scheduling
+- **Definition**: Processes are executed based on their priority. Higher priority processes are executed first.
+- **Advantages**:
+  - Suitable for critical tasks.
+- **Disadvantages**:
+  - Can cause starvation of low-priority processes.
+
+---
+
+### 4. Round Robin (RR)
+- **Definition**: Each process is executed for a fixed time quantum in a cyclic order.
+- **Advantages**:
+  - Provides fairness and prevents starvation.
+- **Disadvantages**:
+  - High context-switching overhead.
+
+#### Example:
+| **Process** | **Arrival Time** | **Burst Time** | **Time Quantum = 4** | **Turnaround Time** | **Waiting Time** |
+|-------------|------------------|----------------|-----------------------|---------------------|------------------|
+| P1          | 0                | 5              | 9                     | 9                   | 4                |
+| P2          | 1                | 3              | 7                     | 6                   | 3                |
+| P3          | 2                | 8              | 14                    | 12                  | 4                |
+
+---
+
+### 5. Multilevel Queue Scheduling
+- **Definition**: Processes are divided into different queues based on their priority or type.
+- Example:
+  - **System Queue**: Highest priority.
+  - **Interactive Queue**: Medium priority.
+  - **Batch Queue**: Lowest priority.
+
+---
+
+### Belady’s Anomaly
+- **Definition**: An increase in the number of page frames can cause an increase in the number of page faults in FIFO page replacement.
+
+#### Visual Representation:
+Below is a flowchart that illustrates how Belady's Anomaly occurs with a reference string and two different frame sizes:
+
+```plaintext
+Reference String: 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5
+
++-----------------------------+
+| Start with 3 Frames        |
++-----------------------------+
+|                            |
+| Page Faults = 9            |
++-----------------------------+
+| Add 1 Frame (Total = 4)    |
++-----------------------------+
+|                            |
+| Page Faults = 10           |
++-----------------------------+
+|                            |
+| Belady's Anomaly Occurs:   |
+| More frames => More faults |
++-----------------------------+
+```
+
+- **Example**:
+  - Reference String: `1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5`
+  - Frames: 3 vs. 4
+  - **With 3 Frames**: 9 Page Faults.
+  - **With 4 Frames**: 10 Page Faults.
+
+#### Table of Page Faults:
+| **Step** | **Reference** | **3 Frames**           | **4 Frames**           |
+|----------|---------------|-------------------------|-------------------------|
+| 1        | 1             | 1 -                     | 1 -                     |
+| 2        | 2             | 1, 2 -                 | 1, 2 -                 |
+| 3        | 3             | 1, 2, 3 -             | 1, 2, 3 -             |
+| 4        | 4             | 4 replaces 1 (fault)   | 4 replaces 1 (fault)   |
+| 5        | 1             | 1 replaces 2 (fault)   | 1 replaces 2 (fault)   |
+| ...      | ...           | ...                    | ...                    |
+| Final    | Total Faults  | 9 Faults               | 10 Faults              |
+- **Definition**: An increase in the number of page frames can cause an increase in the number of page faults in FIFO page replacement.
+- **Example**:
+  - Reference String: `1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5`
+  - Frames: 3 vs. 4
+  - **With 3 Frames**: 9 Page Faults.
+  - **With 4 Frames**: 10 Page Faults.
+
+---
+
+## Examples for Scheduling Algorithms
+
+Below is an example to find the better-performing scheduler:
+
+#### Scenario:
+| **Process** | **Arrival Time** | **Burst Time** |
+|-------------|------------------|----------------|
+| P1          | 0                | 10             |
+| P2          | 2                | 5              |
+| P3          | 4                | 2              |
+
+### FCFS Output
+| **Metric**        | **P1** | **P2** | **P3** |
+|--------------------|--------|--------|--------|
+| Turnaround Time    | 10     | 13     | 15     |
+| Waiting Time       | 0      | 8      | 13     |
+| Average Turnaround | **12.66**                                    |
+| Average Waiting    | **7.0**                                      |
+
+#### Step-by-Step Calculation:
+1. **P1**:
+   - **Completion Time**: Process starts at time 0 (arrival) and runs for 10 units.
+     - Completion Time = 0 + 10 = **10**.
+   - **Turnaround Time**: Completion Time - Arrival Time = 10 - 0 = **10**.
+   - **Waiting Time**: Turnaround Time - Burst Time = 10 - 10 = **0**.
+
+2. **P2**:
+   - **Completion Time**: Process starts after P1 finishes at time 10.
+     - Completion Time = 10 (start) + 5 (burst) = **15**.
+   - **Turnaround Time**: Completion Time - Arrival Time = 15 - 2 = **13**.
+   - **Waiting Time**: Turnaround Time - Burst Time = 13 - 5 = **8**.
+
+3. **P3**:
+   - **Completion Time**: Process starts after P2 finishes at time 15.
+     - Completion Time = 15 (start) + 2 (burst) = **17**.
+   - **Turnaround Time**: Completion Time - Arrival Time = 17 - 4 = **15**.
+   - **Waiting Time**: Turnaround Time - Burst Time = 15 - 2 = **13**.
+
+**Formulas**:
+- **Turnaround Time (TAT)**: `Completion Time - Arrival Time`
+- **Waiting Time (WT)**: `Turnaround Time - Burst Time`
+
+By following these calculations, FCFS averages a **Turnaround Time** of **12.66** and a **Waiting Time** of **7.0**.:
+| **Metric**        | **P1** | **P2** | **P3** |
+|--------------------|--------|--------|--------|
+| Turnaround Time    | 10     | 13     | 15     |
+| Waiting Time       | 0      | 8      | 13     |
+| Average Turnaround | **12.66**                                    |
+| Average Waiting    | **7.0**                                      |
+
+### SJF Output:
+| **Metric**        | **P1** | **P2** | **P3** |
+|--------------------|--------|--------|--------|
+| Turnaround Time    | 15     | 5      | 2      |
+| Waiting Time       | 5      | 0      | 0      |
+| Average Turnaround | **7.33**                                    |
+| Average Waiting    | **1.66**                                    |
+
+**Conclusion**: SJF performs better in this scenario.
+
+---
+
+## Process Creation Using `fork`, `waitpid`, and `exec`
+
+### 1. `fork()`
+- **Definition**: Creates a child process by duplicating the current process.
+- **Return Value**:
+  - `0`: In the child process.
+  - `>0`: Process ID of the child in the parent process.
+  - `<0`: Error in process creation.
+
+#### Flowchart: Parent and Child Process Creation
+Below is a flowchart that visually represents how `fork()` works:
+
+```plaintext
+Start
+  |
+  |-- fork() system call
+  |
+  +---------------------------+
+  |                           |
+Parent Process                Child Process
+  |                           |
+  |-- Executes parent code     |-- Executes child code
+  |                           |
+  +---------------------------+
+            End
+```
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        printf("Child Process: PID = %d
+", getpid());
+    } else {
+        printf("Parent Process: PID = %d
+", getpid());
+    }
+    return 0;
+}
+```
+- **Definition**: Creates a child process by duplicating the current process.
+- **Return Value**:
+  - `0`: In the child process.
+  - `>0`: Process ID of the child in the parent process.
+  - `<0`: Error in process creation.
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        printf("Child Process: PID = %d\n", getpid());
+    } else {
+        printf("Parent Process: PID = %d\n", getpid());
+    }
+    return 0;
+}
+```
+
+---
+
+### 2. `waitpid()`
+- **Definition**: Makes the parent process wait until a specific child process completes.
+- **Syntax**:
+```c
+pid_t waitpid(pid_t pid, int *status, int options);
+```
+
+---
+
+### 3. `exec()`
+- **Definition**: Replaces the current process with a new program.
+- **Variants**:
+  - `execl`, `execp`, `execv`, `execvp`.
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    execl("/bin/ls", "ls", NULL);
+    return 0;
+}
+```
+
+---
+
+## Orphan and Zombie Processes
+
+### 1. Orphan Processes
+- **Definition**: A process whose parent has terminated but is still running.
+- **Example**:
+  - The `init` process adopts orphan processes.
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) {
+        sleep(10); // Orphan child
+        printf("Child process becomes orphan.\n");
+    } else {
+        printf("Parent process exiting.\n");
+    }
+    return 0;
+}
+```
+
+---
+
+### 2. Zombie Processes
+- **Definition**: A process that has completed execution but still has an entry in the process table.
+- **Cause**: The parent did not call `wait()` to remove the process entry.
+
+#### Diagram: Zombie Process in the Process Table
+Below is a representation of the process table showing how a zombie process appears:
+
+```plaintext
++-----------+------------+-------------+
+| Process ID| State      | Parent PID  |
++-----------+------------+-------------+
+| 101       | Running    | 100         |
+| 102       | Zombie     | 100         |
+| 103       | Sleeping   | 101         |
++-----------+------------+-------------+
+```
+
+- **Explanation**:
+  - **Process 102** has completed execution but remains in the table as a "zombie."
+  - **Process 100 (Parent)** has not cleaned up by calling `wait()`.
+
+#### Cleanup Process:
+1. Parent process calls `wait()` or `waitpid()`.
+2. OS removes the zombie process from the process table.
+3. Resources held by the zombie process are released.
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) {
+        printf("Child process exiting.
+");
+    } else {
+        sleep(10); // Simulate delay before cleanup
+        wait(NULL); // Parent cleans up zombie process
+        printf("Zombie process cleaned up.
+");
+    }
+    return 0;
+}
+```
+- **Definition**: A process that has completed execution but still has an entry in the process table.
+- **Cause**: The parent did not call `wait()` to remove the process entry.
+
+#### Example:
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) {
+        printf("Child process exiting.\n");
+    } else {
+        sleep(10); // Parent does not call wait()
+        printf("Parent process did not clean up the child.\n");
+    }
+    return 0;
+}
+```
+
+---
+
 
 
 
