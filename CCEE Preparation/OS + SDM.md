@@ -768,6 +768,137 @@ while true; do
     sleep 5
 done
 ```
+# Process Management in Operating Systems
+
+## Processes
+
+### What is a Process?
+A **process** is an instance of a program in execution. It includes:
+- Program code
+- Current activity (such as the program counter, registers, and variables)
+- Allocated system resources (memory, files, and I/O devices)
+
+---
+
+### Preemptive and Non-Preemptive Processes
+
+| **Feature**                 | **Preemptive Process**                                      | **Non-Preemptive Process**                             |
+|-----------------------------|-----------------------------------------------------------|------------------------------------------------------|
+| **Definition**              | The CPU can be taken away from a process at any time.      | A process runs to completion once it starts execution.|
+| **Control**                 | Controlled by the operating system.                       | Controlled by the process itself.                   |
+| **Examples**                | Multitasking systems (Round-Robin scheduling).            | Batch processing systems.                           |
+| **Advantages**              | Better responsiveness and fairness.                      | Simpler to implement.                               |
+| **Disadvantages**           | Higher overhead due to frequent context switching.        | Inefficient if a process takes too long.            |
+
+---
+
+### Difference Between Process and Thread
+
+| **Aspect**          | **Process**                                        | **Thread**                                    |
+|---------------------|---------------------------------------------------|----------------------------------------------|
+| **Definition**       | A program in execution.                          | A lightweight subprocess, part of a process.|
+| **Resources**        | Has its own memory space and system resources.    | Shares memory and resources of its process. |
+| **Creation Time**    | Slower, requires more overhead.                   | Faster, minimal overhead.                   |
+| **Communication**    | Inter-process communication (e.g., pipes).        | Direct communication within the same process.|
+| **Examples**         | Web browser, media player.                       | Threads in a web browser for tabs.          |
+
+---
+
+## Process Management
+
+### Process Life Cycle
+
+A process goes through several stages during its lifetime:
+
+#### States in the Process Life Cycle:
+1. **New**: Process is being created.
+2. **Ready**: Process is ready to execute but waiting for CPU allocation.
+3. **Running**: Process is executing on the CPU.
+4. **Waiting**: Process is waiting for an I/O operation to complete.
+5. **Terminated**: Process has finished execution.
+
+#### Diagram: Process Life Cycle
+```plaintext
+        +-------+
+        |  New  |
+        +-------+
+            |
+            v
+        +---------+      +---------+
+        |  Ready  |<---->| Waiting |
+        +---------+      +---------+
+            |                ^
+            v                |
+        +---------+          |
+        | Running |----------+
+        +---------+
+            |
+            v
+       +-----------+
+       | Terminated|
+       +-----------+
+```
+
+---
+
+### What are Schedulers?
+
+Schedulers are components of the operating system that manage process execution by deciding:
+- **Which process to run**
+- **When to run**
+
+#### Types of Schedulers:
+
+| **Scheduler**      | **Purpose**                                                                                                                                   | **Frequency**          | **Example**                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------|--------------------------------------|
+| **Short-Term**     | Selects a process from the ready queue to execute on the CPU.                                                                                | Runs very frequently. | Round-Robin, Priority Scheduling.    |
+| **Medium-Term**    | Temporarily removes processes from memory (swapping) to reduce CPU load.                                                                     | Runs occasionally.     | Used in systems with limited memory. |
+| **Long-Term**      | Decides which processes to admit into the system for processing.                                                                              | Runs infrequently.     | Used in batch or job scheduling.     |
+
+#### Comparison of Schedulers:
+
+| **Aspect**         | **Short-Term Scheduler**            | **Medium-Term Scheduler**       | **Long-Term Scheduler**        |
+|---------------------|-------------------------------------|----------------------------------|---------------------------------|
+| **Objective**       | CPU allocation.                   | Manage memory and CPU load.     | Admission of processes.         |
+| **Run Frequency**   | High (milliseconds).              | Medium (seconds).               | Low (minutes or less).          |
+| **Type of Systems** | Time-sharing systems.             | Systems with memory limitations.| Batch systems.                  |
+
+---
+
+### Code Snippet: Process Creation Using Fork in C
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        printf("Child Process: PID = %d\n", getpid());
+    } else {
+        printf("Parent Process: PID = %d\n", getpid());
+    }
+    return 0;
+}
+```
+
+---
+
+### Examples of Schedulers
+
+#### 1. Round-Robin Scheduling (Short-Term Scheduler)
+- Each process is assigned a fixed time quantum.
+- After the quantum expires, the process is preempted, and the next process in the queue is executed.
+
+#### 2. Swapping Processes (Medium-Term Scheduler)
+- A process is swapped out of memory to the disk to free up space for other processes.
+- Example: Virtual memory systems.
+
+#### 3. Job Scheduling (Long-Term Scheduler)
+- Jobs are selected from a job queue for execution based on criteria like priority or deadlines.
+
+---
+
 
 
 
