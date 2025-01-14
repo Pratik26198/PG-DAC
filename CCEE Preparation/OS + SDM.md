@@ -1589,6 +1589,169 @@ After compaction:
 - **Interrupt Handlers**: Manage IO operation notifications.
 - **IO Scheduler**: Optimizes the order of IO requests to enhance performance.
 
+---
+# Virtual Memory
+
+Virtual memory is a memory management technique that provides an "illusion" of a larger main memory by abstracting physical memory into a virtual address space. It allows programs to use more memory than is physically available in RAM by utilizing disk storage for data that isn't actively in use.
+
+## Features of Virtual Memory
+1. **Logical Addressing:** Virtual addresses are translated to physical addresses through the Memory Management Unit (MMU).
+2. **Demand Paging:** Only the required data/pages are loaded into physical memory, reducing memory usage.
+3. **Isolation:** Each process operates within its own virtual address space.
+4. **Efficient Multitasking:** Allows many processes to run simultaneously by swapping data in and out of memory.
+
+---
+
+## Demand Paging
+
+**Demand paging** is a memory management scheme where pages are loaded into memory only when they are required. If a page isn't present in physical memory when a program accesses it, a **page fault** occurs, and the operating system loads the required page from disk into memory.
+
+### Steps in Demand Paging
+1. The program references a page using a virtual address.
+2. If the page is not in memory (page fault), the OS:
+   - Identifies the required page.
+   - Finds a free frame in memory or evicts an existing page.
+   - Loads the page from secondary storage (disk).
+   - Updates the page table.
+3. Execution resumes after the page is loaded.
+
+---
+
+## Page Faults
+
+A **page fault** occurs when a program accesses a page that is not currently in physical memory. This triggers the operating system to fetch the missing page from disk.
+
+### Types of Page Faults
+1. **Minor Page Fault:** The page is in memory but not mapped into the process's page table.
+2. **Major Page Fault:** The page must be retrieved from secondary storage.
+3. **Invalid Page Fault:** Occurs when a program accesses a non-existent or restricted page.
+
+### Handling a Page Fault
+1. Determine the missing page using the virtual address.
+2. Check the disk location of the page.
+3. Allocate a frame in physical memory.
+4. Load the page into the allocated frame.
+5. Update the process's page table.
+6. Resume execution.
+
+---
+
+## Page Replacement Algorithms
+
+When a page fault occurs and memory is full, the OS must decide which page to replace using a **page replacement algorithm**.
+
+### 1. FIFO (First-In-First-Out)
+- The oldest page in memory is replaced.
+- Simple but may lead to poor performance (e.g., Belady's anomaly).
+
+#### Example
+```plaintext
+Pages: [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5]
+Frames: 3
+FIFO: [1, 2, 3] -> [4, 1, 2] -> [5, 1, 2] -> [3, 4, 5]
+Page Faults: 9
+```
+
+### 2. LRU (Least Recently Used)
+- Replaces the page that has not been used for the longest time.
+- More efficient but requires tracking page usage.
+
+#### Example
+```plaintext
+Pages: [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5]
+Frames: 3
+LRU: [1, 2, 3] -> [4, 1, 2] -> [5, 4, 1] -> [3, 5, 1]
+Page Faults: 8
+```
+
+### 3. Optimal
+- Replaces the page that won’t be used for the longest time in the future.
+- Theoretical best performance but requires knowledge of future accesses.
+
+#### Example
+```plaintext
+Pages: [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5]
+Frames: 3
+Optimal: [1, 2, 3] -> [4, 1, 2] -> [5, 4, 1] -> [3, 4, 5]
+Page Faults: 7
+```
+
+### 4. Clock Algorithm
+- Circular implementation of LRU using a "use" bit.
+- Pages are replaced in a circular manner, skipping pages with their "use" bit set to `1`.
+
+---
+
+## Diagrams and Tables
+
+### Virtual Memory Architecture
+```plaintext
++-------------------------+
+|         Process         |
++-------------------------+
+|       Virtual Memory    | <- Logical Address
++-------------------------+
+         MMU
++-------------------------+
+|     Physical Memory     | <- Physical Address
++-------------------------+
+```
+
+### Page Table Example
+| Virtual Page | Physical Frame | Valid Bit |
+|--------------|----------------|-----------|
+| 0            | 3              | 1         |
+| 1            | 5              | 1         |
+| 2            | -              | 0         |
+| 3            | 1              | 1         |
+
+---
+
+## Code Snippets
+
+### Simulating FIFO in Python
+```python
+def fifo(pages, frames):
+    memory = []
+    page_faults = 0
+    
+    for page in pages:
+        if page not in memory:
+            page_faults += 1
+            if len(memory) < frames:
+                memory.append(page)
+            else:
+                memory.pop(0)
+                memory.append(page)
+        print(f"Memory: {memory}")
+    
+    return page_faults
+
+pages = [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5]
+frames = 3
+faults = fifo(pages, frames)
+print(f"Total Page Faults: {faults}")
+```
+
+---
+
+## Flowchart: Page Fault Handling
+
+```plaintext
+[Start] -> [Access Page] -> [Page in Memory?]
+                          /      \
+                         /        \
+                       Yes        No
+                       /            \
+         [Continue Execution]   [Page Fault]
+                                    |
+                          [Load Page from Disk]
+                                    |
+                         [Update Page Table]
+                                    |
+                         [Continue Execution]
+```
+
 
 
 
