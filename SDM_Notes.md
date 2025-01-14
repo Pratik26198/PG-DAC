@@ -699,7 +699,7 @@ D --> E[Delete Container]
 10. **`sudo docker run`**: Restart the Docker container.
 
 ```
----
+```
 # **Introduction to YAML**
 
 **YAML** (YAML Ain't Markup Language) is a human-readable data serialization standard used for configuration files and data exchange between programming languages. It is widely used in DevOps tools like Kubernetes, Ansible, and Docker Compose.
