@@ -1752,6 +1752,170 @@ print(f"Total Page Faults: {faults}")
                          [Continue Execution]
 ```
 
+# Deadlock
+
+A **deadlock** occurs when a group of processes becomes stuck in a state where no process can proceed because each process is waiting for a resource held by another. Deadlocks primarily occur in concurrent systems where multiple processes share resources.
+
+---
+
+## Necessary Conditions of Deadlock
+
+For a deadlock to occur, all four of the following conditions must be true simultaneously:
+
+1. **Mutual Exclusion:**
+   - At least one resource must be held in a non-shareable mode.
+   - Only one process can use the resource at a time.
+
+2. **Hold and Wait:**
+   - A process holding at least one resource is waiting to acquire additional resources held by other processes.
+
+3. **No Preemption:**
+   - Resources cannot be forcibly removed from a process holding them; they must be released voluntarily.
+
+4. **Circular Wait:**
+   - A closed chain of processes exists such that each process holds at least one resource needed by the next process in the chain.
+
+**Diagram:**  
+```plaintext
+P1 -> R1 -> P2 -> R2 -> P3 -> R3 -> P1
+```
+
+---
+
+## Deadlock Prevention and Avoidance
+
+### 1. Deadlock Prevention
+Deadlock prevention involves ensuring that at least one of the necessary conditions for deadlock does not hold.
+
+#### Strategies:
+- **Mutual Exclusion:** Make resources shareable where possible.
+- **Hold and Wait:** Require processes to request all resources at once, or release current resources before requesting new ones.
+- **No Preemption:** Allow preemption of resources if a process cannot acquire all needed resources.
+- **Circular Wait:** Impose a strict ordering of resource allocation to prevent circular chains.
+
+---
+
+### 2. Deadlock Avoidance
+Deadlock avoidance requires additional information about processes' resource needs to ensure that the system never enters an unsafe state.
+
+#### Banker's Algorithm:
+1. Each process declares the maximum number of resources it might need.
+2. The system checks if allocating resources to the process will leave the system in a safe state.
+3. A **safe state** ensures that all processes can complete without causing a deadlock.
+
+#### Example:
+- Processes: P1, P2
+- Resources: R1, R2
+- Max Need: [[7, 5], [3, 2]]
+- Available: [10, 7]
+
+**Flowchart:**
+```plaintext
+[Start] -> [Request Resources] -> [Check Safety] -> [Safe?]
+                                   /    \
+                                  Yes    No
+                                  /        \
+                         [Allocate]      [Wait]
+```
+
+---
+
+## Semaphore
+
+A **semaphore** is a synchronization primitive used to control access to shared resources. Semaphores can be:
+
+1. **Binary Semaphore (Mutex):**
+   - Takes values 0 or 1.
+   - Used for mutual exclusion.
+
+2. **Counting Semaphore:**
+   - Represents the number of available units of a resource.
+
+#### Operations:
+- **Wait (P):** Decrements the semaphore value.
+- **Signal (V):** Increments the semaphore value.
+
+**Code Example:**
+```c
+Semaphore S = 1;
+
+P(S): if (S > 0) S = S - 1;
+V(S): S = S + 1;
+```
+
+---
+
+## Mutex
+
+A **mutex** (short for "mutual exclusion") is a locking mechanism that allows only one thread to access a critical section at a time.
+
+### Characteristics:
+- Ownership: Only the process that locks the mutex can unlock it.
+- Binary: Works as a binary semaphore.
+
+**Code Example:**
+```c
+pthread_mutex_t lock;
+
+pthread_mutex_lock(&lock);
+// Critical section
+pthread_mutex_unlock(&lock);
+```
+
+---
+
+## Producer-Consumer Problem
+
+The **producer-consumer problem** illustrates synchronization issues in multi-threaded programming. A producer thread creates items and adds them to a buffer, while a consumer thread removes items from the buffer.
+
+### Solution using Semaphores:
+#### Semaphores:
+- `Empty`: Tracks empty slots in the buffer.
+- `Full`: Tracks filled slots in the buffer.
+- `Mutex`: Ensures mutual exclusion.
+
+**Code Example:**
+```c
+Semaphore empty = N, full = 0, mutex = 1;
+
+Producer:
+P(empty);
+P(mutex);
+// Add item to buffer
+V(mutex);
+V(full);
+
+Consumer:
+P(full);
+P(mutex);
+// Remove item from buffer
+V(mutex);
+V(empty);
+```
+
+---
+
+## Deadlock vs. Starvation
+
+| **Aspect**       | **Deadlock**                                          | **Starvation**                                      |
+|-------------------|-------------------------------------------------------|----------------------------------------------------|
+| **Definition**    | Processes cannot proceed due to circular resource dependency. | Processes are perpetually delayed from accessing resources. |
+| **Cause**         | Mutual exclusion, hold and wait, no preemption, circular wait. | Priority scheduling or resource hoarding by high-priority processes. |
+| **Detection**     | Can be detected using algorithms like Banker's.       | Cannot be easily detected; symptoms include delayed execution. |
+| **Prevention**    | Modify resource allocation policies to avoid deadlocks. | Use aging to increase priority of waiting processes over time. |
+
+---
+
+### Flowchart: Deadlock Detection Algorithm
+
+```plaintext
+[Start] -> [Check Resource Allocation] -> [Safe State?]
+                           /    \
+                          Yes    No
+                          /        \
+                     [Proceed]   [Resolve Deadlock]
+```
+
 
 
 
