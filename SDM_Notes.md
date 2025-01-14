@@ -830,7 +830,8 @@ API Server
        │   └── Container
        └── Kubelet
 ```
-![image](https://github.com/user-attachments/assets/c4ac211a-905e-4099-bedd-7a1c98ab9e17)
+![image](https://github.com/user-attachments/assets/168ae9f1-4a17-40d4-a6ab-11ac5151ca9c)
+
 
 ---
 
