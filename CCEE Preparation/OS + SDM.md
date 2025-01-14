@@ -1445,6 +1445,19 @@ int main() {
 | Best Fit   | Moderate     | Better                 |
 | Worst Fit  | Slow         | Poor                   |
 
+### Example
+
+Consider memory blocks of sizes: **100KB**, **500KB**, **200KB**, and **300KB**.  
+Process sizes: **212KB**, **417KB**, and **112KB**.
+
+## Strategy
+
+| Strategy    | Allocation Order      |
+|-------------|-----------------------|
+| First Fit   | 200KB, 500KB          |
+| Best Fit    | 300KB, 500KB          |
+| Worst Fit   | 500KB, 500KB          |
+
 ---
 
 ## Compaction
