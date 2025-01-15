@@ -531,4 +531,188 @@ Example:
   }
 </script>
 ```
+```
+
+# HTML Forms & Controls
+
+## HTML Forms
+HTML forms are used to collect user input and send it to a server for processing. Forms are defined using the `<form>` tag, which can contain various input elements.
+
+### Basic Syntax
+```html
+<form action="/submit" method="POST">
+  <!-- Form Controls Go Here -->
+</form>
+```
+
+### Common Form Controls
+
+#### 1. **Input**
+The `<input>` tag is a versatile element for collecting user input.
+
+| Type           | Description                             | Example                                      |
+|----------------|-----------------------------------------|----------------------------------------------|
+| `text`         | Single-line text input                 | `<input type="text" name="username">`     |
+| `password`     | Masked text input                      | `<input type="password" name="pwd">`     |
+| `email`        | Validates email addresses              | `<input type="email" name="email">`      |
+| `number`       | Accepts numerical input                | `<input type="number" name="age">`       |
+| `date`         | Date picker                            | `<input type="date" name="dob">`         |
+| `file`         | Uploads a file                         | `<input type="file" name="profilePic">`  |
+
+#### 2. **Text Area**
+The `<textarea>` tag is used for multi-line text input.
+
+```html
+<textarea name="message" rows="4" cols="50">Enter your message here...</textarea>
+```
+
+#### 3. **Radio Buttons**
+Used to select one option from a group.
+
+```html
+<label>
+  <input type="radio" name="gender" value="male"> Male
+</label>
+<label>
+  <input type="radio" name="gender" value="female"> Female
+</label>
+```
+
+#### 4. **Checkbox**
+Allows multiple selections.
+
+```html
+<label>
+  <input type="checkbox" name="hobby" value="reading"> Reading
+</label>
+<label>
+  <input type="checkbox" name="hobby" value="sports"> Sports
+</label>
+```
+
+#### 5. **Dropdown (Select)**
+The `<select>` tag creates a dropdown menu.
+
+```html
+<select name="country">
+  <option value="india">India</option>
+  <option value="usa">USA</option>
+  <option value="uk">UK</option>
+</select>
+```
+
+#### 6. **Buttons**
+
+| Button Type | Description                            | Example                                  |
+|-------------|----------------------------------------|------------------------------------------|
+| `submit`    | Submits the form                      | `<button type="submit">Submit</button>` |
+| `reset`     | Resets form fields to their defaults  | `<button type="reset">Reset</button>`   |
+| `button`    | General-purpose button                | `<button type="button">Click Me</button>` |
+
+### Example Form
+```html
+<form action="/submit" method="POST">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+  <label for="gender">Gender:</label>
+  <input type="radio" name="gender" value="male"> Male
+  <input type="radio" name="gender" value="female"> Female
+
+  <label for="country">Country:</label>
+  <select id="country" name="country">
+    <option value="india">India</option>
+    <option value="usa">USA</option>
+    <option value="uk">UK</option>
+  </select>
+
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+</form>
+```
+
+---
+
+# Introduction to Document Object Model (DOM)
+
+## What is the DOM?
+The Document Object Model (DOM) is a programming interface for web documents. It represents the structure of a webpage as a tree of objects that can be manipulated using programming languages like JavaScript.
+
+### DOM Tree Structure
+The DOM organizes the HTML document into a tree-like structure:
+
+- The document root is `<html>`.
+- Each HTML element becomes a node in the tree.
+- Text, attributes, and comments are also nodes.
+
+Example Tree:
+```plaintext
+<html>
+ └── <body>
+      ├── <h1>
+      │    └── "Hello World"
+      ├── <p>
+      │    └── "This is a paragraph."
+      └── <ul>
+           ├── <li>Item 1</li>
+           └── <li>Item 2</li>
+```
+
+### Accessing the DOM
+JavaScript can be used to interact with the DOM.
+
+#### Selecting Elements
+| Method                     | Description                                      | Example                                   |
+|----------------------------|--------------------------------------------------|-------------------------------------------|
+| `getElementById()`         | Selects an element by its ID                    | `document.getElementById('id')`          |
+| `getElementsByClassName()` | Selects elements by their class name            | `document.getElementsByClassName('class')` |
+| `querySelector()`          | Selects the first element that matches a CSS selector | `document.querySelector('.class')`    |
+| `querySelectorAll()`       | Selects all elements that match a CSS selector  | `document.querySelectorAll('div')`       |
+
+#### Modifying Elements
+```html
+<p id="demo">This is a paragraph.</p>
+<button onclick="changeText()">Change Text</button>
+<script>
+  function changeText() {
+    document.getElementById('demo').innerHTML = 'Text has been changed!';
+  }
+</script>
+```
+
+#### Adding and Removing Elements
+```html
+<ul id="list">
+  <li>Item 1</li>
+</ul>
+<button onclick="addItem()">Add Item</button>
+<script>
+  function addItem() {
+    const ul = document.getElementById('list');
+    const li = document.createElement('li');
+    li.textContent = 'New Item';
+    ul.appendChild(li);
+  }
+</script>
+```
+
+### Events in the DOM
+Events allow interaction with the DOM, such as clicks, mouse movements, and keypresses.
+
+#### Example: Event Listener
+```html
+<button id="btn">Click Me</button>
+<script>
+  document.getElementById('btn').addEventListener('click', function() {
+    alert('Button clicked!');
+  });
+</script>
+```
+
+---
+
+The DOM is a powerful model for interacting with web pages, enabling dynamic and interactive user experiences.
 
