@@ -1274,3 +1274,200 @@ Non-functional testing evaluates software performance, reliability, scalability,
 
 ---
 
+# Introduction to Selenium (Using Eclipse IDE)
+
+## What is Selenium?
+Selenium is a powerful open-source tool for automating web browsers. It supports multiple browsers and languages, making it a popular choice for automated web application testing.
+
+### Key Features:
+1. Supports multiple programming languages: Java, Python, C#, Ruby, etc.
+2. Cross-browser support: Chrome, Firefox, Edge, etc.
+3. Can be integrated with testing frameworks like TestNG and JUnit.
+4. Provides tools like Selenium WebDriver and Selenium Grid.
+
+### Why Use Eclipse IDE for Selenium?
+1. **Ease of Use**: Eclipse is user-friendly and widely used for Java-based Selenium projects.
+2. **Rich Ecosystem**: Supports plugins and integrations for Selenium libraries and tools.
+3. **Error Highlighting**: Helps debug and write error-free code efficiently.
+
+---
+
+# Load WebDriver
+
+## Steps to Set Up Selenium WebDriver in Eclipse:
+1. **Install Java and Eclipse**:
+   - Download and install the latest version of Java (JDK) and Eclipse IDE.
+
+2. **Download Selenium JAR Files**:
+   - Visit the Selenium website ([https://www.selenium.dev/](https://www.selenium.dev/)) and download the latest WebDriver JAR files.
+
+3. **Set Up Project in Eclipse**:
+   - Create a new Java project in Eclipse.
+   - Add Selenium JAR files to the project:
+     1. Right-click on the project > Properties > Java Build Path.
+     2. Go to the "Libraries" tab > Add External JARs > Select Selenium JAR files.
+
+4. **Download WebDriver Executables**:
+   - Download the appropriate driver executable (e.g., ChromeDriver for Chrome).
+
+### Example Code to Load WebDriver:
+```java
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoadWebDriver {
+    public static void main(String[] args) {
+        // Set the path for ChromeDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Open a website
+        driver.get("https://www.google.com");
+
+        // Print the title of the page
+        System.out.println("Page Title: " + driver.getTitle());
+
+        // Close the browser
+        driver.quit();
+    }
+}
+```
+
+---
+
+# Create Selenium Commands
+
+## Locators in Selenium
+Locators identify web elements on a webpage for interaction. Common locators include:
+
+### 1. **By ID**
+```java
+WebElement element = driver.findElement(By.id("elementID"));
+```
+
+### 2. **By Name**
+```java
+WebElement element = driver.findElement(By.name("elementName"));
+```
+
+### 3. **By Class Name**
+```java
+WebElement element = driver.findElement(By.className("elementClass"));
+```
+
+### 4. **By Tag Name**
+```java
+WebElement element = driver.findElement(By.tagName("tagName"));
+```
+
+### 5. **By XPath**
+```java
+WebElement element = driver.findElement(By.xpath("//tagname[@attribute='value']"));
+```
+
+---
+
+# Add Interactions
+
+## 1. **Text Box**
+```java
+WebElement textBox = driver.findElement(By.id("textBoxID"));
+textBox.sendKeys("Hello, World!");
+```
+
+## 2. **Radio Button Selection**
+```java
+WebElement radioButton = driver.findElement(By.id("radioButtonID"));
+radioButton.click();
+```
+
+## 3. **Checkbox Selection**
+```java
+WebElement checkBox = driver.findElement(By.id("checkBoxID"));
+if (!checkBox.isSelected()) {
+    checkBox.click();
+}
+```
+
+## 4. **Dropdown Item Selection**
+Use the `Select` class for dropdowns:
+```java
+import org.openqa.selenium.support.ui.Select;
+
+WebElement dropdown = driver.findElement(By.id("dropdownID"));
+Select select = new Select(dropdown);
+select.selectByVisibleText("Option 1");
+```
+
+## 5. **Keyboard Actions**
+```java
+import org.openqa.selenium.interactions.Actions;
+
+Actions actions = new Actions(driver);
+actions.sendKeys("Some Text").perform();
+```
+
+## 6. **Mouse Actions**
+```java
+Actions actions = new Actions(driver);
+WebElement element = driver.findElement(By.id("hoverElement"));
+actions.moveToElement(element).perform();
+```
+
+## 7. **Multi-Select**
+```java
+Select multiSelect = new Select(driver.findElement(By.id("multiSelectID")));
+multiSelect.selectByVisibleText("Option 1");
+multiSelect.selectByVisibleText("Option 2");
+```
+
+---
+
+# Example Workflow
+
+### Automating a Login Page:
+1. **Scenario**: Automate login for a website with ID and Password fields.
+
+### Code Example:
+```java
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LoginAutomation {
+    public static void main(String[] args) {
+        // Set up WebDriver
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        WebDriver driver = new ChromeDriver();
+
+        // Open the website
+        driver.get("https://example.com/login");
+
+        // Enter username
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("testuser");
+
+        // Enter password
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("password123");
+
+        // Click login
+        WebElement loginButton = driver.findElement(By.id("loginButton"));
+        loginButton.click();
+
+        // Validate login
+        String expectedTitle = "Dashboard";
+        if (driver.getTitle().equals(expectedTitle)) {
+            System.out.println("Login Successful");
+        } else {
+            System.out.println("Login Failed");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
+
