@@ -713,5 +713,222 @@ Events allow interaction with the DOM, such as clicks, mouse movements, and keyp
 
 ---
 
-The DOM is a powerful model for interacting with web pages, enabling dynamic and interactive user experiences.
+# CSS Basics and Styling HTML
+
+## Introduction to CSS
+CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation of a document written in HTML or XML. It controls the layout, colors, fonts, and overall appearance of web pages.
+
+### Benefits of CSS
+1. **Separation of Content and Style**: Improves maintainability.
+2. **Consistency**: Allows consistent styling across multiple pages.
+3. **Flexibility**: Provides responsive designs with ease.
+4. **Performance**: Reduces file size by centralizing styles.
+
+---
+
+## Styling HTML with CSS
+CSS can style HTML elements by applying rules through:
+1. **Selectors**: Identifying which elements to style.
+2. **Properties**: Defining the style aspects.
+
+### Example
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    h1 {
+      color: blue;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to CSS</h1>
+  <p>This page is styled using CSS.</p>
+</body>
+</html>
+```
+
+---
+
+## CSS Types: Inline, Internal, External, and Multiple Styles
+
+### 1. **Inline CSS**
+CSS applied directly within an HTML element's `style` attribute.
+
+Example:
+```html
+<p style="color: red; font-size: 20px;">This is inline CSS.</p>
+```
+
+### 2. **Internal CSS**
+CSS rules written inside a `<style>` tag within the `<head>` section of the HTML.
+
+Example:
+```html
+<style>
+  p {
+    color: green;
+    font-size: 18px;
+  }
+</style>
+```
+
+### 3. **External CSS**
+CSS rules stored in a separate file linked to the HTML document using the `<link>` tag.
+
+Example:
+```html
+<link rel="stylesheet" href="styles.css">
+```
+`styles.css`:
+```css
+body {
+  background-color: #f0f0f0;
+}
+h1 {
+  color: darkblue;
+}
+```
+
+### 4. **Multiple Styles**
+CSS precedence determines which rule applies when multiple rules target the same element:
+1. Inline > Internal > External.
+2. Specificity and importance (`!important`) can override this.
+
+Example:
+```html
+<p style="color: red;">This inline style overrides external and internal CSS.</p>
+```
+
+---
+
+## CSS Fonts
+CSS provides control over fonts through properties like `font-family`, `font-size`, `font-style`, and `font-weight`.
+
+Example:
+```css
+p {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+}
+```
+---
+
+## CSS Box Model
+The CSS Box Model describes the rectangular boxes generated for elements.
+
+### Components:
+1. **Content**: The actual content of the box (e.g., text, images).
+2. **Padding**: Space between the content and the border.
+3. **Border**: Surrounds the padding.
+4. **Margin**: Space outside the border.
+
+Example:
+```css
+div {
+  width: 300px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 10px;
+}
+```
+Visual Representation:
+```plaintext
++--------------------------+ <- Margin
+|  +--------------------+  | <- Border
+|  |  +-------------+  |  | <- Padding
+|  |  |  Content    |  |  |
+|  |  +-------------+  |  |
+|  +--------------------+  |
++--------------------------+
+```
+
+---
+
+## The `id` and `class` Attributes
+
+### `id` Attribute
+- Used to uniquely identify a single HTML element.
+- Syntax:
+```html
+<div id="unique">This is unique.</div>
+```
+- CSS:
+```css
+#unique {
+  color: red;
+}
+```
+
+### `class` Attribute
+- Used to define a group of elements with shared styles.
+- Syntax:
+```html
+<div class="common">Styled with class.</div>
+```
+- CSS:
+```css
+.common {
+  font-size: 20px;
+}
+```
+
+---
+
+## HTML `<style>` Tag
+The `<style>` tag defines internal CSS rules inside the `<head>` section of an HTML document.
+
+Example:
+```html
+<style>
+  h1 {
+    color: purple;
+    font-size: 28px;
+  }
+</style>
+```
+
+---
+
+## Linking a Style to an HTML Document
+An external CSS file can be linked using the `<link>` tag.
+
+### Syntax
+```html
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+```
+
+### Example
+HTML:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>External CSS Example</h1>
+</body>
+</html>
+```
+CSS (`styles.css`):
+```css
+h1 {
+  color: orange;
+  text-align: center;
+}
+```
+
+---
+
 
