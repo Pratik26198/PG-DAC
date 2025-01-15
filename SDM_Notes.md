@@ -1083,4 +1083,194 @@ Defects detected during the design phase cost significantly less than those foun
 |  7. Absence-of-errors fallacy      |
 +------------------------------------+
 
+```
+# Introduction to STLC and V Model
+
+## Software Testing Life Cycle (STLC)
+STLC is a systematic process used to test software, ensuring quality and functionality at each stage of development. It is a subset of the Software Development Life Cycle (SDLC).
+
+### Phases of STLC:
+1. **Requirement Analysis**:
+   - Analyze and understand testing requirements.
+   - Inputs: Requirements document (SRS, BRS).
+   - Deliverables: Requirement traceability matrix (RTM).
+
+2. **Test Planning**:
+   - Define scope, resources, tools, and schedule for testing.
+   - Deliverables: Test Plan.
+
+3. **Test Case Development**:
+   - Design test cases, scenarios, and scripts.
+   - Deliverables: Test cases, test data.
+
+4. **Test Environment Setup**:
+   - Configure the hardware/software for testing.
+   - Deliverables: Environment readiness report.
+
+5. **Test Execution**:
+   - Execute test cases and log defects.
+   - Deliverables: Test execution report, defect reports.
+
+6. **Test Closure**:
+   - Ensure test objectives are met, analyze test results, and generate test closure reports.
+
+### Diagram of STLC:
+```plaintext
++--------------------------+
+|    Requirement Analysis  |
++--------------------------+
+            ↓
++--------------------------+
+|       Test Planning      |
++--------------------------+
+            ↓
++--------------------------+
+| Test Case Development    |
++--------------------------+
+            ↓
++--------------------------+
+| Test Environment Setup   |
++--------------------------+
+            ↓
++--------------------------+
+|      Test Execution      |
++--------------------------+
+            ↓
++--------------------------+
+|       Test Closure       |
++--------------------------+
+```
+
+## V Model
+The **V-Model** (Verification and Validation Model) is a software development approach emphasizing that each development phase is associated with a corresponding testing phase.
+
+### Diagram:
+```plaintext
+     +-----------------------+             +---------------------+
+     |    Requirements       |             |   Acceptance Testing |
+     +-----------------------+             +---------------------+
+                 ↓                           ↑
+     +-----------------------+             +---------------------+
+     |    High-Level Design  |             |  System Testing      |
+     +-----------------------+             +---------------------+
+                 ↓                           ↑
+     +-----------------------+             +---------------------+
+     |    Low-Level Design   |             |  Integration Testing |
+     +-----------------------+             +---------------------+
+                 ↓                           ↑
+     +-----------------------+             +---------------------+
+     |      Coding           |             |    Unit Testing      |
+     +-----------------------+             +---------------------+
+```
+
+### Key Features:
+1. Verification and Validation occur simultaneously.
+2. Testing phases align with development phases.
+3. Early defect detection and resolution.
+
+---
+
+# Types of Testing: Manual and Automation
+
+## Manual Testing
+- **Definition**: Testing performed manually without automation tools.
+- **Pros**:
+  - Suitable for exploratory and ad-hoc testing.
+  - Low initial cost.
+  - Flexible and adaptable.
+- **Cons**:
+  - Time-consuming and prone to human error.
+  - Inefficient for large-scale regression testing.
+
+### Example:
+Testing a login page by entering valid and invalid credentials and verifying the results.
+
+## Automation Testing
+- **Definition**: Testing using automation tools to execute test scripts.
+- **Pros**:
+  - Faster execution.
+  - Repeatable and consistent.
+  - Ideal for regression and performance testing.
+- **Cons**:
+  - High initial setup cost.
+  - Limited to predefined test cases.
+
+### Tools:
+- Selenium
+- JUnit
+- TestNG
+- Appium
+
+---
+
+# Tools Used for Automation Testing
+
+| **Tool Name** | **Use Case**               | **Features**                             |
+|---------------|----------------------------|------------------------------------------|
+| Selenium      | Web application testing    | Cross-browser support, open-source       |
+| Appium        | Mobile app testing         | Multi-platform, open-source              |
+| JUnit         | Unit testing               | Integration with IDEs, annotations       |
+| TestNG        | Unit and integration testing| Parallel testing, advanced annotations   |
+| Postman       | API testing                | Automated request testing, environment setup |
+| LoadRunner    | Performance testing        | Simulates high-load scenarios            |
+
+---
+
+# Introduction to Testing Methods
+
+## White-Box Testing
+- **Definition**: Testing internal structures or code logic.
+- **Techniques**:
+  - Statement Coverage
+  - Branch Coverage
+  - Path Coverage
+- **Example**: Ensuring all `if-else` conditions in a function are tested.
+
+## Black-Box Testing
+- **Definition**: Testing software without knowledge of its internal code.
+- **Techniques**:
+  - Equivalence Partitioning
+  - Boundary Value Analysis
+- **Example**: Testing a search bar without knowing the algorithm behind it.
+
+## Grey-Box Testing
+- **Definition**: Combines white-box and black-box techniques.
+- **Example**: Testing a database for SQL injection while understanding schema design.
+
+---
+
+# Introduction to Functional Testing
+
+## Definition
+Functional testing validates the functionality of software against requirements.
+
+### Techniques:
+1. **Unit Testing**: Tests individual units of code.
+2. **Integration Testing**: Tests interactions between modules.
+3. **System Testing**: Validates the complete system.
+4. **Acceptance Testing**: Ensures the software meets end-user requirements.
+
+### Example:
+For an e-commerce application:
+1. Add items to the cart.
+2. Verify that the total price updates correctly.
+
+---
+
+# Introduction to Non-Functional Testing
+
+## Definition
+Non-functional testing evaluates software performance, reliability, scalability, and usability.
+
+### Types:
+1. **Performance Testing**: Measures response time under load.
+   - Tool: JMeter, LoadRunner.
+2. **Security Testing**: Validates data protection and vulnerability.
+   - Tool: OWASP ZAP.
+3. **Usability Testing**: Assesses user-friendliness.
+   - Example: Testing UI navigation.
+4. **Compatibility Testing**: Checks software on various devices and browsers.
+   - Tool: BrowserStack.
+
+---
 
