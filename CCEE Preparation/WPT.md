@@ -176,4 +176,187 @@ Database (if needed)
 HTTP Response
     ↓
 Rendered Web Page
+```
+# Introduction to HTML5
+
+## What is HTML5?
+HTML5 is the latest version of the HyperText Markup Language, designed to structure and present content on the web. It introduces new features to support multimedia, semantic elements, APIs, and enhanced performance. HTML5 is widely used for building responsive and interactive web applications.
+
+### Key Features of HTML5:
+1. **Semantic Elements**: New tags like `<header>`, `<footer>`, `<article>`, and `<section>` enhance readability and structure.
+2. **Multimedia Support**: Native support for audio and video using `<audio>` and `<video>` tags.
+3. **Canvas and SVG**: Allows dynamic graphics rendering without plugins.
+4. **Geolocation API**: Enables location-based services.
+5. **Responsive Design**: Works seamlessly with CSS3 for adaptive layouts.
+6. **Offline Storage**: Provides local storage via `localStorage` and `sessionStorage`.
+7. **Form Enhancements**: New input types like `email`, `date`, and `range`.
+
+---
+
+# Introduction to Basic HTML Tags
+
+HTML tags form the building blocks of a webpage. They are enclosed in angle brackets (`< >`) and usually have an opening and closing tag.
+
+---
+
+## Common HTML Tags and Their Uses
+
+### 1. **Alignment**
+Align content using CSS, but HTML provides basic tags:
+- `<center>` (deprecated in HTML5; use CSS instead):
+  ```html
+  <center>This text is centered</center>
+  ```
+
+### 2. **Headings**
+HTML provides six levels of headings:
+- Syntax:
+  ```html
+  <h1>Main Heading</h1>
+  <h2>Subheading</h2>
+  <h3>Smaller Heading</h3>
+  ```
+- Output:
+  - `<h1>` is the largest.
+  - `<h6>` is the smallest.
+
+### 3. **Anchor**
+Creates hyperlinks to other pages or resources:
+- Syntax:
+  ```html
+  <a href="https://www.example.com">Visit Example</a>
+  ```
+- Attributes:
+  - `href`: The URL to navigate.
+  - `target="_blank"`: Opens the link in a new tab.
+
+### 4. **Paragraph**
+Defines a block of text:
+- Syntax:
+  ```html
+  <p>This is a paragraph of text.</p>
+  ```
+
+### 5. **Image**
+Displays images on a webpage:
+- Syntax:
+  ```html
+  <img src="image.jpg" alt="Description" width="300" height="200">
+  ```
+- Attributes:
+  - `src`: Path to the image file.
+  - `alt`: Alternative text for accessibility.
+  - `width` and `height`: Dimensions of the image.
+
+### 6. **Lists**
+HTML supports ordered and unordered lists:
+- **Unordered List**:
+  ```html
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+  ```
+- **Ordered List**:
+  ```html
+  <ol>
+    <li>First Item</li>
+    <li>Second Item</li>
+  </ol>
+  ```
+- Output:
+  - `<ul>`: Bulleted list.
+  - `<ol>`: Numbered list.
+
+### 7. **Tables**
+Defines tabular data:
+- Syntax:
+  ```html
+  <table border="1">
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+    </tr>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </table>
+  ```
+- Attributes:
+  - `border`: Adds a border around the table.
+
+### 8. **iFrames**
+Embeds another HTML document within the current page:
+- Syntax:
+  ```html
+  <iframe src="https://www.example.com" width="600" height="400"></iframe>
+  ```
+- Attributes:
+  - `src`: URL of the embedded document.
+  - `width` and `height`: Size of the frame.
+
+---
+
+# Example: Combining HTML Tags
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 Introduction</title>
+</head>
+<body>
+  <h1>Welcome to HTML5</h1>
+  <p>This is an example of basic HTML tags.</p>
+  
+  <h2>Example List</h2>
+  <ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+  </ul>
+
+  <h2>Sample Table</h2>
+  <table border="1">
+    <tr>
+      <th>Language</th>
+      <th>Popularity</th>
+    </tr>
+    <tr>
+      <td>HTML</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>CSS</td>
+      <td>High</td>
+    </tr>
+  </table>
+
+  <h2>Embedded Content</h2>
+  <iframe src="https://www.example.com" width="600" height="400"></iframe>
+
+  <h2>Image Example</h2>
+  <img src="image.jpg" alt="Example Image" width="300">
+
+  <h2>Anchor Example</h2>
+  <a href="https://www.example.com" target="_blank">Visit Example</a>
+</body>
+</html>
+```
+
+---
+
+# Diagram: Basic HTML Structure
+```plaintext
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>  <!-- Meta information -->
+  </head>
+  <body>
+    <!-- Content -->
+  </body>
+</html>
 
