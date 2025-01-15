@@ -1485,4 +1485,227 @@ public class LoginAutomation {
         driver.quit();
     }
 }
+```
+
+# Introduction to Delivery Pipeline
+
+## What is a Delivery Pipeline?
+A **delivery pipeline** is an automated sequence of processes involved in delivering software to production. It ensures code changes move through various stages such as building, testing, and deployment in an efficient and reliable manner.
+
+### Key Stages in a Delivery Pipeline:
+1. **Source Code Management**:
+   - Manage version control using tools like Git.
+
+2. **Build**:
+   - Compile and package the code using tools like Maven, Gradle, or Ant.
+
+3. **Testing**:
+   - Automated testing (unit, integration, functional) using tools like Selenium, JUnit, or TestNG.
+
+4. **Deployment**:
+   - Deploy to staging or production using CI/CD tools like Jenkins or Kubernetes.
+
+### Benefits:
+- Faster feedback loops.
+- Reduced manual errors.
+- Consistent delivery and deployments.
+- Supports Agile and DevOps practices.
+
+---
+
+# Introduction to Jenkins
+
+## What is Jenkins?
+Jenkins is an open-source automation server used to implement Continuous Integration (CI) and Continuous Delivery (CD). It automates tasks like building, testing, and deploying code changes.
+
+### Key Features:
+1. **Extensible**:
+   - Over 1,000 plugins to integrate with various tools.
+
+2. **Distributed Builds**:
+   - Supports master-slave architecture for load distribution.
+
+3. **Platform Independent**:
+   - Runs on Windows, Linux, and macOS.
+
+4. **Easy Configuration**:
+   - Configurable via web-based GUI or configuration files.
+
+---
+
+# Jenkins Management
+
+## Installation:
+1. **Pre-requisites**:
+   - Install Java (JDK 8 or higher).
+   - Download Jenkins WAR file from [https://www.jenkins.io/](https://www.jenkins.io/).
+
+2. **Run Jenkins**:
+   ```bash
+   java -jar jenkins.war
+   ```
+   Access Jenkins on `http://localhost:8080`.
+
+## Key Management Tasks:
+1. **Create Users**:
+   - Go to `Manage Jenkins > Manage Users > Create User`.
+
+2. **Configure Plugins**:
+   - Go to `Manage Jenkins > Manage Plugins`.
+   - Install necessary plugins (e.g., Git, Maven, Pipeline).
+
+3. **Configure Global Tools**:
+   - Go to `Manage Jenkins > Global Tool Configuration`.
+   - Configure JDK, Git, and Maven paths.
+
+---
+
+# Adding Slave Node to Jenkins
+
+## Why Use Slave Nodes?
+Slave nodes (agents) allow Jenkins to distribute build jobs across multiple machines, improving performance and resource management.
+
+## Steps to Add a Slave Node:
+1. **Set Up Node in Jenkins**:
+   - Go to `Manage Jenkins > Manage Nodes > New Node`.
+   - Provide details such as node name, remote directory, and usage type.
+
+2. **Configure Node Machine**:
+   - Install Java on the slave machine.
+   - Launch the agent JAR file using:
+     ```bash
+     java -jar agent.jar -jnlpUrl <Jenkins_URL>/jnlp -secret <secret> -workDir <directory>
+     ```
+
+3. **Verify Connection**:
+   - Check the node status under `Manage Jenkins > Manage Nodes`.
+
+---
+
+# Building a Delivery Pipeline
+
+## What is a Pipeline in Jenkins?
+A Jenkins pipeline automates a series of tasks in the software delivery process, defined using a script.
+
+### Steps to Create a Pipeline:
+1. **Install Pipeline Plugin**:
+   - Go to `Manage Jenkins > Manage Plugins`.
+   - Install the `Pipeline` plugin.
+
+2. **Create a Pipeline Job**:
+   - Go to `New Item > Pipeline`.
+   - Provide a name and configure the job.
+
+3. **Define the Pipeline Script**:
+   - Use either a declarative or scripted syntax.
+
+### Example Pipeline Script:
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh 'scp target/app.jar user@server:/deployments'
+            }
+        }
+    }
+}
+```
+
+---
+
+# Selenium Integration with Jenkins
+
+## Why Integrate Selenium with Jenkins?
+Integrating Selenium with Jenkins allows you to automate browser testing as part of your CI/CD pipeline.
+
+### Steps to Integrate Selenium with Jenkins:
+1. **Set Up Selenium Project**:
+   - Create a Maven-based Selenium project.
+   - Add dependencies for Selenium and TestNG in the `pom.xml` file.
+
+   ```xml
+   <dependencies>
+       <dependency>
+           <groupId>org.seleniumhq.selenium</groupId>
+           <artifactId>selenium-java</artifactId>
+           <version>4.1.2</version>
+       </dependency>
+       <dependency>
+           <groupId>org.testng</groupId>
+           <artifactId>testng</artifactId>
+           <version>7.4.0</version>
+       </dependency>
+   </dependencies>
+   ```
+
+2. **Create a Jenkins Job**:
+   - Go to `New Item > Freestyle Project`.
+   - Configure the repository URL (e.g., GitHub).
+   - Add a build step to invoke Maven goals (e.g., `clean test`).
+
+3. **Execute Selenium Tests**:
+   - Run the Jenkins job and view test results in the console output.
+
+4. **View Test Reports**:
+   - Add the `TestNG Results Plugin`.
+   - Configure the job to archive `test-output/testng-results.xml`.
+
+---
+
+# Example Workflow
+
+### Automating a CI/CD Pipeline with Selenium and Jenkins
+1. **Scenario**: Automate the build, test, and deployment of a web application using Selenium and Jenkins.
+
+2. **Pipeline Script**:
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/username/repository.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                sh 'scp target/app.jar user@server:/deployments'
+            }
+        }
+    }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+        }
+    }
+}
+```
+
+
 
