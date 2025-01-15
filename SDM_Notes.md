@@ -1492,31 +1492,7 @@ public class LoginAutomation {
 ## What is a Delivery Pipeline?
 A **delivery pipeline** is an automated sequence of processes involved in delivering software to production. It ensures code changes move through various stages such as building, testing, and deployment in an efficient and reliable manner.
 
-### Key Stages in a Delivery Pipeline:
-1. **Source Code Management**:
-   - Manage version control using tools like Git.
-
-2. **Build**:
-   - Compile and package the code using tools like Maven, Gradle, or Ant.
-
-3. **Testing**:
-   - Automated testing (unit, integration, functional) using tools like Selenium, JUnit, or TestNG.
-
-4. **Deployment**:
-   - Deploy to staging or production using CI/CD tools like Jenkins or Kubernetes.
-
-### Benefits:
-- Faster feedback loops.
-- Reduced manual errors.
-- Consistent delivery and deployments.
-- Supports Agile and DevOps practices.
-
----
-
-# Introduction to Delivery Pipeline
-
-## What is a Delivery Pipeline?
-A **delivery pipeline** is an automated sequence of processes involved in delivering software to production. It ensures code changes move through various stages such as building, testing, and deployment in an efficient and reliable manner.
+![image](https://github.com/user-attachments/assets/e0b63668-1571-4c9d-9f31-21085b4516f3)
 
 ### Key Stages in a Delivery Pipeline:
 1. **Source Code Management**:
@@ -1544,12 +1520,15 @@ A **delivery pipeline** is an automated sequence of processes involved in delive
 ## What is Jenkins?
 Jenkins is an open-source automation server used to implement Continuous Integration (CI) and Continuous Delivery (CD). It automates repetitive tasks such as code building, testing, and deployment.
 
+![image](https://github.com/user-attachments/assets/0c2bd403-487c-4902-bf0c-d445d84205d7)
+
+
 ### Key Features:
 1. **Extensible**:
    - Jenkins supports over 1,000 plugins to integrate with tools like Git, Docker, Maven, and Selenium, making it highly flexible.
 
 2. **Distributed Builds**:
-   - Jenkins supports a master-slave architecture, allowing build tasks to be distributed across multiple machines for better resource utilization.
+   - Jenkins supports a **master-slave architecture**, allowing build tasks to be distributed across multiple machines for better resource utilization.
 
 3. **Platform Independent**:
    - Jenkins can run on various operating systems such as Windows, Linux, and macOS, making it versatile for development teams.
