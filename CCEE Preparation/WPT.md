@@ -531,7 +531,6 @@ Example:
   }
 </script>
 ```
-```
 
 # HTML Forms & Controls
 
