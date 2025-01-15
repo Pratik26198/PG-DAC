@@ -359,4 +359,176 @@ Embeds another HTML document within the current page:
     <!-- Content -->
   </body>
 </html>
+```
+# HTML5
+
+## New Features in HTML5
+HTML5 introduces numerous enhancements that improve web development capabilities, interactivity, and accessibility. Key features include:
+
+1. **Improved Semantics**: Tags like `<header>`, `<footer>`, `<article>`, and `<section>` provide meaningful content structure.
+2. **Enhanced Multimedia**: Native support for audio and video playback without plugins.
+3. **Graphics and Effects**: The `<canvas>` element and SVG integration enable dynamic graphics rendering.
+4. **APIs and Connectivity**:
+   - Geolocation API
+   - Offline storage using `localStorage` and `sessionStorage`
+   - Drag-and-drop API.
+5. **Performance and Integration**:
+   - Reduced reliance on external plugins (e.g., Flash).
+   - Improved parsing rules for error handling.
+
+---
+
+## New Elements, Attributes, and Features
+
+### New Elements
+
+| Element       | Description                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| `<header>`    | Represents the introductory section of a document or section.              |
+| `<footer>`    | Represents the footer section with information like copyright.             |
+| `<article>`   | Defines self-contained, independent content.                              |
+| `<section>`   | Represents a thematic grouping of content.                                |
+| `<nav>`       | Used for navigation links.                                                |
+| `<figure>`    | Groups media elements with a caption.                                     |
+| `<figcaption>`| Provides a caption for `<figure>`.                                        |
+| `<mark>`      | Highlights text.                                                         |
+| `<time>`      | Represents date and time.                                                |
+| `<progress>`  | Displays progress of a task.                                             |
+
+### New Attributes
+
+| Attribute     | Description                                                                 |
+|---------------|-----------------------------------------------------------------------------|
+| `placeholder` | Provides placeholder text in inputs.                                       |
+| `autofocus`   | Automatically focuses an element.                                         |
+| `required`    | Specifies that an input must be filled out before submitting.             |
+| `pattern`     | Defines a regular expression for input validation.                        |
+| `form`        | Associates the element with a specific form.                              |
+| `draggable`   | Specifies whether an element is draggable.                                |
+
+### Link Relations
+
+HTML5 introduces new values for the `rel` attribute in links:
+
+| Relation       | Description                                                               |
+|----------------|---------------------------------------------------------------------------|
+| `preload`      | Specifies resources to load early.                                        |
+| `prefetch`     | Indicates resources to fetch for future use.                              |
+| `stylesheet`   | Links to external CSS files.                                             |
+
+### Microdata
+Microdata allows embedding structured data into HTML to improve search engine understanding.
+
+Example:
+```html
+<div itemscope itemtype="https://schema.org/Person">
+  <span itemprop="name">Alice</span>
+  <span itemprop="jobTitle">Engineer</span>
+</div>
+```
+
+### ARIA Accessibility
+Accessible Rich Internet Applications (ARIA) improve accessibility for users with disabilities.
+
+Example:
+```html
+<div role="banner">Site Title</div>
+<nav role="navigation">
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+</nav>
+```
+
+### Objects and Events
+- **New Objects**: `FormData`, `Blob`, and `ArrayBuffer`.
+- **New Events**: `oninput`, `oncanplay`, `onplay`, `onpause`.
+
+### Canvas Tag
+The `<canvas>` element enables dynamic graphics using JavaScript.
+
+Example:
+```html
+<canvas id="myCanvas" width="300" height="150"></canvas>
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(50, 50, 100, 75);
+</script>
+```
+
+---
+
+## HTML5 Validation
+HTML5 enhances form validation with built-in attributes:
+
+| Attribute     | Purpose                                  |
+|---------------|------------------------------------------|
+| `required`    | Ensures the input field is filled.       |
+| `pattern`     | Validates input against a regular expression. |
+| `maxlength`   | Limits the length of the input.          |
+| `type`        | Validates based on the input type (e.g., email). |
+
+Example:
+```html
+<form>
+  <label for="email">Email:</label>
+  <input type="email" id="email" required placeholder="Enter your email">
+  <button type="submit">Submit</button>
+</form>
+```
+
+---
+
+## Audio & Video Support
+
+### Audio Tag
+The `<audio>` tag embeds audio files.
+
+Example:
+```html
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+```
+
+### Video Tag
+The `<video>` tag embeds video files.
+
+Example:
+```html
+<video controls width="600">
+  <source src="video.mp4" type="video/mp4">
+  Your browser does not support the video element.
+</video>
+```
+
+---
+
+## Geo-location Support
+The Geolocation API retrieves the user’s location.
+
+Example:
+```html
+<button onclick="getLocation()">Get Location</button>
+<p id="location"></p>
+
+<script>
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      document.getElementById('location').innerText = "Geolocation not supported.";
+    }
+  }
+
+  function showPosition(position) {
+    document.getElementById('location').innerText = 
+      `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+  }
+</script>
+```
 
