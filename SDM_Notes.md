@@ -134,6 +134,21 @@ A **Git repository** is a storage space for your project, including:
      ```
 
 ---
+## Common Git Commands
+| **Command**                         | **Description**                                                   |
+|-------------------------------------|-------------------------------------------------------------------|
+| `git init`                          | Create a new repository.                                          |
+| `git status`                        | Check the repository status.                                      |
+| `git log`                           | View commit logs.                                                 |
+| `git add .`                         | Stage all changes for the next commit.                           |
+| `git commit -m "message"`           | Commit staged changes with a message.                            |
+| `git push`                          | Push local repository changes to the remote repository.           |
+| `git clone <repo_url>`              | Clone a remote repository to the local machine.                  |
+| `git pull`                          | Pull the latest changes from the remote repository.              |
+| `git config --global user.name`     | Set the global username.                                          |
+| `git config --global user.email`    | Set the global email address.                                     |
+| `git config --global user.password` | Set the global password (public access token).                   |
+
 
 ## Flowchart: Git Workflow
 ```mermaid
