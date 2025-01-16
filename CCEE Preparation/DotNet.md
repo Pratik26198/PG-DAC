@@ -1082,6 +1082,21 @@ public class DerivedClass : BaseClass
         Console.WriteLine($"{message} - {number}");
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        DerivedClass obj = new DerivedClass();
+
+        // Calls the Print method from BaseClass (because of 1 argument)
+        obj.Print("Hello from BaseClass");
+
+        // Calls the Print method from DerivedClass (because of 2 arguments)
+        obj.Print("Hello from DerivedClass", 42);
+    }
+}
+
 ```
 
 ---
