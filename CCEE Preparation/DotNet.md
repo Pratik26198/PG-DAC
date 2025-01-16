@@ -3649,40 +3649,47 @@ Child actions are invoked within a parent view using `Html.Action`.
 
 ---
 
-## **Data Management with ADO.NET**
+# Data Management with ADO.NET
 
-### **Microsoft.Data.SqlClient**
-A library to interact with SQL Server.
+## **Introduction to Microsoft.Data.SqlClient**
+`Microsoft.Data.SqlClient` is the official library for connecting .NET applications to SQL Server databases. It replaces the earlier `System.Data.SqlClient` and provides robust support for synchronous and asynchronous database operations.
+
+### **Key Features:**
+- Optimized for SQL Server.
+- Supports modern features like Always Encrypted and Managed Identity.
+- Provides both synchronous and asynchronous APIs.
 
 ---
 
-### **Core ADO.NET Objects**
+## **Core ADO.NET Objects**
 
-#### **Connection Object**
-- Manages the connection to the database.
-
-#### **Command Object**
-- Executes SQL queries or stored procedures.
-
-#### **DataReader**
-- Reads data in a forward-only, read-only manner.
-
-#### **DataAdapter, DataSet, and DataTable**
-- `DataAdapter`: Bridges the data source and `DataSet`.
-- `DataSet`: In-memory representation of data.
-- `DataTable`: Represents a single table of data.
+### **1. Connection Object**
+- Manages the connection to a database.
+- Uses a connection string to define database details.
 
 #### **Example:**
 ```csharp
 using Microsoft.Data.SqlClient;
 
-string connectionString = "YourConnectionStringHere";
+string connectionString = "Server=localhost;Database=TestDb;Trusted_Connection=True;";
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
     connection.Open();
-    SqlCommand command = new SqlCommand("SELECT * FROM Products", connection);
-    SqlDataReader reader = command.ExecuteReader();
+    Console.WriteLine("Connection Opened");
+}
+```
 
+---
+
+### **2. Command Object**
+- Executes SQL queries or stored procedures against the database.
+
+#### **Example:**
+```csharp
+string query = "SELECT * FROM Products";
+using (SqlCommand command = new SqlCommand(query, connection))
+{
+    SqlDataReader reader = command.ExecuteReader();
     while (reader.Read())
     {
         Console.WriteLine(reader["Name"]);
@@ -3692,26 +3699,94 @@ using (SqlConnection connection = new SqlConnection(connectionString))
 
 ---
 
-### **Asynchronous Execution**
+### **3. DataReader**
+- Provides a forward-only, read-only stream of data from the database.
+- Ideal for reading large amounts of data efficiently.
 
 #### **Example:**
 ```csharp
-using Microsoft.Data.SqlClient;
-
-string connectionString = "YourConnectionStringHere";
-
-using (SqlConnection connection = new SqlConnection(connectionString))
+using (SqlDataReader reader = command.ExecuteReader())
 {
-    await connection.OpenAsync();
-    SqlCommand command = new SqlCommand("SELECT * FROM Products", connection);
-    SqlDataReader reader = await command.ExecuteReaderAsync();
-
-    while (await reader.ReadAsync())
+    while (reader.Read())
     {
-        Console.WriteLine(reader["Name"]);
+        Console.WriteLine($"Product: {reader["Name"]}, Price: {reader["Price"]}");
     }
 }
 ```
+
+---
+
+### **4. DataAdapter, DataSet, and DataTable**
+- **DataAdapter**: Bridges the database and in-memory objects.
+- **DataSet**: Represents an in-memory cache of data.
+- **DataTable**: Represents a single table of data.
+
+#### **Example:**
+```csharp
+string query = "SELECT * FROM Products";
+SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+DataSet dataSet = new DataSet();
+adapter.Fill(dataSet, "Products");
+
+DataTable table = dataSet.Tables["Products"];
+foreach (DataRow row in table.Rows)
+{
+    Console.WriteLine(row["Name"]);
+}
+```
+
+---
+
+## **Asynchronous Command Execution**
+- Asynchronous commands improve performance by not blocking the main thread while waiting for the database response.
+
+#### **Example:**
+```csharp
+string query = "SELECT * FROM Products";
+using (SqlCommand command = new SqlCommand(query, connection))
+{
+    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+    {
+        while (await reader.ReadAsync())
+        {
+            Console.WriteLine($"Product: {reader["Name"]}, Price: {reader["Price"]}");
+        }
+    }
+}
+```
+
+---
+
+## **Asynchronous Connections**
+- Establishing database connections asynchronously prevents the application from freezing during connection setup.
+
+#### **Example:**
+```csharp
+string connectionString = "Server=localhost;Database=TestDb;Trusted_Connection=True;";
+using (SqlConnection connection = new SqlConnection(connectionString))
+{
+    await connection.OpenAsync();
+    Console.WriteLine("Asynchronous Connection Opened");
+
+    string query = "SELECT COUNT(*) FROM Products";
+    using (SqlCommand command = new SqlCommand(query, connection))
+    {
+        int count = (int)await command.ExecuteScalarAsync();
+        Console.WriteLine($"Number of products: {count}");
+    }
+}
+```
+
+---
+
+## **Best Practices for ADO.NET**
+1. Use `using` statements to ensure connections are properly closed.
+2. Prefer parameterized queries to prevent SQL injection.
+3. Use asynchronous methods for better performance in high-concurrency scenarios.
+4. Log and handle exceptions properly during database operations.
+
+---
+
 
 ---
 
