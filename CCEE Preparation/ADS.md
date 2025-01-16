@@ -42,22 +42,14 @@ This table provides a comprehensive overview of various algorithms, including th
 2. **Merge Sort**
    ![Merge Sort Visualization](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif)
 
-3. **Binary Search**
-   ```
-   Pseudocode:
-   BinarySearch(arr, x):
-       start = 0
-       end = length(arr) - 1
-       while start <= end:
-           mid = (start + end) // 2
-           if arr[mid] == x:
-               return mid
-           elif arr[mid] < x:
-               start = mid + 1
-           else:
-               end = mid - 1
-       return -1
-   ```
+3. **Quick Sort**
+   ![Quick Sort Visualization](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)
+
+4. **Dijkstra's Algorithm (Road Network Example)**
+   ![Dijkstra Visualization](https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif)
+
+5. **DFS and BFS Traversals**
+   ![DFS and BFS Traversals](https://upload.wikimedia.org/wikipedia/commons/4/42/Breadth-first-tree.svg)
 
 ### Recommendations for Use
 - Use sorting algorithms based on dataset size and requirements for stability.
