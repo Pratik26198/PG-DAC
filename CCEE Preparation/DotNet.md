@@ -3563,14 +3563,83 @@ Access via: `http://localhost/Home/Index?name=Alice`
 
 ## **MVC Module**
 
-### **Partial Views**
-- Reusable view components.
+## **Partial Views**
+
+### **Overview**
+Partial views are reusable view components in ASP.NET MVC that allow you to render portions of a web page. They are particularly useful for rendering common UI elements like headers, footers, or navigation menus.
+
+### **Key Features:**
+- Encapsulate reusable UI logic.
+- Reduce redundancy by sharing across multiple views.
 - Rendered within a parent view.
 
-#### **Example:**
-```html
-@Html.Partial("_PartialView")
+### **Example:**
+1. **Create a Partial View:**
+   - Add a new `.cshtml` file (e.g., `_PartialView.cshtml`) to the **Views/Shared** folder.
+   - Example content for `_PartialView.cshtml`:
+     ```html
+     <div>
+         <h3>This is a partial view!</h3>
+     </div>
+     ```
+
+2. **Render the Partial View in a Parent View:**
+   ```html
+   @Html.Partial("_PartialView")
+   ```
+
+3. **Passing Data to Partial Views:**
+   - Use `ViewData` or directly pass a model:
+     ```html
+     @Html.Partial("_PartialView", Model)
+     ```
+
+---
+
+## **Action Method and Child Action**
+
+### **Overview**
+- **Action Methods** handle incoming HTTP requests and generate responses. They are defined in controllers.
+- **Child Actions** are special methods that can be invoked within a view to render additional content dynamically.
+
+### **Action Method Example:**
+```csharp
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public IActionResult GetDate()
+    {
+        return Content(DateTime.Now.ToString());
+    }
+}
 ```
+
+### **Child Action Example:**
+Child actions are invoked within a parent view using `Html.Action`.
+
+1. **Define the Action in a Controller:**
+   ```csharp
+   public IActionResult DisplayMessage()
+   {
+       return PartialView("_MessagePartial", "Hello from Child Action!");
+   }
+   ```
+
+2. **Invoke the Action in a View:**
+   ```html
+   @Html.Action("DisplayMessage", "Home")
+   ```
+
+3. **Output from `_MessagePartial.cshtml`:**
+   ```html
+   <div>
+       @Model
+   </div>
+   ```
 
 ---
 
