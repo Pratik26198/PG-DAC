@@ -392,4 +392,806 @@ The **Intermediate Language Disassembler (ILDASM)** is a tool provided by the .N
    ```
 
 ---
+# Console Applications and Class Libraries in .NET Core
 
+## **Console Applications**
+
+### What are Console Applications?
+Console applications are command-line programs that run in a console window (Command Prompt, PowerShell, or Terminal). These applications interact with users through text input and output.
+
+### Features of Console Applications:
+1. Lightweight and straightforward.
+2. Typically used for utility programs or testing purposes.
+3. No graphical user interface (GUI).
+
+### Code Example:
+```csharp
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to Console Application!");
+        Console.Write("Enter your name: ");
+        string name = Console.ReadLine();
+        Console.WriteLine($"Hello, {name}!");
+    }
+}
+```
+
+### How to Create a Console Application in .NET Core:
+1. Open a terminal.
+2. Run the following commands:
+   ```bash
+   dotnet new console -n MyConsoleApp
+   cd MyConsoleApp
+   dotnet run
+   ```
+
+---
+
+## **Class Libraries**
+
+### What are Class Libraries?
+Class libraries are reusable sets of code (usually in the form of `.dll` files) that can be referenced by multiple projects.
+
+### Features of Class Libraries:
+1. Promotes code reuse.
+2. Provides encapsulation and modular design.
+3. Does not have an entry point (`Main` method).
+
+### Code Example:
+```csharp
+namespace MyLibrary
+{
+    public class Greeting
+    {
+        public string SayHello(string name)
+        {
+            return $"Hello, {name}!";
+        }
+    }
+}
+```
+
+### How to Create a Class Library in .NET Core:
+1. Open a terminal.
+2. Run the following commands:
+   ```bash
+   dotnet new classlib -n MyClassLibrary
+   ```
+3. Reference the library in another project using:
+   ```bash
+   dotnet add reference ../MyClassLibrary/MyClassLibrary.csproj
+   ```
+
+---
+
+# C# Basics
+
+### Key Elements of C#:
+1. **Case-Sensitive**: C# distinguishes between uppercase and lowercase.
+2. **Object-Oriented**: Supports principles like encapsulation, inheritance, and polymorphism.
+3. **Type-Safe**: Prevents operations on incompatible data types.
+
+### Basic Structure of a C# Program:
+```csharp
+using System;
+
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+        }
+    }
+}
+```
+
+---
+
+# Project References and Using
+
+### What is a Project Reference?
+A project reference links one project to another, allowing the referencing project to use the classes, methods, and other components of the referenced project.
+
+### Adding a Reference:
+```bash
+dotnet add reference ../MyClassLibrary/MyClassLibrary.csproj
+```
+
+### Using Directive:
+The `using` directive imports namespaces into your program, allowing you to access their classes and methods.
+
+Example:
+```csharp
+using MyLibrary;
+
+class Program
+{
+    static void Main()
+    {
+        var greeting = new Greeting();
+        Console.WriteLine(greeting.SayHello("Alice"));
+    }
+}
+```
+
+---
+
+# Classes in C#
+
+### Definition:
+A class is a blueprint for creating objects. It encapsulates data and behavior.
+
+### Example:
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public void Introduce()
+    {
+        Console.WriteLine($"Hi, I am {Name} and I am {Age} years old.");
+    }
+}
+```
+
+---
+
+# Data Types in .NET and CTS Equivalents
+
+| **C# Type**      | **CTS Equivalent**       | **Description**                     |
+|------------------|--------------------------|-------------------------------------|
+| `int`            | `System.Int32`           | 32-bit signed integer               |
+| `string`         | `System.String`          | Sequence of Unicode characters      |
+| `bool`           | `System.Boolean`         | Represents true or false            |
+| `double`         | `System.Double`          | 64-bit floating-point number        |
+| `object`         | `System.Object`          | Base type for all objects           |
+
+---
+
+# Methods in C#
+
+### **Method Overloading**
+Method overloading allows multiple methods with the same name but different parameters.
+
+Example:
+```csharp
+public class Calculator
+{
+    public int Add(int a, int b) => a + b;
+    public double Add(double a, double b) => a + b;
+}
+```
+
+### **Optional Parameters**
+Allows parameters to have default values if not provided by the caller.
+
+Example:
+```csharp
+public void PrintMessage(string message = "Default Message")
+{
+    Console.WriteLine(message);
+}
+```
+
+### **Named Parameters and Positional Parameters**
+Named parameters allow specifying arguments by name.
+
+Example:
+```csharp
+PrintMessage(message: "Hello!");
+```
+
+### **Using `params`**
+Allows passing a variable number of arguments to a method.
+
+Example:
+```csharp
+public void PrintNumbers(params int[] numbers)
+{
+    foreach (var number in numbers)
+    {
+        Console.WriteLine(number);
+    }
+}
+```
+
+### **Local Functions**
+A method defined inside another method. Useful for helper logic.
+
+Example:
+```csharp
+public void ProcessData()
+{
+    void Log(string message)
+    {
+        Console.WriteLine(message);
+    }
+
+    Log("Processing started...");
+    // Processing logic
+    Log("Processing completed.");
+}
+```
+
+---
+
+# Properties in C#
+
+### **Get and Set Accessors**
+Properties in C# are used to encapsulate fields and provide controlled access to them through `get` and `set` accessors.
+
+Example:
+```csharp
+public class Person
+{
+    private string name;
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person person = new Person();
+        person.Name = "Alice";
+        Console.WriteLine(person.Name);
+    }
+}
+```
+
+### **Readonly Properties**
+Readonly properties allow data to be read but not modified.
+
+Example:
+```csharp
+public class Circle
+{
+    public double Radius { get; }
+
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Circle circle = new Circle(10);
+        Console.WriteLine(circle.Radius);
+    }
+}
+```
+
+### **Using Property Accessors to Create Readonly Properties**
+You can use a `get` accessor without a `set` to make a property readonly.
+
+Example:
+```csharp
+public class Square
+{
+    public double Side { get; }
+    public double Area => Side * Side; // Read-only property using expression body
+
+    public Square(double side)
+    {
+        Side = side;
+    }
+}
+```
+
+---
+
+# Constructors
+
+### **What are Constructors?**
+Constructors are special methods used to initialize objects. They are called automatically when an object is created.
+
+### **Features of Constructors:**
+- Have the same name as the class.
+- Do not have a return type.
+
+Example:
+```csharp
+public class Car
+{
+    public string Model { get; }
+
+    public Car(string model)
+    {
+        Model = model;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Car car = new Car("Tesla");
+        Console.WriteLine(car.Model);
+    }
+}
+```
+
+---
+
+# Object Initializer
+
+Object initializers allow you to set property values when creating an object without using a constructor explicitly.
+
+Example:
+```csharp
+public class Book
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Book book = new Book
+        {
+            Title = "1984",
+            Author = "George Orwell"
+        };
+        Console.WriteLine($"{book.Title} by {book.Author}");
+    }
+}
+```
+
+---
+
+# Destructors
+
+### **What is a Destructor?**
+Destructors are methods used to clean up resources before an object is garbage collected. They have the same name as the class but are prefixed with a `~` symbol.
+
+### **Key Points:**
+- Called automatically when the object is no longer accessible.
+- Cannot have parameters or be called explicitly.
+
+Example:
+```csharp
+public class Resource
+{
+    ~Resource()
+    {
+        Console.WriteLine("Destructor called to release resources.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Resource resource = new Resource();
+    }
+}
+```
+
+---
+
+# Discussion on IDisposable
+
+### **What is IDisposable?**
+The `IDisposable` interface provides a mechanism for releasing unmanaged resources manually. It is commonly used with the `using` statement to ensure proper cleanup.
+
+### **Implementing IDisposable**
+To implement `IDisposable`, you need to define the `Dispose` method.
+
+Example:
+```csharp
+public class FileManager : IDisposable
+{
+    private bool disposed = false;
+
+    public void OpenFile()
+    {
+        Console.WriteLine("File opened.");
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
+        {
+            if (disposing)
+            {
+                // Release managed resources here
+            }
+
+            // Release unmanaged resources here
+            disposed = true;
+        }
+    }
+
+    ~FileManager()
+    {
+        Dispose(false);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        using (FileManager manager = new FileManager())
+        {
+            manager.OpenFile();
+        }
+    }
+}
+```
+
+### **Using `using` Statement**
+The `using` statement ensures the `Dispose` method is called automatically.
+
+Example:
+```csharp
+using (FileManager manager = new FileManager())
+{
+    manager.OpenFile();
+}
+```
+
+---
+# Static Members of a Class
+
+### **Static Fields**
+Static fields are shared among all instances of a class. They belong to the class itself rather than any specific instance.
+
+#### Example:
+```csharp
+public class Counter
+{
+    public static int Count = 0;
+
+    public Counter()
+    {
+        Count++;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Counter c1 = new Counter();
+        Counter c2 = new Counter();
+        Console.WriteLine(Counter.Count); // Output: 2
+    }
+}
+```
+
+---
+
+### **Static Methods**
+Static methods can be called without creating an instance of the class.
+
+#### Example:
+```csharp
+public class MathUtility
+{
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        int result = MathUtility.Add(5, 10);
+        Console.WriteLine(result); // Output: 15
+    }
+}
+```
+
+---
+
+### **Static Properties**
+Static properties provide controlled access to static fields.
+
+#### Example:
+```csharp
+public class Configuration
+{
+    private static string applicationName = "MyApp";
+
+    public static string ApplicationName
+    {
+        get { return applicationName; }
+        set { applicationName = value; }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Configuration.ApplicationName);
+        Configuration.ApplicationName = "NewApp";
+        Console.WriteLine(Configuration.ApplicationName);
+    }
+}
+```
+
+---
+
+### **Static Constructors**
+Static constructors initialize static fields or perform actions that only need to occur once.
+
+#### Example:
+```csharp
+public class Logger
+{
+    public static string LogPath;
+
+    static Logger()
+    {
+        LogPath = "DefaultPath";
+        Console.WriteLine("Static constructor called.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Logger.LogPath);
+    }
+}
+```
+
+---
+
+# Static Classes
+
+### **What are Static Classes?**
+Static classes cannot be instantiated and contain only static members. They are used for grouping related methods and properties.
+
+#### Example:
+```csharp
+public static class MathHelper
+{
+    public static int Multiply(int a, int b)
+    {
+        return a * b;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(MathHelper.Multiply(3, 4));
+    }
+}
+```
+
+---
+
+# Static Local Functions
+
+Static local functions are defined inside a method and cannot access instance members of the containing class.
+
+#### Example:
+```csharp
+class Program
+{
+    static void Main()
+    {
+        int result = AddNumbers(5, 10);
+        Console.WriteLine(result);
+
+        static int AddNumbers(int a, int b)
+        {
+            return a + b;
+        }
+    }
+}
+```
+
+---
+
+# Inheritance
+
+### **Access Specifiers**
+Access specifiers control the visibility of members in a class hierarchy.
+
+| **Access Specifier** | **Description**                                      |
+|-----------------------|-----------------------------------------------------|
+| `public`             | Accessible everywhere.                              |
+| `protected`          | Accessible in the same class and derived classes.   |
+| `private`            | Accessible only within the same class.              |
+| `internal`           | Accessible within the same assembly.                |
+| `protected internal` | Accessible within the same assembly or derived classes. |
+
+---
+
+### **Constructors in a Hierarchy**
+Constructors in a base class are called before those in the derived class.
+
+#### Example:
+```csharp
+public class Animal
+{
+    public Animal()
+    {
+        Console.WriteLine("Animal constructor");
+    }
+}
+
+public class Dog : Animal
+{
+    public Dog()
+    {
+        Console.WriteLine("Dog constructor");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Dog dog = new Dog();
+    }
+}
+```
+
+---
+
+### **Overloading in Derived Class**
+Derived classes can have overloaded methods with different parameter lists.
+
+#### Example:
+```csharp
+public class BaseClass
+{
+    public void Print(string message)
+    {
+        Console.WriteLine(message);
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public void Print(string message, int number)
+    {
+        Console.WriteLine($"{message} - {number}");
+    }
+}
+```
+
+---
+
+### **Hiding Members with `new`**
+The `new` keyword hides a member of the base class.
+
+#### Example:
+```csharp
+public class BaseClass
+{
+    public void Display()
+    {
+        Console.WriteLine("Base Display");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public new void Display()
+    {
+        Console.WriteLine("Derived Display");
+    }
+}
+```
+
+---
+
+### **Overriding Members**
+The `override` keyword is used to redefine a virtual method in a derived class.
+
+#### Example:
+```csharp
+public class BaseClass
+{
+    public virtual void Greet()
+    {
+        Console.WriteLine("Hello from BaseClass");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void Greet()
+    {
+        Console.WriteLine("Hello from DerivedClass");
+    }
+}
+```
+
+---
+
+### **Sealed Methods**
+The `sealed` keyword prevents further overriding of a method.
+
+#### Example:
+```csharp
+public class BaseClass
+{
+    public virtual void Show()
+    {
+        Console.WriteLine("Base Show");
+    }
+}
+
+public class DerivedClass : BaseClass
+{
+    public sealed override void Show()
+    {
+        Console.WriteLine("Derived Show");
+    }
+}
+```
+
+---
+
+### **Abstract Classes and Methods**
+Abstract classes cannot be instantiated and can include abstract methods that must be implemented in derived classes.
+
+#### Example:
+```csharp
+public abstract class Shape
+{
+    public abstract double GetArea();
+}
+
+public class Rectangle : Shape
+{
+    public double Width { get; set; }
+    public double Height { get; set; }
+
+    public override double GetArea()
+    {
+        return Width * Height;
+    }
+}
+```
+
+---
+
+### **Sealed Classes**
+A sealed class cannot be inherited.
+
+#### Example:
+```csharp
+public sealed class FinalClass
+{
+    public void Display()
+    {
+        Console.WriteLine("This is a sealed class.");
+    }
+}
+```
