@@ -4301,9 +4301,12 @@ export default TodoApp;
 | react-redux | Library for connecting Redux with React         |
 
 ---
-
-
-
+| Dialog Box       | Purpose                                 | Buttons Available          | Returns                             |
+|-----------------------|---------------------------------------------|---------------------------------|-----------------------------------------|
+| *alert()*         | Displays a simple alert message.           | OK                              | undefined                             |
+| *confirm()*       | Asks the user to confirm an action.         | OK, Cancel                      | true (OK) or false (Cancel)         |
+| *prompt()*        | Prompts the user for input.                | OK, Cancel                      | User input (string) or null (Cancel)  |
+---
 
 
 
