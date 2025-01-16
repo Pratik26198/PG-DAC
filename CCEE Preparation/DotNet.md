@@ -4046,6 +4046,25 @@ catch (Exception ex)
 
 ### **Filters and Custom Action Filters**
 - Filters allow pre- and post-action processing.
+- Filters in ASP.NET MVC provide a way to execute logic before or after an action method is called. They enable common functionalities like logging, authentication, and error handling to be centralized and reused.
+
+  #### **Custom Action Filters**
+Custom action filters allow you to define your logic for pre- or post-action execution.
+
+#### **Creating a Custom Action Filter**
+Custom action filters inherit from `ActionFilterAttribute`.
+
+## **Filter Execution Order**
+Filters execute in the following order:
+1. Authorization Filters
+2. Action Filters
+3. Result Filters
+4. Exception Filters
+
+### **Execution Flow Diagram**
+```plaintext
+Request → Authorization Filter → Action Filter (Before) → Action Method → Action Filter (After) → Result Filter → Response
+```
 
 #### **Example:**
 ```csharp
@@ -4063,8 +4082,13 @@ public IActionResult Index()
     return View();
 }
 ```
+## **Summary**
+- Filters streamline repetitive logic like logging, authentication, and error handling.
+- Custom filters allow you to centralize common functionalities.
+- Filters can be applied globally, at the controller level, or on specific actions, ensuring flexibility and reusability.
 
 ---
+
 # ASP.NET MVC Security and Entity Framework
 
 ## **MVC Security**
