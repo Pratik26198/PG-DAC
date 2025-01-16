@@ -242,4 +242,154 @@ public IActionResult AdminPage()
 ```
 
 ---
+# .NET Framework, .NET Core, Mono, Xamarin Differences
+
+## Key Differences
+
+| Feature                | .NET Framework                       | .NET Core                           | Mono                               | Xamarin                            |
+|------------------------|--------------------------------------|-------------------------------------|------------------------------------|------------------------------------|
+| **Purpose**            | Windows-based applications           | Cross-platform, modern applications | Cross-platform, lightweight CLR   | Mobile app development (iOS, Android) |
+| **Platform Support**   | Windows                              | Windows, macOS, Linux               | Cross-platform                     | Mobile devices                     |
+| **Performance**        | Moderate                             | High                                | Moderate                          | Optimized for mobile              |
+| **Open Source**        | No                                   | Yes                                 | Yes                               | Yes                                |
+| **Deployment Model**   | System-wide installation             | Side-by-side deployment             | Embedded in apps                  | Embedded in apps                  |
+
+## Architecture Diagram
+
+```
+.NET Ecosystem:
++-------------------------+
+|   Applications          |
+|   - Desktop             |
+|   - Mobile              |
+|   - Cloud               |
+|   - IoT                 |
++-------------------------+
+|  .NET Framework | .NET Core | Xamarin | Mono |
++-------------------------+
+|        CLR and BCL       |
++-------------------------+
+|   Platform-Specific APIs |
++-------------------------+
+```
+
+---
+
+# Versions of .NET Framework
+
+## Milestones in .NET Framework Versions
+
+| **Version** | **Release Year** | **Key Features**                                         |
+|-------------|------------------|---------------------------------------------------------|
+| 1.0         | 2002             | Initial release, CLR, ASP.NET, ADO.NET                  |
+| 2.0         | 2005             | Generics, Nullable types                                |
+| 3.0         | 2006             | WPF, WCF, WWF, CardSpace                                |
+| 3.5         | 2007             | LINQ, Lambda Expressions                               |
+| 4.0         | 2010             | Dynamic Language Runtime, PLINQ                        |
+| 4.5         | 2012             | Async Programming, .NET for Windows Store apps         |
+| 4.7         | 2017             | .NET Standard support, Performance improvements        |
+| 4.8         | 2019             | Last full version of the Framework                     |
+
+---
+
+# Managed and Unmanaged Code
+
+### Managed Code
+- Code executed under the control of the CLR.
+- Benefits:
+  - Garbage collection.
+  - Type safety.
+  - Exception handling.
+
+**Example:**
+```csharp
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello, Managed Code!");
+    }
+}
+```
+
+### Unmanaged Code
+- Code executed outside the CLR environment.
+- Typically written in languages like C or C++.
+- Requires explicit memory management.
+
+**Example:**
+```c
+#include <stdio.h>
+int main()
+{
+    printf("Hello, Unmanaged Code!");
+    return 0;
+}
+```
+
+| **Feature**       | **Managed Code**                        | **Unmanaged Code**                    |
+|-------------------|-----------------------------------------|---------------------------------------|
+| **Memory**        | Managed by CLR (Garbage Collection)     | Explicitly managed by the programmer  |
+| **Platform**      | Cross-platform (via CLR)                | Platform-dependent                   |
+| **Development**   | Simplified with .NET features           | Requires low-level programming        |
+
+---
+
+# Introduction to Visual Studio
+
+### What is Visual Studio?
+Visual Studio is an Integrated Development Environment (IDE) by Microsoft, providing tools for developing, debugging, and deploying .NET applications.
+
+## Features
+1. **Code Editor**: Supports IntelliSense and code navigation.
+2. **Debugger**: Built-in debugging tools for breakpoints and watch variables.
+3. **Designer**: GUI design tools for Windows and web apps.
+4. **Integrated Testing**: Unit testing and test-driven development support.
+5. **Extensions**: Integration with Git, NuGet, and more.
+
+### Common Workflows
+1. Create a new project.
+2. Write and edit code.
+3. Debug and test the application.
+4. Build and deploy the project.
+
+---
+
+# Using ILDASM
+
+### What is ILDASM?
+The **Intermediate Language Disassembler (ILDASM)** is a tool provided by the .NET SDK for viewing the contents of .NET assemblies.
+
+### Features
+- View the **manifest**, **metadata**, and **IL code**.
+- Analyze **type definitions** and **resources**.
+
+### Steps to Use ILDASM
+1. Open **Developer Command Prompt**.
+2. Run `ILDASM` command.
+3. Load the `.exe` or `.dll` file into the tool.
+
+### Example: Viewing IL Code
+1. Compile the following C# code:
+    ```csharp
+    public class Program
+    {
+        public static void Main()
+        {
+            System.Console.WriteLine("Hello, ILDASM!");
+        }
+    }
+    ```
+2. Use `ILDASM` to inspect the generated assembly:
+   ```plaintext
+   .method public hidebysig static void Main() cil managed
+   {
+       .entrypoint
+       ldstr "Hello, ILDASM!"
+       call void [mscorlib]System.Console::WriteLine(string)
+       ret
+   }
+   ```
+
+---
 
