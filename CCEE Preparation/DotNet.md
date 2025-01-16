@@ -1121,6 +1121,21 @@ public class DerivedClass : BaseClass
         Console.WriteLine("Derived Display");
     }
 }
+class Program
+{
+    static void Main()
+    {
+        BaseClass baseObj = new BaseClass();
+        baseObj.Display(); // Calls BaseClass.Display
+
+        DerivedClass derivedObj = new DerivedClass();
+        derivedObj.Display(); // Calls DerivedClass.Display
+
+        BaseClass baseRefDerived = new DerivedClass();
+        baseRefDerived.Display(); // Calls BaseClass.Display due to method hiding
+    }
+}
+
 ```
 
 ---
