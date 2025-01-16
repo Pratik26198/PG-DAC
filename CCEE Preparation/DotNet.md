@@ -3427,8 +3427,8 @@ Strongly typed views bind directly to a model.
 ---
 
 ### **Using Scaffold Templates**
--Scaffolding generates CRUD code based on the model.
--The scaffolder can generate the controller, views (Index, Create, Edit, Details, Delete), and routing setup.
+- Scaffolding generates CRUD code based on the model.
+- The scaffolder can generate the controller, views (Index, Create, Edit, Details, Delete), and routing setup.
 
 #### **Steps:**
 1. Right-click on the `Controllers` folder.
