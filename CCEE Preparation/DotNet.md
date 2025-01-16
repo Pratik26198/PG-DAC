@@ -3170,3 +3170,1436 @@ class Program
 ```
 
 ---
+
+# ASP.NET MVC Core Overview
+
+## **Introduction to ASP.NET MVC Core**
+ASP.NET Core MVC is a framework for building modern, cloud-based, and high-performance web applications. It adheres to the Model-View-Controller (MVC) design pattern, enabling a clear separation of concerns for maintainability and scalability.
+
+---
+
+## **Architecture of an ASP.NET MVC Application**
+
+The architecture of an ASP.NET MVC application consists of three main components:
+
+1. **Model**:
+   - Represents the application's data and business logic.
+   - Handles data retrieval and storage, often interacting with a database.
+
+2. **View**:
+   - Responsible for rendering the user interface.
+   - Uses Razor syntax to combine HTML with C# logic.
+
+3. **Controller**:
+   - Acts as the intermediary between the Model and the View.
+   - Handles user input, updates the Model, and returns the appropriate View.
+
+### **Flow Diagram:**
+```plaintext
+User Request → Controller → Model → Database → Model → Controller → View → User Response
+```
+
+---
+
+## **Understanding Folder Structures and Configuration Files**
+
+### **Folder Structure:**
+| **Folder/File**      | **Purpose**                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| `Controllers`        | Contains controller classes that handle HTTP requests.                     |
+| `Models`             | Contains the application's data and business logic.                        |
+| `Views`              | Contains Razor files for UI rendering.                                     |
+| `wwwroot`            | Holds static files like CSS, JavaScript, and images.                       |
+| `Program.cs`         | Configures the app's startup logic and middleware.                         |
+| `appsettings.json`   | Stores application settings like database connection strings.              |
+
+### **Configuration Files:**
+- **`appsettings.json`**: Used for configuration, such as database connections and logging.
+- **`launchSettings.json`**: Defines profiles for debugging and running the application.
+
+---
+
+## **Understanding Controllers and Actions**
+
+### **Creating a Controller**
+A controller is a class that handles user requests and returns responses. Controllers inherit from the `Controller` base class.
+
+#### **Example:**
+```csharp
+using Microsoft.AspNetCore.Mvc;
+
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+```
+
+### **How Actions Are Invoked**
+Actions are public methods within a controller. The routing pattern (`/Controller/Action/ID`) determines which action is invoked.
+
+#### **Example URL:**
+```
+http://localhost/Home/Index
+```
+This invokes the `Index` action in the `HomeController`.
+
+### **Attributes: HttpGet, HttpPost, NoAction**
+- **`HttpGet`**: Indicates the action handles GET requests.
+- **`HttpPost`**: Indicates the action handles POST requests.
+- **`NonAction`**: Marks a method as not callable through routing.
+
+#### **Example:**
+```csharp
+public class AccountController : Controller
+{
+    [HttpGet]
+    public IActionResult Login() => View();
+
+    [HttpPost]
+    public IActionResult Login(string username, string password)
+    {
+        // Handle login
+        return RedirectToAction("Index", "Home");
+    }
+
+    [NonAction]
+    public void HelperMethod() { }
+}
+```
+
+### **Running an Action Result**
+An action result determines the type of response. Common action results include:
+- `ViewResult`: Returns a view.
+- `JsonResult`: Returns JSON data.
+- `RedirectResult`: Redirects to another URL.
+
+#### **Example:**
+```csharp
+public IActionResult Details()
+{
+    return Json(new { Name = "Alice", Age = 25 });
+}
+```
+
+---
+
+## **Understanding Views and Models**
+
+### **Creating Models and ViewModels**
+- **Model**: Represents data and business logic.
+- **ViewModel**: Combines data from multiple models for use in a view.
+
+#### **Example Model:**
+```csharp
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+```
+
+#### **Example ViewModel:**
+```csharp
+public class ProductViewModel
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string Category { get; set; }
+}
+```
+
+---
+
+### **Creating Razor Views**
+Razor views use `.cshtml` files to combine HTML and C# logic.
+
+#### **Example View:**
+```html
+@model Product
+
+<h1>@Model.Name</h1>
+<p>Price: @Model.Price</p>
+```
+
+---
+
+### **HTML Helper Functions**
+HTML helpers generate HTML elements dynamically.
+
+#### **Example:**
+```csharp
+@Html.TextBoxFor(model => model.Name)
+@Html.ValidationMessageFor(model => model.Name)
+```
+
+---
+
+### **Understanding ViewBag**
+`ViewBag` is a dynamic object used to pass data from the controller to the view.
+
+#### **Example:**
+```csharp
+// Controller
+public IActionResult Index()
+{
+    ViewBag.Message = "Welcome to ASP.NET MVC!";
+    return View();
+}
+
+// View
+<h1>@ViewBag.Message</h1>
+```
+
+---
+
+### **Validation Using Data Annotations**
+Data annotations define validation rules directly in the model.
+
+#### **Example:**
+```csharp
+public class Product
+{
+    [Required]
+    public string Name { get; set; }
+
+    [Range(0, 1000)]
+    public decimal Price { get; set; }
+}
+```
+
+---
+
+### **Client-Side and Server-Side Validation**
+- **Client-Side Validation**: Uses JavaScript to validate data before submission.
+- **Server-Side Validation**: Ensures data integrity on the server.
+
+#### **Example:**
+```csharp
+public IActionResult Create(Product product)
+{
+    if (ModelState.IsValid)
+    {
+        // Save to database
+    }
+    return View(product);
+}
+```
+
+---
+
+### **Self-Validated Model**
+Implement `IValidatableObject` for custom validation logic.
+
+#### **Example:**
+```csharp
+public class Product : IValidatableObject
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (Price < 0)
+        {
+            yield return new ValidationResult("Price must be non-negative.");
+        }
+    }
+}
+```
+
+---
+
+### **Creating Strongly Typed Views**
+Strongly typed views bind directly to a model.
+
+#### **Example:**
+```html
+@model Product
+
+<h1>@Model.Name</h1>
+<p>Price: @Model.Price</p>
+```
+
+---
+
+### **Using Scaffold Templates**
+Scaffolding generates CRUD code based on the model.
+
+#### **Steps:**
+1. Right-click on the `Controllers` folder.
+2. Select "Add" → "Controller".
+3. Choose a scaffold template and the corresponding model.
+
+---
+
+### **CRUD Operations Using Model**
+CRUD operations allow managing data effectively.
+
+#### **Examples:**
+- **Create:**
+  ```csharp
+  public IActionResult Create(Product product)
+  {
+      _context.Products.Add(product);
+      _context.SaveChanges();
+      return RedirectToAction("Index");
+  }
+  ```
+
+- **Read:**
+  ```csharp
+  public IActionResult Index()
+  {
+      var products = _context.Products.ToList();
+      return View(products);
+  }
+  ```
+
+- **Update:**
+  ```csharp
+  public IActionResult Edit(Product product)
+  {
+      _context.Products.Update(product);
+      _context.SaveChanges();
+      return RedirectToAction("Index");
+  }
+  ```
+
+- **Delete:**
+  ```csharp
+  public IActionResult Delete(int id)
+  {
+      var product = _context.Products.Find(id);
+      _context.Products.Remove(product);
+      _context.SaveChanges();
+      return RedirectToAction("Index");
+  }
+  ```
+
+---
+# ASP.NET MVC Core - Advanced Topics
+
+## **MVC State Management**
+
+### **ViewBag, TempData, Session, and Application**
+
+#### **ViewBag**
+- Dynamic object for passing data from controller to view.
+- Data persists for a single request.
+
+#### **Example:**
+```csharp
+public IActionResult Index()
+{
+    ViewBag.Message = "Hello, ViewBag!";
+    return View();
+}
+```
+
+#### **TempData**
+- Stores data temporarily between requests.
+- Based on `IActionContextAccessor`.
+
+#### **Example:**
+```csharp
+public IActionResult Index()
+{
+    TempData["Message"] = "Hello, TempData!";
+    return RedirectToAction("SecondAction");
+}
+
+public IActionResult SecondAction()
+{
+    ViewBag.Message = TempData["Message"];
+    return View();
+}
+```
+
+#### **Session**
+- Stores user data across multiple requests.
+- Data is stored server-side.
+
+#### **Example:**
+```csharp
+HttpContext.Session.SetString("User", "Alice");
+string user = HttpContext.Session.GetString("User");
+```
+
+#### **Application**
+- Global storage for all users across the application lifetime.
+- Less commonly used in modern applications.
+
+---
+
+### **Cookies and QueryString**
+
+#### **Cookies**
+- Small files stored on the client browser.
+
+#### **Example:**
+```csharp
+Response.Cookies.Append("User", "Alice");
+string user = Request.Cookies["User"];
+```
+
+#### **QueryString**
+- Passes data in the URL.
+
+#### **Example:**
+```csharp
+public IActionResult Index(string name)
+{
+    return Content($"Hello, {name}");
+}
+```
+Access via: `http://localhost/Home/Index?name=Alice`
+
+---
+
+## **MVC Module**
+
+### **Partial Views**
+- Reusable view components.
+- Rendered within a parent view.
+
+#### **Example:**
+```html
+@Html.Partial("_PartialView")
+```
+
+---
+
+### **Action Method and Child Action**
+- An action method handles HTTP requests.
+- Child actions are invoked within a view using `Html.Action`.
+
+---
+
+## **Data Management with ADO.NET**
+
+### **Microsoft.Data.SqlClient**
+A library to interact with SQL Server.
+
+---
+
+### **Core ADO.NET Objects**
+
+#### **Connection Object**
+- Manages the connection to the database.
+
+#### **Command Object**
+- Executes SQL queries or stored procedures.
+
+#### **DataReader**
+- Reads data in a forward-only, read-only manner.
+
+#### **DataAdapter, DataSet, and DataTable**
+- `DataAdapter`: Bridges the data source and `DataSet`.
+- `DataSet`: In-memory representation of data.
+- `DataTable`: Represents a single table of data.
+
+#### **Example:**
+```csharp
+using Microsoft.Data.SqlClient;
+
+string connectionString = "YourConnectionStringHere";
+using (SqlConnection connection = new SqlConnection(connectionString))
+{
+    connection.Open();
+    SqlCommand command = new SqlCommand("SELECT * FROM Products", connection);
+    SqlDataReader reader = command.ExecuteReader();
+
+    while (reader.Read())
+    {
+        Console.WriteLine(reader["Name"]);
+    }
+}
+```
+
+---
+
+### **Asynchronous Execution**
+
+#### **Example:**
+```csharp
+using Microsoft.Data.SqlClient;
+
+string connectionString = "YourConnectionStringHere";
+
+using (SqlConnection connection = new SqlConnection(connectionString))
+{
+    await connection.OpenAsync();
+    SqlCommand command = new SqlCommand("SELECT * FROM Products", connection);
+    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+    while (await reader.ReadAsync())
+    {
+        Console.WriteLine(reader["Name"]);
+    }
+}
+```
+
+---
+
+## **Routing & Request Life Cycle**
+
+### **Routing Engine and Routing Table**
+- The routing engine maps incoming requests to controllers and actions.
+- Routes are stored in the routing table.
+
+---
+
+### **RouteConfig File**
+Defines the default routing pattern:
+```csharp
+endpoints.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+```
+
+---
+
+### **404 Error Handling**
+- Occurs when a resource is not found.
+- Handle with middleware or custom error pages.
+
+---
+
+### **Attribute Routing**
+- Allows defining routes directly on controllers and actions.
+
+#### **Example:**
+```csharp
+[Route("api/products")]
+public IActionResult GetProducts()
+{
+    return View();
+}
+```
+
+---
+
+## **Layouts, Bundle, and Minification**
+
+### **Creating Layouts**
+- Layouts provide a consistent structure for views.
+
+#### **Example:**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>
+```
+
+---
+
+### **Bundling and Minification**
+- Bundling: Combines multiple files into one.
+- Minification: Reduces file size by removing unnecessary characters.
+
+#### **Example BundleConfig:**
+```csharp
+bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+    "~/Scripts/jquery-{version}.js",
+    "~/Scripts/bootstrap.js"));
+```
+
+---
+
+### **Custom Helper Function**
+Reusable utility methods for views.
+
+#### **Example:**
+```csharp
+public static class CustomHelpers
+{
+    public static IHtmlContent DisplayDate(this IHtmlHelper htmlHelper, DateTime date)
+    {
+        return new HtmlString($"<p>{date.ToString("MMMM dd, yyyy")}</p>");
+    }
+}
+```
+
+Usage:
+```html
+@Html.DisplayDate(DateTime.Now)
+```
+
+---
+
+### **Asynchronous Actions**
+- Use `async` and `await` for non-blocking I/O operations.
+
+#### **Example:**
+```csharp
+public async Task<IActionResult> GetDataAsync()
+{
+    var data = await GetDataFromDbAsync();
+    return View(data);
+}
+```
+
+---
+
+### **Error Handling in MVC with Log Entry**
+Log errors using frameworks like Serilog or NLog.
+
+#### **Example:**
+```csharp
+try
+{
+    // Code
+}
+catch (Exception ex)
+{
+    _logger.LogError(ex, "An error occurred");
+    return View("Error");
+}
+```
+
+---
+
+### **Filters and Custom Action Filters**
+- Filters allow pre- and post-action processing.
+
+#### **Example:**
+```csharp
+public class LogActionFilter : ActionFilterAttribute
+{
+    public override void OnActionExecuting(ActionExecutingContext context)
+    {
+        Console.WriteLine("Action is executing");
+    }
+}
+
+[LogActionFilter]
+public IActionResult Index()
+{
+    return View();
+}
+```
+
+---
+# ASP.NET MVC Security and Entity Framework
+
+## **MVC Security**
+
+### **Using `Authorize` and `AllowAnonymous` Attributes**
+- **`Authorize`**: Restricts access to controllers or actions to authenticated users.
+- **`AllowAnonymous`**: Overrides `Authorize` to allow access to specific actions for all users.
+
+#### **Example:**
+```csharp
+[Authorize]
+public class AccountController : Controller
+{
+    public IActionResult Dashboard()
+    {
+        return View();
+    }
+
+    [AllowAnonymous]
+    public IActionResult Login()
+    {
+        return View();
+    }
+}
+```
+
+---
+
+### **Implementing Forms-Based Authentication**
+Forms-based authentication validates users by matching credentials against a data source (e.g., a database).
+
+#### **Steps to Implement:**
+1. Configure authentication in `Startup.cs`:
+   ```csharp
+   services.AddAuthentication("CookieAuthentication")
+       .AddCookie("CookieAuthentication", options =>
+       {
+           options.LoginPath = "/Account/Login";
+       });
+   ```
+
+2. Sign in a user:
+   ```csharp
+   public async Task<IActionResult> Login(string username, string password)
+   {
+       if (IsValidUser(username, password))
+       {
+           var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
+           var identity = new ClaimsIdentity(claims, "CookieAuthentication");
+           var principal = new ClaimsPrincipal(identity);
+
+           await HttpContext.SignInAsync("CookieAuthentication", principal);
+           return RedirectToAction("Dashboard");
+       }
+       return View();
+   }
+   ```
+
+3. Sign out a user:
+   ```csharp
+   public async Task<IActionResult> Logout()
+   {
+       await HttpContext.SignOutAsync("CookieAuthentication");
+       return RedirectToAction("Login");
+   }
+   ```
+
+---
+
+### **Preventing Forgery Attacks Using `AntiForgeryToken`**
+- `AntiForgeryToken` helps prevent Cross-Site Request Forgery (CSRF) attacks.
+
+#### **Example:**
+```csharp
+// View
+<form asp-action="SubmitData" method="post">
+    @Html.AntiForgeryToken()
+    <input type="text" name="data" />
+    <button type="submit">Submit</button>
+</form>
+
+// Controller
+[ValidateAntiForgeryToken]
+[HttpPost]
+public IActionResult SubmitData(string data)
+{
+    // Process data
+    return View();
+}
+```
+
+---
+
+### **Preventing Cross-Site Scripting (XSS) Attacks**
+- Use Razor’s automatic encoding for user inputs.
+- Encode strings manually using `HtmlEncoder`.
+
+#### **Example:**
+```csharp
+@Html.Raw(HtmlEncoder.Default.Encode(userInput))
+```
+
+---
+
+## **Entity Framework (EF)**
+
+### **Introduction to EF**
+Entity Framework is an ORM (Object-Relational Mapper) that allows developers to interact with databases using .NET objects.
+
+#### **Key Features:**
+- Eliminates the need to write SQL queries manually.
+- Supports LINQ for querying data.
+
+---
+
+### **Different Approaches in EF**
+1. **Database First**:
+   - Start with an existing database and generate models from it.
+
+2. **Model First**:
+   - Design the database visually and generate both database and models.
+
+3. **Code First**:
+   - Write C# classes first, and EF generates the database schema.
+
+---
+
+### **Using Code First Approach**
+#### **Steps to Implement:**
+1. Define a model:
+   ```csharp
+   public class Product
+   {
+       public int Id { get; set; }
+       public string Name { get; set; }
+       public decimal Price { get; set; }
+   }
+   ```
+
+2. Define a context:
+   ```csharp
+   public class AppDbContext : DbContext
+   {
+       public DbSet<Product> Products { get; set; }
+
+       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       {
+           optionsBuilder.UseSqlServer("YourConnectionStringHere");
+       }
+   }
+   ```
+
+3. Run migrations to create the database:
+   ```bash
+   dotnet ef migrations add InitialCreate
+   dotnet ef database update
+   ```
+
+---
+
+### **Using Various Data Annotations**
+Data annotations are attributes that define rules and configurations for models.
+
+#### **Example:**
+```csharp
+public class Product
+{
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    public string Name { get; set; }
+
+    [Range(0, 1000)]
+    public decimal Price { get; set; }
+}
+```
+
+---
+
+### **Using Fluent APIs**
+Fluent APIs provide an alternative way to configure models.
+
+#### **Example:**
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Product>()
+        .HasKey(p => p.Id);
+
+    modelBuilder.Entity<Product>()
+        .Property(p => p.Name)
+        .IsRequired();
+}
+```
+
+---
+
+### **Database Migrations**
+Migrations allow incremental updates to the database schema based on model changes.
+
+#### **Commands:**
+- Add Migration:
+  ```bash
+  dotnet ef migrations add MigrationName
+  ```
+- Update Database:
+  ```bash
+  dotnet ef database update
+  ```
+
+---
+
+### **CRUD Operations Using EF**
+#### **Create:**
+```csharp
+using (var context = new AppDbContext())
+{
+    var product = new Product { Name = "Laptop", Price = 1000 };
+    context.Products.Add(product);
+    context.SaveChanges();
+}
+```
+
+#### **Read:**
+```csharp
+using (var context = new AppDbContext())
+{
+    var products = context.Products.ToList();
+    foreach (var product in products)
+    {
+        Console.WriteLine(product.Name);
+    }
+}
+```
+
+#### **Update:**
+```csharp
+using (var context = new AppDbContext())
+{
+    var product = context.Products.FirstOrDefault(p => p.Id == 1);
+    if (product != null)
+    {
+        product.Price = 1200;
+        context.SaveChanges();
+    }
+}
+```
+
+#### **Delete:**
+```csharp
+using (var context = new AppDbContext())
+{
+    var product = context.Products.FirstOrDefault(p => p.Id == 1);
+    if (product != null)
+    {
+        context.Products.Remove(product);
+        context.SaveChanges();
+    }
+}
+```
+
+---
+# ASP.NET MVC Core - Localization and Deployment
+
+## **Localization in MVC**
+Localization enables applications to support multiple languages and regional settings. ASP.NET Core MVC provides built-in support for localization using `IStringLocalizer` and `IHtmlLocalizer`.
+
+---
+
+### **Steps to Implement Localization**
+
+#### **1. Configure Localization in `Startup.cs`**
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddLocalization(options => options.ResourcesPath = "Resources");
+    services.AddControllersWithViews()
+        .AddViewLocalization()
+        .AddDataAnnotationsLocalization();
+
+    services.Configure<RequestLocalizationOptions>(options =>
+    {
+        var supportedCultures = new[] { "en-US", "fr-FR" };
+        options.DefaultRequestCulture = new RequestCulture("en-US");
+        options.SupportedCultures = supportedCultures;
+        options.SupportedUICultures = supportedCultures;
+    });
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    var localizationOptions = app.ApplicationServices
+        .GetService<IOptions<RequestLocalizationOptions>>().Value;
+    app.UseRequestLocalization(localizationOptions);
+
+    app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapDefaultControllerRoute();
+    });
+}
+```
+
+---
+
+#### **2. Create Resource Files**
+- Add a `Resources` folder in the project.
+- Create resource files for each language, e.g., `HomeController.en-US.resx` and `HomeController.fr-FR.resx`.
+- Define key-value pairs for localized strings in these files.
+
+---
+
+#### **3. Use `IStringLocalizer` in Controllers**
+```csharp
+using Microsoft.Extensions.Localization;
+
+public class HomeController : Controller
+{
+    private readonly IStringLocalizer<HomeController> _localizer;
+
+    public HomeController(IStringLocalizer<HomeController> localizer)
+    {
+        _localizer = localizer;
+    }
+
+    public IActionResult Index()
+    {
+        ViewBag.Message = _localizer["WelcomeMessage"];
+        return View();
+    }
+}
+```
+
+---
+
+#### **4. Use Localized Strings in Views**
+```html
+<h1>@ViewBag.Message</h1>
+```
+
+---
+
+## **Deploying ASP.NET MVC Application**
+Deployment involves publishing your application to a server or cloud platform like IIS, Azure, or AWS.
+
+### **Steps to Deploy an ASP.NET MVC Application**
+
+#### **1. Publish the Application**
+1. Right-click on the project in Visual Studio.
+2. Select "Publish...".
+3. Choose a publish target (e.g., Folder, Azure, IIS, or FTP).
+4. Configure the target and publish the application.
+
+---
+
+#### **2. Deploy to IIS**
+1. Install **IIS** and the **ASP.NET Core Hosting Bundle** on the server.
+2. Copy the published files to a folder on the server.
+3. Create a new site in IIS:
+   - Set the physical path to the folder containing the published files.
+   - Configure the binding (e.g., set the port or domain).
+
+#### **3. Verify Deployment**
+1. Start the IIS site.
+2. Open a browser and navigate to the site's URL.
+
+---
+
+#### **4. Deploy to Azure (Optional)**
+1. Create an Azure App Service.
+2. Use Visual Studio to publish directly to Azure:
+   - Right-click on the project and select "Publish to Azure".
+3. Follow the prompts to deploy.
+
+---
+
+#### **Example Deployment Output**
+- **Local IIS**: `http://localhost:8080`
+- **Azure**: `https://yourapp.azurewebsites.net`
+
+---
+
+# ASP.NET MVC Web APIs and React Integration
+
+## **Web APIs**
+ASP.NET Web API is a framework for building HTTP services that can be consumed by a variety of clients, including browsers, mobile apps, and React applications.
+
+---
+
+## **Creating an ASP.NET MVC Web API**
+
+### **Steps to Create a Web API**
+1. **Create a New ASP.NET Core Project:**
+   - Select "ASP.NET Core Web API" as the project template.
+
+2. **Add a Controller:**
+   ```csharp
+   [ApiController]
+   [Route("api/[controller]")]
+   public class ProductsController : ControllerBase
+   {
+       private readonly AppDbContext _context;
+
+       public ProductsController(AppDbContext context)
+       {
+           _context = context;
+       }
+
+       [HttpGet]
+       public IActionResult GetProducts()
+       {
+           var products = _context.Products.ToList();
+           return Ok(products);
+       }
+
+       [HttpPost]
+       public IActionResult AddProduct(Product product)
+       {
+           _context.Products.Add(product);
+           _context.SaveChanges();
+           return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+       }
+   }
+   ```
+
+3. **Run the API:**
+   - Start the application and access the endpoints (e.g., `http://localhost:5000/api/products`).
+
+---
+
+## **Configuring for CORS (Cross-Origin Resource Sharing)**
+CORS allows web applications to interact with resources from a different origin.
+
+### **Add CORS in `Startup.cs` or `Program.cs`:**
+```csharp
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        builder => builder.WithOrigins("http://localhost:3000")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
+app.UseCors("AllowReactApp");
+```
+
+---
+
+## **Different HTTP Verbs**
+Web APIs use HTTP verbs to perform CRUD operations:
+
+| **HTTP Verb** | **Purpose**             | **Example**                |
+|---------------|-------------------------|----------------------------|
+| `GET`         | Retrieve data           | `GET /api/products`        |
+| `POST`        | Create new data         | `POST /api/products`       |
+| `PUT`         | Update existing data    | `PUT /api/products/{id}`   |
+| `DELETE`      | Delete data             | `DELETE /api/products/{id}`|
+
+---
+
+## **Consuming Web API Using a Client**
+
+### **Example Using HttpClient:**
+```csharp
+HttpClient client = new HttpClient();
+HttpResponseMessage response = await client.GetAsync("http://localhost:5000/api/products");
+
+if (response.IsSuccessStatusCode)
+{
+    string responseData = await response.Content.ReadAsStringAsync();
+    Console.WriteLine(responseData);
+}
+```
+
+---
+
+## **Using Newtonsoft APIs**
+`Newtonsoft.Json` is commonly used for JSON serialization and deserialization.
+
+### **Example:**
+```csharp
+using Newtonsoft.Json;
+
+string json = JsonConvert.SerializeObject(new { Name = "Laptop", Price = 1000 });
+Console.WriteLine(json);
+
+var product = JsonConvert.DeserializeObject<Product>(json);
+Console.WriteLine(product.Name);
+```
+
+---
+
+## **Integrating Web API with React App**
+
+### **1. Configure CORS in Web API**
+- Ensure CORS is configured to allow requests from the React app.
+
+### **2. Configure React App**
+
+#### **Install Axios for HTTP Requests:**
+```bash
+npm install axios
+```
+
+### **3. Sending Requests from React App:**
+#### **React Component Example:**
+```javascript
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const Products = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/products')
+            .then(response => {
+                setProducts(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, []);
+
+    return (
+        <div>
+            <h1>Products</h1>
+            <ul>
+                {products.map(product => (
+                    <li key={product.id}>{product.name}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default Products;
+```
+
+---
+
+## **Sending Request from React App, Processing at Web API, and Affecting the Database**
+
+### **React: Sending POST Request**
+```javascript
+const addProduct = () => {
+    axios.post('http://localhost:5000/api/products', {
+        name: 'New Product',
+        price: 500
+    })
+    .then(response => {
+        console.log('Product added:', response.data);
+    })
+    .catch(error => {
+        console.error('Error adding product:', error);
+    });
+};
+```
+
+### **Web API: Processing POST Request**
+```csharp
+[HttpPost]
+public IActionResult AddProduct(Product product)
+{
+    _context.Products.Add(product);
+    _context.SaveChanges();
+    return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+}
+```
+
+### **Database Update**
+- EF Core ensures the new product is added to the database when `SaveChanges()` is called.
+
+---
+
+## **Summary of React-Web API Integration**
+1. Configure CORS in the Web API to allow requests from the React app.
+2. Use Axios in the React app for making HTTP requests.
+3. Design Web API endpoints to handle incoming requests and interact with the database.
+4. Test the integration to ensure data flows correctly between the React app, Web API, and database.
+
+---
+# MVC Integration with React
+
+## **Introduction to MVC and React**
+
+### **What is MVC?**
+- MVC (Model-View-Controller) is a design pattern that separates the application logic, user interface, and data management into three distinct layers:
+  - **Model**: Manages data and business logic.
+  - **View**: Handles UI rendering.
+  - **Controller**: Acts as the intermediary between Model and View, processing user input and returning responses.
+
+### **What is React?**
+- React is a JavaScript library for building user interfaces.
+- It is component-based, declarative, and focuses on efficiently updating and rendering UI components.
+
+### **Why Integrate MVC with React?**
+- MVC handles server-side logic and data processing.
+- React provides a dynamic and responsive front-end for better user experience.
+- Integration allows combining the strengths of both frameworks:
+  - MVC for structured backend logic.
+  - React for interactive UI components.
+
+---
+
+## **Setting Up the Project**
+
+### **Steps to Set Up MVC Backend**
+1. **Create an ASP.NET Core MVC Project:**
+   - Use Visual Studio or CLI to create a new ASP.NET Core Web Application.
+   - Choose the **MVC template**.
+
+2. **Add a React Frontend:**
+   - Use the following commands to create a React app inside the MVC project folder:
+     ```bash
+     npx create-react-app client-app
+     ```
+
+3. **Configure MVC to Serve React:**
+   - Update the `Startup.cs` or `Program.cs` to serve static files from the `client-app/build` folder:
+     ```csharp
+     app.UseDefaultFiles();
+     app.UseStaticFiles();
+     app.UseRouting();
+     ```
+
+4. **Build React App for Production:**
+   - Navigate to the `client-app` folder and build the project:
+     ```bash
+     npm run build
+     ```
+   - Copy the contents of `build/` into the `wwwroot` folder of the MVC project.
+
+---
+
+## **Integrating React with MVC Backend**
+
+### **Define Models**
+Define the data structures (models) in the MVC application to represent the business logic.
+
+#### **Example: Product Model**
+```csharp
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+```
+
+### **Implement Controllers**
+Controllers handle API endpoints that React will call to fetch or manipulate data.
+
+#### **Example: ProductsController**
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
+{
+    private readonly AppDbContext _context;
+
+    public ProductsController(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public IActionResult GetProducts()
+    {
+        var products = _context.Products.ToList();
+        return Ok(products);
+    }
+
+    [HttpPost]
+    public IActionResult AddProduct(Product product)
+    {
+        _context.Products.Add(product);
+        _context.SaveChanges();
+        return CreatedAtAction(nameof(GetProducts), new { id = product.Id }, product);
+    }
+}
+```
+
+### **Use Views**
+MVC views will render the entry point for the React application.
+
+#### **Example: React View**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React App</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="client-app/build/static/js/main.js"></script>
+</body>
+</html>
+```
+
+---
+
+## **Data Management and State Handling**
+
+### **Establish Data Flow**
+React will call the API endpoints created in the MVC backend to fetch or update data.
+
+#### **Example: Fetching Data in React**
+```javascript
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/products")
+            .then(response => setProducts(response.data))
+            .catch(error => console.error(error));
+    }, []);
+
+    return (
+        <ul>
+            {products.map(product => (
+                <li key={product.id}>{product.name} - ${product.price}</li>
+            ))}
+        </ul>
+    );
+};
+
+export default ProductList;
+```
+
+### **Manage State**
+Use React state management techniques such as `useState`, `useReducer`, or libraries like Redux for complex applications.
+
+#### **Example: Using `useState`**
+```javascript
+const [formData, setFormData] = useState({
+  name: "",
+  price: 0,
+});
+
+const handleInputChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+```
+
+---
+
+## **Advanced Topics and Best Practices**
+
+### **Authentication and Authorization**
+1. **Backend (MVC):**
+   Use `Authorize` attribute to secure endpoints:
+   ```csharp
+   [Authorize]
+   [HttpGet]
+   public IActionResult SecureData() => Ok("This is secure data.");
+   ```
+
+2. **Frontend (React):**
+   Handle authentication tokens (e.g., JWT):
+   ```javascript
+   const token = localStorage.getItem("authToken");
+   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+   ```
+
+### **Routing**
+Use React Router for client-side routing.
+
+#### **Example: React Router**
+```javascript
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+const App = () => (
+  <Router>
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/products" component={ProductList} />
+    </Switch>
+  </Router>
+);
+
+export default App;
+```
+
+### **Structuring React Components**
+Organize components into meaningful directories for maintainability.
+
+#### **Example Directory Structure:**
+```
+client-app/
+├── src/
+│   ├── components/
+│   │   ├── ProductList.js
+│   │   ├── ProductForm.js
+│   ├── pages/
+│   │   ├── HomePage.js
+│   │   ├── ProductPage.js
+│   ├── App.js
+│   ├── index.js
+```
+
+---
+
+## **Summary**
+1. MVC provides a structured backend for data processing, while React handles dynamic and interactive UIs.
+2. Integration involves setting up API endpoints in MVC, calling them from React, and managing state effectively.
+3. Advanced practices like authentication, routing, and component structuring enhance scalability and security.
+
+---
+
