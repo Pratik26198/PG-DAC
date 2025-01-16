@@ -1742,7 +1742,8 @@ int[] numbers = { 10, 20, 30, 40 };
 int[] subset = numbers[1..3];
 foreach (int number in subset)
 {
-    Console.WriteLine(number);
+    Console.WriteLine(number);    //20 30
+
 }
 ```
 
