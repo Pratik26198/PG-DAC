@@ -853,6 +853,7 @@ ptr = &var; // Store address of 'var' in 'ptr'
 int a = 10;
 int *p = &a;
 cout << "Value of a: " << *p << endl; // Dereference pointer
+// Value of a: 10 
 ```
 
 ---
